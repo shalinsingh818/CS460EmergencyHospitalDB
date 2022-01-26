@@ -21,6 +21,17 @@ This is the data model for the patient info on in-take. It stores personal infor
 | mobile_phone  | Mobile phone number                                     |
 | other         | Other unstructured information doctors can write down.  |
 
+
+## Doctor
+Data model that stores information about the doctor assigned to a patient. 
+| **FieldName** | **Description**                                        |
+|---------------|--------------------------------------------------------|
+| doctor_id     | Unique Identifier for the doctor.                      |
+| first_name    | First name of the doctor                               |
+| last_name     | Last name of the doctor                                |
+| department    | Position of the doctor, associated with a department.  |
+
+
 ## Room
 This is the data model for the room that the patient/doctor is assigned to. The model is indepedent of the patient or the doctor, it can  be associated with either ID. 
 | **FieldName**       | **Description**                          |
@@ -49,3 +60,5 @@ Data model for medication that can be prescribed to the patient.
 | name          | Name of the medication being prescribed.                |
 | brand         | Brand  of the medication being prescribed               |
 | description   | Description/info patient needs to know about the drug.  |
+
+
