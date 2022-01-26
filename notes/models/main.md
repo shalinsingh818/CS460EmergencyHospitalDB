@@ -62,3 +62,15 @@ Data model for medication that can be prescribed to the patient.
 | description   | Description/info patient needs to know about the drug.  |
 
 
+## Appointment
+Data model for storing information about appointments booked with the hospital. 
+
+| **FieldName**  | **Description**                                                                   |
+|----------------|-----------------------------------------------------------------------------------|
+| appointment_id | Unique Identifier for the doctor.                                                 |
+| patient        | One to many relationship. Many patients can be associated with an appointment.    |
+| doctor         | Doctor's associated with the appointment.                                         |
+| start_time     | Starting time of the appointment.                                                 |
+| end_time       | Ending time of the appointment                                                    |
+| room_number    | Room that the appointment is taking place in. (Possible one to many relationship) |
+
