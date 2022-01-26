@@ -4,6 +4,7 @@ Data model for the emergency room application.
 
 ## Patient
 This is the data model for the patient info on in-take. It stores personal information, next of kin, and other information that doctors can fill in during in-take. 
+
 | **FieldName** | **Description**                                         |
 |---------------|---------------------------------------------------------|
 | patient_id    | Unique ID to keep track of the patient.                 |
@@ -32,7 +33,7 @@ This is the data model for the room that the patient/doctor is assigned to. The 
 
 
 ## Department
-
+Department that physician could be associated with. Department is a way to group/isolate the best doctors for patient care. 
 | **FieldName** | **Description**                    |
 |---------------|------------------------------------|
 | department_id | Unique id for the department.      |
@@ -41,7 +42,7 @@ This is the data model for the room that the patient/doctor is assigned to. The 
 
 
 ## Medication
-
+Data model for medication that can be prescribed to the patient. 
 | **FieldName** | **Description**                                         |
 |---------------|---------------------------------------------------------|
 | code          | Code of the medication                                  |
