@@ -29,3 +29,12 @@ Data model for the emergency room application.
 | blockfloor          | Name of the drug.                        |
 | blockcode           | First name of the patient                |
 | availability_status | Last name of the patient                 |
+
+
+## Department
+
+| **FieldName** | **Description**                    |
+|---------------|------------------------------------|
+| department_id | Unique id for the department.      |
+| name          | Name of the hospital department.   |
+| head          | Head physician of the department.  |
