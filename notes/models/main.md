@@ -3,7 +3,7 @@ Data model for the emergency room application.
 
 
 ## Patient
-
+This is the data model for the patient info on in-take. It stores personal information, next of kin, and other information that doctors can fill in during in-take. 
 | **FieldName** | **Description**                                         |
 |---------------|---------------------------------------------------------|
 | patient_id    | Unique ID to keep track of the patient.                 |
@@ -21,7 +21,7 @@ Data model for the emergency room application.
 | other         | Other unstructured information doctors can write down.  |
 
 ## Room
-
+This is the data model for the room that the patient/doctor is assigned to. The model is indepedent of the patient or the doctor, it can  be associated with either ID. 
 | **FieldName**       | **Description**                          |
 |---------------------|------------------------------------------|
 | room_number         | Unique ID to keep track of the patient.  |
