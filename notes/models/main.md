@@ -38,3 +38,13 @@ Data model for the emergency room application.
 | department_id | Unique id for the department.      |
 | name          | Name of the hospital department.   |
 | head          | Head physician of the department.  |
+
+
+## Medication
+
+| **FieldName** | **Description**                                         |
+|---------------|---------------------------------------------------------|
+| code          | Code of the medication                                  |
+| name          | Name of the medication being prescribed.                |
+| brand         | Brand  of the medication being prescribed               |
+| description   | Description/info patient needs to know about the drug.  |
