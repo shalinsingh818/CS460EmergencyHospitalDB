@@ -19,3 +19,13 @@ Data model for the emergency room application.
 | work_phone    | Work phone number                                       |
 | mobile_phone  | Mobile phone number                                     |
 | other         | Other unstructured information doctors can write down.  |
+
+## Room
+
+| **FieldName**       | **Description**                          |
+|---------------------|------------------------------------------|
+| room_number         | Unique ID to keep track of the patient.  |
+| room_type           | Gender of the patient.                   |
+| blockfloor          | Name of the drug.                        |
+| blockcode           | First name of the patient                |
+| availability_status | Last name of the patient                 |
