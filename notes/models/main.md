@@ -20,16 +20,78 @@ This is the data model for the patient info on in-take. It stores personal infor
 | work_phone    | Work phone number                                       |
 | mobile_phone  | Mobile phone number                                     |
 | other         | Other unstructured information doctors can write down.  |
+| symptoms      | Other unstructured information doctors can write down.  |
+| health insurance | Other unstructured information doctors can write down. |
+| vaccination      | Other unstructured information doctors can write down. |
+| vaccination_date | Other unstructured information doctors can write down. |
+| Drugs or alchohol | Whether drugs or alchohol was involved			  |
+| Religion		 | Religion of the patient								  |
+| SSN		 	     | Social security number							  |
+| Sexually active    | Sexually active								      |
+| Allergies    	| Allergies for the patient				   				  |
+| Blood Type 	|   Blood type of the paitient 						      |
 
 
-## Doctor
-Data model that stores information about the doctor assigned to a patient. 
+## Test/Scan Results
+Data model that stores  
+| **FieldName** | **Description**                                        |
+|---------------|--------------------------------------------------------|
+| test_id       | Unique Identifier for the doctor.                      |
+| type          | XRay, MRI, CT SCAN                                     |
+| cost          | cost of scan                                     		 |
+
+## Diagnosis
+Data model to store information about diagnosis
+
+1. Diabetes
+2. COVID
+3. Pneumonia
+4. Asthma
+5. Heart Attack
+6. Stroke
+7. IBS
+8. Hypertension
+
+
+## Physician
+Data model that stores information about the doctor assigned to a patient.
+
+1. Create and change records for the paitient
+2. Should be able to perform X-Rays
+3. Should be able to request
+	* XRays
+	* MRIS
+	* CAT SCAN
+	* URINE
+	* BLOOD
+4. Doctor should be able to add symptoms
+5. Doctor should be able to add notes but differ from the nurse notes
+6. Doctor should provide discharge instructions
+7. External References
+
 | **FieldName** | **Description**                                        |
 |---------------|--------------------------------------------------------|
 | doctor_id     | Unique Identifier for the doctor.                      |
 | first_name    | First name of the doctor                               |
 | last_name     | Last name of the doctor                                |
 | department    | Position of the doctor, associated with a department.  |
+
+
+## Nurse Information
+Nurse information intake
+1. Nurse can update/change vitals blood pressure
+2. Also needs a place to record notes about the patient
+3. Nurse needs symptom/decision tree of possible medical conditions
+4. Nurse decides Whether the person is going to be admitted or not
+
+
+| **FieldName** | **Description**                                        |
+|---------------|--------------------------------------------------------|
+| blood_pressure| Unique Identifier for the doctor.                      |
+| weight        | First name of the doctor                               |
+| height     | Last name of the doctor                                |
+| notes     | Last name of the doctor                                |
+| symptoms     | Last name of the doctor                                |
 
 
 ## Room
@@ -74,3 +136,15 @@ Data model for storing information about appointments booked with the hospital.
 | end_time       | Ending time of the appointment                                                    |
 | room_number    | Room that the appointment is taking place in. (Possible one to many relationship) |
 
+
+## Diagnosis
+Create a model
+
+
+## Billing
+1. Include how much a scan/procedure costs
+2. Bill goes to the patient
+3. User permissions for billing department
+4. Include information if patient is adult/child age and provide information for the parent
+5. Fixed rate for room
+6. Bill Deadline
