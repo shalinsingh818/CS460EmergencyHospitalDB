@@ -6,8 +6,13 @@
 # Introduction
 
 **Project Name:** CritiCare
+
 **Backend Language**: Python
-**DataBase**: sqlite3, redis, mysql
+
+**DataWharehouse**: Sqlite3
+
+**In Memory Cache**: Redis
+
 **Frontend Stack**: PyQt 5
 
 

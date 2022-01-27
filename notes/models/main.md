@@ -88,10 +88,10 @@ Nurse information intake
 | **FieldName** | **Description**                                        |
 |---------------|--------------------------------------------------------|
 | blood_pressure| Unique Identifier for the doctor.                      |
-| weight        | First name of the doctor                               |
-| height     | Last name of the doctor                                |
-| notes     | Last name of the doctor                                |
-| symptoms     | Last name of the doctor                                |
+| weight        | Verified weight of patient                             |
+| height     	| Verified height of patient                             |
+| notes     	| Notes for the patient                                  |
+| symptoms     	| Symptoms                                 				 |
 
 
 ## Room
