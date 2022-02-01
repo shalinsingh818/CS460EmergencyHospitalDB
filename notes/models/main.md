@@ -116,7 +116,8 @@ Department that physician could be associated with. Department is a way to group
 
 ## Medication
 Data model for medication that can be prescribed to the patient. 
-| **FieldName** | **Description**                                         |
+|o**FieldName** | **Description**                                         |
+
 |---------------|---------------------------------------------------------|
 | code          | Code of the medication                                  |
 | name          | Name of the medication being prescribed.                |
