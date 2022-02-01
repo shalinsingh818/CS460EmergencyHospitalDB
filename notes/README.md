@@ -115,9 +115,10 @@ Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, 
 	* Permission hierachy for access to information. Permission hiearchy goes in order: Admin -> Doctor -> Nurse -> Janitor -> Patient
 	* Admin is the only one that has access to the database file (raw). 
 3. **Governmental Constraints**:
-	* I have no clue what this is
+	* FERPA regulations
+	* HIPPA confidentiality
 4. **Hardware Constraints**::
-	* This is vague
+	*
 
 
 ## Assumptions and Dependencies
@@ -128,53 +129,68 @@ Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, 
 # Specific Requirements
 List of all the functions we need for this system
 
-## Employee Management Service Functions
+## CRUD Operations
 
-### Create Employee Record
 
-**Introduction**: Purpose of this function is to create/enter an employee record into the database. 
+### CREATE
+
+**Introduction**: Purpose of this function is to create/add instance of db table model to the database. THIS METHOD will be implemented for all models in the ER diagram. Every model needs to have CRUD operations. 
 
 1. **Inputs**
-	* first name of employee	
-	* last name of employee
-	* position (Doctor, Nurse, Janitor)
-	* ssn Social Security number
-2. **Processing**: 
-	* Validate social security number
-	* Make sure that first and last name are legal/valid
-	* Make sure first and last name are not empty
+	* Required Fields for  the given model
+2. **Processing**:
+	* Validate all fields of the model
+	* Use certain logic depending on the model/system
 3. **Outputs**: 
 	* boolean value that indicates if the record was successfully created
+	* If the create operation is not manual, we can keep a log of the model that was inserted. 
 
-
-
-### Update Employee Record
-
-**Introduction**: Purpose of this function is to update a current employee record into the database. 
+### READ
+**Introduction**: Purpose of this function is to read/view multiple instance of a db table model. This is to display information to the user. This method should be attached to every entity in the ER diagram. 
 
 1. **Inputs**
-	* Employee unique id
-	* first name of employee	
-	* last name of employee
-	* position (Doctor, Nurse, Janitor)
-	* ssn Social Security number
-2. **Processing**: 
-	* Validate social security number
-	* Make sure that first and last name are legal/valid
-	* Make sure first and last name are not empty
+	* This will be a READ ALL method. No parameters or filters are needed for this endpoint
+2. **Processing**:
+	* Depending on what model is viewed, authentication will be required
+	* User will need to be logged in to view certain models.  
+3. **Outputs**: 
+	* return json/data of entity model to the user
+	* Endpoint should render the data so that the GUI can easily obtain it. 
+
+
+### UPDATE
+**Introduction**: Purpose of this function is to be able to update the fields/instance of entity in the ER diagram. Every entity in the ER diagram will have this method to follow CRUD convention. 
+
+1. **Inputs**
+	* Any of the fields that need to be updated
+	* Exclude unique ID, can't be changed
+2. **Processing**:
+	* Validate model depending on fields
+	* Make sure fields are not empty 
 3. **Outputs**: 
 	* boolean value that indicates if the record was successfully updated
 
-### Delete Employee Record
+### DELETE (BY ID)
+**Introduction**: Purpose of this function is to delete an individual instance of the entity using a unique id. 
 
-**Introduction**: Purpose of this function is to delete a employee in the database
 1. **Inputs**
-	* Employee unique id
+	* unique id of the entity that we want to delete
 2. **Processing**: 
-	* Validate that the current account has access to delete employees
+	* Validate permission of user that is deleting the entity. 
 3. **Outputs**: 
 	* boolean value that indicates if the record was successfully deleted
 
+
+### DELETE ALL
+**Introduction**: Purpose of this function is to act as a "KILL SWITCH" to all entities in the ER diagram. If we need to delete/clean the database, this method can delete all the entities in the database. 
+
+1. **Inputs**
+	* none
+2. **Processing**: 
+	* If the entities have relating fields such as foreign keys, primary etc, cascade validation will be needed
+	* Validate that no data anomlies can occur when the table is dropped from the db. 
+3. **Outputs**: 
+	* boolean value that indicates if the record was successfully deleted
 
 
 # External interface requirements
