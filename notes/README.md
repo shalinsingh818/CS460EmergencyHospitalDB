@@ -50,27 +50,24 @@ Criticare is an information management system for emergency rooms/critical care 
 ## Product Functions
 
 
-
-
-
-1. Employee management service
+1. **Employee management service**
 	* Manages employees (Doctors, nurses, janitorial etc. )
 	* Permissions system: Employees can have access to information baseds on their role/permission assigned. 
 	* Doctors/Nurses can view patient information and schedule procedures
 
-2. Patient Intake Service
+2. **Patient Intake Service**
 	* Adds patient information to the database
 	* Validates intake/arrival information
 	* Prescribe meidcations/assign procedures to patient
 	* Diagnose patient with specific medical conditions
 	* Admit patient to ER
 
-3. Procedure/Room Assignment Service
+3. **Procedure/Room Assignment Service**
 	* Assign patients/employees to designated room for procedure
 	* Keep track of room availability status
 
-4. User login/authentication
-	* Users/Employees can log in with a username and password
+4. **User login//registration/authentication**
+	* Users/Employees can register and account and log in with provided information
 	* Account information is stored in a database
 
 
@@ -86,9 +83,28 @@ There are many types of users for this application. The user roles are defined a
 | Janitor   | Cleaning/Janitor services employees.                    |
 | Patient   | The patient using the application.                      |
 
-1. **Admin User Characteristics**:
+
+Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, Janitor and Patient. These characteristics are seperated based on the role/permission usage of the application. 
+
+1. **Admin User**:
 	* Access to all CRUD operations for every model in the database
-	*
+	* Deploy multiple instances of ER application. 
+
+2. **Nurse**:
+	* Can view/admit patients to the ER
+	* View/Provide information about patient procedures, medications or diagnosis
+	* Check rooms that are available for procedures/overnight patient stays
+
+3. **Doctor**: 	
+	* Has all the same permissions that a nurse has
+	* Can diagnose and prescribe medication
+	* Create/Schedule procedures. 
+
+4. **Janitor**
+	* This is here to show that multiple types of employees can exist in the data model
+	* Access to rooms for cleaning up after procedures. 
+5. 
+
 
 
 ## General Constraints
