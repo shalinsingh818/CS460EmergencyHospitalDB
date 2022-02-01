@@ -103,8 +103,20 @@ Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, 
 
 ## General Constraints
 
+### Goverment/National Constraints### 
+1. Government needs access to financial/employee information to perform audits. 
+2. Insurance companies need to be verified when being added to the hospital
 
-
+3. **Defensive Security Constraints** 
+	* Cannot provide real time user session authentication
+	* SQLITE3 (Database Framework) is vunerable to injections with escaped string patterns. 
+	* Application does not have brute force mitigation
+	* Data is not replicated or on a distributed cluster. Architecture is monolithic. 
+4. **Offensive Security Constraints** 
+	* To log in, user must have account information saved in the database. 
+	* Application should only be accesible through the GUI unless user has admin access. 
+	* Permission hierachy for access to information. Permission hiearchy goes in order: Admin -> Doctor -> Nurse -> Janitor -> Patient
+	* Admin is the only one that has access to the database file (raw). 
 
 
 
