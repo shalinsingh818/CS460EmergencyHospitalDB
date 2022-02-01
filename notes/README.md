@@ -103,7 +103,6 @@ Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, 
 
 ## General Constraints
 
-### Goverment/National Constraints### 
 1. **Defensive Security Constraints** 
 	* Cannot provide real time user session authentication
 	* SQLITE3 (Database Framework) is vunerable to injections with escaped string patterns. 
@@ -185,6 +184,78 @@ A mandatory feauture of the application is to be able to create, read, update an
 	* Validate that no data anomlies can occur when the table is dropped from the db. 
 3. **Outputs**: 
 	* boolean value that indicates if the record was successfully deleted
+
+## PATIENT Functional Requirements
+These are the functions needed for the actor (Patient)
+
+### VERIFY DOB
+**Introduction**: Purpose of this function is to verify that the date of the birth of the patient is valid. It checks if they are under or over 18 and returns a result based on the value of the condition. 
+1. **Inputs**
+	* patient date of birth
+	* date-format: YYYY:M:D:H:M:S
+2. **Processing**: 
+	* Check if age is less then 18
+	* Check if age is greater than 18
+3. **Outputs**: 
+	* returns true or false if patient is adult or not
+
+
+### CALCULATE BMI
+**Introduction**: Purpose of this function is to verify that the date of the birth of the patient is valid. It checks if they are under or over 18 and returns a result based on the value of the condition. 
+1. **Inputs**
+	* patient date of birth
+	* date-format: YYYY:M:D:H:M:S
+2. **Processing**: 
+	* Check if age is less then 18
+	* Check if age is greater than 18
+3. **Outputs**: 
+	* returns true or false if patient is adult or not
+
+
+### ADD SYMPTOMS
+**Introduction**: Purpose of this function is to verify that the date of the birth of the patient is valid. It checks if they are under or over 18 and returns a result based on the value of the condition. 
+1. **Inputs**
+	* patient date of birth
+	* date-format: YYYY:M:D:H:M:S
+2. **Processing**: 
+	* Check if age is less then 18
+	* Check if age is greater than 18
+3. **Outputs**: 
+	* returns true or false if patient is adult or not
+
+## NURSE: Functional Requirements
+These are all the functional requirements for an employee with the "Nurse" role. 
+
+### ADMIT PATIENT
+**Introduction**: Purpose of this function is to allow nurse/doctor admit patient to the ER and process the intake information. 
+1. **Inputs**
+	* patient id (Unique ID)
+2. **Processing**: 
+	* Check if patient intake information matches nurses information
+	* Set admitted status to "true"
+3. **Outputs**: 
+	* returns true or false if patient was successfully admitted
+
+
+### VIEW/UPDATE PATIENT NOTES
+**Introduction**: Purpose of this function is to allow nurse/doctor admit patient to the ER and process the intake information. 
+1. **Inputs**
+	* patient id (Unique ID)
+2. **Processing**: 
+	* Check if patient intake information matches nurses information
+	* Set admitted status to "true"
+3. **Outputs**: 
+	* returns true or false if patient was successfully admitted
+
+## DOCTOR: Functional Requirements
+
+
+
+## ROOM:  Functional Requirements
+
+
+
+## PROCEDURE:  Functional Requirements
 
 
 # External interface requirements
