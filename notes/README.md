@@ -1,9 +1,9 @@
-# Client Notes
+# CritiCare Emergency Room Application
 
-1. Verify that the data models present are needed for the client
-2. Confirm that the language/frameworks
 
-# Introduction
+1. **Introduction**: 
+
+
 
 **Project Name:** CritiCare
 
@@ -25,10 +25,10 @@ Criticare is an information management system for emergency rooms/critical care 
 
 ## Acronym Index
 
-**Object Relational Mapper**
-**CRUD**
-**SQL**
-
+**Object Relational Mapper**: 
+**CRUD**: Create, Read, Update, Delete information
+**SQL**: Structured Query Language (For database)
+**ER**: Emergency Room
 
 ## References
 
@@ -77,11 +77,11 @@ There are many types of users for this application. The user roles are defined a
 
 | FieldName | Summary                                                 |
 |-----------|---------------------------------------------------------|
-| Admin     | Has full access to database and application source code |
-| Nurse     | Nurses using the application for helping patients.      |
-| Doctor    | Doctors using the application for helping patients.     |
-| Janitor   | Cleaning/Janitor services employees.                    |
-| Patient   | The patient using the application.                      |
+| ```Admin```     | Has full access to database and application source code |
+|``` Nurse```     | Nurses using the application for helping patients.      |
+| ```Doctor```    | Doctors using the application for helping patients.     |
+| ```Janitor```   | Cleaning/Janitor services employees.                    |
+| ```Patient```   | The patient using the application.                      |
 
 
 Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, Janitor and Patient. These characteristics are seperated based on the role/permission usage of the application. 
@@ -103,7 +103,12 @@ Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, 
 4. **Janitor**
 	* This is here to show that multiple types of employees can exist in the data model
 	* Access to rooms for cleaning up after procedures. 
-5. 
+
+5. **Patient**
+	* Can view schedules procedures
+	* View medications/dignosis given by doctor or nurse
+	* Can view financial summary/cost of visit after discharge
+
 
 
 
