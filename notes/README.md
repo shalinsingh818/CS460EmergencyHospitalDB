@@ -117,7 +117,7 @@ Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, 
 3. **Governmental Constraints**:
 	* I have no clue what this is
 4. **Hardware Constraints**::
-	* Also don't know what this is
+	* This is vague
 
 
 ## Assumptions and Dependencies
@@ -126,23 +126,55 @@ Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, 
 
 
 # Specific Requirements
-Requirements for the CS460 project. 
+List of all the functions we need for this system
 
-1. Managing patient information in a emergency room
-2. Login/Authentication
-3. Data must be stored in a database
+## Employee Management Service Functions
+
+### Create Employee Record
+
+**Introduction**: Purpose of this function is to create/enter an employee record into the database. 
+
+1. **Inputs**
+	* first name of employee	
+	* last name of employee
+	* position (Doctor, Nurse, Janitor)
+	* ssn Social Security number
+2. **Processing**: 
+	* Validate social security number
+	* Make sure that first and last name are legal/valid
+	* Make sure first and last name are not empty
+3. **Outputs**: 
+	* boolean value that indicates if the record was successfully created
 
 
-## Functional Requirement 1
 
-**Introduction**: 
+### Update Employee Record
 
-**Inputs**: 
+**Introduction**: Purpose of this function is to update a current employee record into the database. 
 
-**Processing**:
+1. **Inputs**
+	* Employee unique id
+	* first name of employee	
+	* last name of employee
+	* position (Doctor, Nurse, Janitor)
+	* ssn Social Security number
+2. **Processing**: 
+	* Validate social security number
+	* Make sure that first and last name are legal/valid
+	* Make sure first and last name are not empty
+3. **Outputs**: 
+	* boolean value that indicates if the record was successfully updated
 
+### Delete Employee Record
 
-**Outputs**: 
+**Introduction**: Purpose of this function is to delete a employee in the database
+1. **Inputs**
+	* Employee unique id
+2. **Processing**: 
+	* Validate that the current account has access to delete employees
+3. **Outputs**: 
+	* boolean value that indicates if the record was successfully deleted
+
 
 
 # External interface requirements
