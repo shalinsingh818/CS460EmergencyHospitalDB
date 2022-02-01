@@ -130,12 +130,10 @@ Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, 
 List of all the functions we need for this system
 
 ## CRUD Operations
-
+A mandatory feauture of the application is to be able to create, read, update and delete instances of entites in the ER diagram. T
 
 ### CREATE
-
 **Introduction**: Purpose of this function is to create/add instance of db table model to the database. THIS METHOD will be implemented for all models in the ER diagram. Every model needs to have CRUD operations. 
-
 1. **Inputs**
 	* Required Fields for  the given model
 2. **Processing**:
@@ -147,7 +145,6 @@ List of all the functions we need for this system
 
 ### READ
 **Introduction**: Purpose of this function is to read/view multiple instance of a db table model. This is to display information to the user. This method should be attached to every entity in the ER diagram. 
-
 1. **Inputs**
 	* This will be a READ ALL method. No parameters or filters are needed for this endpoint
 2. **Processing**:
@@ -160,7 +157,6 @@ List of all the functions we need for this system
 
 ### UPDATE
 **Introduction**: Purpose of this function is to be able to update the fields/instance of entity in the ER diagram. Every entity in the ER diagram will have this method to follow CRUD convention. 
-
 1. **Inputs**
 	* Any of the fields that need to be updated
 	* Exclude unique ID, can't be changed
@@ -172,7 +168,6 @@ List of all the functions we need for this system
 
 ### DELETE (BY ID)
 **Introduction**: Purpose of this function is to delete an individual instance of the entity using a unique id. 
-
 1. **Inputs**
 	* unique id of the entity that we want to delete
 2. **Processing**: 
@@ -183,7 +178,6 @@ List of all the functions we need for this system
 
 ### DELETE ALL
 **Introduction**: Purpose of this function is to act as a "KILL SWITCH" to all entities in the ER diagram. If we need to delete/clean the database, this method can delete all the entities in the database. 
-
 1. **Inputs**
 	* none
 2. **Processing**: 
