@@ -1,9 +1,6 @@
 # CritiCare Emergency Room Application
 
 
-1. **Introduction**: 
-
-
 
 **Project Name:** CritiCare
 
@@ -17,17 +14,15 @@
 Purpose of this document is to provide a general summary/requirement analysis of what tCritiCare is and how it functions. 
 
 ## Scope
-
 Criticare is an information management system for emergency rooms/critical care centers. The application stores information on a database and allows users to view, read, update and enter hospital related information. Some of the main features of criticare are managing patient/employee information, reserve rooms to perform procedures on patient and diagnose and provide the proper medical care in emergencies. 
 
-
-
-
 ## Acronym Index
+**Object Relational Mapper**: Maps code class blueprints to data structures
 
-**Object Relational Mapper**: 
 **CRUD**: Create, Read, Update, Delete information
+
 **SQL**: Structured Query Language (For database)
+
 **ER**: Emergency Room
 
 ## References
