@@ -112,7 +112,8 @@ Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, 
 	* FERPA regulations
 	* HIPPA confidentiality
 4. **Hardware Constraints**::
-	*
+	* System is running on one CPU with a sqlite3 database
+	* 1TB hard drive space. 
 
 
 ## Assumptions and Dependencies
@@ -233,21 +234,56 @@ These are all the functional requirements for an employee with the "Nurse" role.
 
 
 ### VIEW/UPDATE PATIENT NOTES
-**Introduction**: Purpose of this function is to allow nurse/doctor admit patient to the ER and process the intake information. 
+**Introduction**: Purpose of this function is to allow nurse to view and update notes for the patient while they are admitted to the emergency room. 
 1. **Inputs**
-	* patient id (Unique ID)
+	* patient id (Related to notes entity)
 2. **Processing**: 
-	* Check if patient intake information matches nurses information
-	* Set admitted status to "true"
+	* Check if user is a nurse
+	* Check if patient is admitted. 
 3. **Outputs**: 
-	* returns true or false if patient was successfully admitted
+	* returns true or false if patient notes were successfully updated. 
 
+
+### VIEW/UPDATE PATIENT NOTES
+**Introduction**: Purpose of this function is to allow nurse to view and update notes for the patient while they are admitted to the emergency room. 
+1. **Inputs**
+	* patient id (Related to notes entity)
+2. **Processing**: 
+	* Check if user is a nurse
+	* Check if patient is admitted. 
+3. **Outputs**: 
+	* returns true or false if patient notes were successfully updated.
+
+ 
 ## DOCTOR: Functional Requirements
+All functionality needed for doctor entity. These include functions with permissions, viewing/reading data from the database. 
 
 
+### PRESCRIBE MEDICATION
+**Introduction**: Purpose of this function to prescribe a patient with the medication needed to treat their diagnosis. 
+1. **Inputs**
+	* patient_id: unique id of the patient
+	* medication_id unique id/code for the medication
+2. **Processing**: 
+	* Check if user is a doctor
+	* Check if patient is admitted. 
+3. **Outputs**: 
+	* returns true or false if patient medication was prescribed. 
 
-## ROOM:  Functional Requirements
 
+### ASSIGN AND CREATE A PROCEDURE
+**Introduction**: Purpose of this function to create a procedure, select the type and assign the patient/staff and room needed. 
+
+1. **Inputs**
+	* patient_id: unique id of the patient (could be one to many)
+	* employee_id unique id for the employees we need
+	* room_id unique id for the room the procedure is occuring in. 
+
+2. **Processing**: 
+	* Check if user is a doctor
+	* Check if patient is admitted. 
+3. **Outputs**: 
+	* returns true or false if patient medication was prescribed. 
 
 
 ## PROCEDURE:  Functional Requirements
