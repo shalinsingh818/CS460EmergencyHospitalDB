@@ -189,6 +189,16 @@ A mandatory feauture of the application is to be able to create, read, update an
 3. **Outputs**: 
 	* boolean value that indicates if the record was successfully deleted
 
+
+
+# Services Diagram
+Down below is a uml diagram of how all the interconnected services work together. The data for these services comes from the database repository. 
+
+Note that the entity relationships may change in development. 
+
+![ER Diagram](./images/p6.png)
+
+
 ## PATIENT Functional Requirements
 These are the functions needed for the actor (Patient)
 
