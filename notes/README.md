@@ -122,7 +122,15 @@ Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, 
 
 
 # Specific Requirements
-List of all the functions we need for this system
+The requirements for the system are based on the entity relationship diagram down below. 
+
+## Entity Relationship Diagram
+Down below is the databse/uml diagram to model the actors in the emergency room system. 
+
+Note that the entity relationships may change in development. 
+
+![ER Diagram](./images/p4.png)
+
 
 ## CRUD Operations
 A mandatory feauture of the application is to be able to create, read, update and delete instances of entites in the ER diagram. T
@@ -320,11 +328,15 @@ All functionality needed for doctor entity. These include functions with permiss
 **Other Requirements**: 
 
 
+# Application Architecture
+This is a model of how the database functions will be seperated from the buisness logic of the application. The figure shows a library designated for buisness logic and the data repository. The database repository will use sqlite3, with the ER diagram implemented. 
 
-# Entity Relationship Diagram
-Down below is the databse/uml diagram to model the actors in the emergency room system. 
+The object relational mapper is just a way to serialize database entites into classses/objects. 
 
-![ER Diagram](/images/p1.png)
+![Buisness Logoc](./images/p1.png)
+
+
+
 
 
 
