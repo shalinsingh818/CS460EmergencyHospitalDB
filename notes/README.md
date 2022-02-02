@@ -320,3 +320,13 @@ All functionality needed for doctor entity. These include functions with permiss
 **Other Requirements**: 
 
 
+
+# Entity Relationship Diagram
+Down below is the databse/uml diagram to model the actors in the emergency room system. 
+
+![ER Diagram](/images/p1.png)
+
+
+
+
+
