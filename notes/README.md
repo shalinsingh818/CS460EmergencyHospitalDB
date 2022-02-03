@@ -40,7 +40,7 @@ Github Repo Link: https://github.com/shalinsingh818/CS460EmergencyHospitalDB
 
 ## Product Perspective
 
-
+It is part of a larger product. There will be many components, such as the patient intake, the procedure, diagnosis, medication, room assign, room, permission, results, patient and employee information. From an interface perspective, for example, components such as procedure, diagnosis, medication etc. will pull info from Intake. As for hardware used, the system is running on one CPU with a sqlite3 database.
 
 
 ## Product Functions
@@ -58,7 +58,7 @@ Github Repo Link: https://github.com/shalinsingh818/CS460EmergencyHospitalDB
 3. **Procedure/Room Assignment Service**
 	* Assign patients/employees to designated room for procedure
 	* Keep track of room availability status
-4. **User login//registration/authentication**
+4. **User login/registration/authentication**
 	* Users/Employees can register and account and log in with provided information
 	* Account information is stored in a database
 
