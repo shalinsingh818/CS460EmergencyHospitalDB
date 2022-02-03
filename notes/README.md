@@ -27,7 +27,7 @@ Criticare is an information management system for emergency rooms/critical care 
 
 ## References
 
-The code will be version controlled on github. The team will be colloborating and updating progress on the github repository. 
+The code will be version controlled on github. The team will be collaborating and updating progress on the github repository. 
 Github Repo Link: https://github.com/shalinsingh818/CS460EmergencyHospitalDB 
 
 ## Overview
