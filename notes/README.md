@@ -11,7 +11,7 @@
 **Frontend Stack**: PyQt 5 (OR) HTML/BOOTSTRAP
 
 # Purpose
-Purpose of this document is to provide a general summary/requirement analysis of what tCritiCare is and how it functions. 
+Purpose of this project is to create an application that can be used in hospitals and emergency rooms to organize, save, edit and evaluate patient information. This document is contract between the client and developers that verify the requirements of the application. 
 
 ## Scope
 Criticare is an information management system for emergency rooms/critical care centers. The application stores information on a database and allows users to view, read, update and enter hospital related information. Some of the main features of criticare are managing patient/employee information, reserve rooms to perform procedures on patient and diagnose and provide the proper medical care in emergencies. 
@@ -27,7 +27,8 @@ Criticare is an information management system for emergency rooms/critical care 
 
 ## References
 
-
+The code will be version controlled on github. The team will be colloborating and updating progress on the github repository. 
+Github Repo Link: https://github.com/shalinsingh818/CS460EmergencyHospitalDB 
 
 ## Overview
 
