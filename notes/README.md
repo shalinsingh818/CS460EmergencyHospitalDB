@@ -8,7 +8,7 @@
 
 **DataWharehouse**: Sqlite3
 
-**Frontend Stack**: PyQt 5 (OR) HTML/BOOTSTRAP
+**Frontend Stack**: HTML/BOOTSTRAP
 
 # Purpose
 Purpose of this project is to create an application that can be used in hospitals and emergency rooms to organize, save, edit and evaluate patient information. This document is contract between the client and developers that verify the requirements of the application. 
@@ -32,19 +32,14 @@ Github Repo Link: https://github.com/shalinsingh818/CS460EmergencyHospitalDB
 
 ## Overview
 
-
-
 # General Description
-
-
+Criticare is a information managment system for Hospital/Emergency room. The application stores information about Patients, Employees and Procedures/Medical Conditions. Employees/Users can create accounts and view their medical/work information. Overall, this application allows patients to get the correct medical diagnosis/procedure in the event of an emergency. 
 
 ## Product Perspective
-
 It is part of a larger product. There will be many components, such as the patient intake, the procedure, diagnosis, medication, room assign, room, permission, results, patient and employee information. From an interface perspective, for example, components such as procedure, diagnosis, medication etc. will pull info from Intake. As for hardware used, the system is running on one CPU with a sqlite3 database.
 
 
 ## Product Functions
-
 1. **Employee management service**
 	* Manages employees (Doctors, nurses, janitorial etc. )
 	* Permissions system: Employees can have access to information baseds on their role/permission assigned. 
@@ -64,7 +59,6 @@ It is part of a larger product. There will be many components, such as the patie
 
 
 ## User Characteristics
-
 There are many types of users for this application. The user roles are defined as
 
 | FieldName | Summary                                                 |
@@ -98,7 +92,6 @@ Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, 
 	* Can view financial summary/cost of visit after discharge
 
 ## General Constraints
-
 1. **Defensive Security Constraints** 
 	* Cannot provide real time user session authentication
 	* SQLITE3 (Database Framework) is vunerable to injections with escaped string patterns. 
@@ -157,7 +150,6 @@ A mandatory feauture of the application is to be able to create, read, update an
 	* return json/data of entity model to the user
 	* Endpoint should render the data so that the GUI can easily obtain it. 
 
-
 ### UPDATE
 **Introduction**: Purpose of this function is to be able to update the fields/instance of entity in the ER diagram. Every entity in the ER diagram will have this method to follow CRUD convention. 
 1. **Inputs**
@@ -178,7 +170,6 @@ A mandatory feauture of the application is to be able to create, read, update an
 3. **Outputs**: 
 	* boolean value that indicates if the record was successfully deleted
 
-
 ### DELETE ALL
 **Introduction**: Purpose of this function is to act as a "KILL SWITCH" to all entities in the ER diagram. If we need to delete/clean the database, this method can delete all the entities in the database. 
 1. **Inputs**
@@ -189,15 +180,12 @@ A mandatory feauture of the application is to be able to create, read, update an
 3. **Outputs**: 
 	* boolean value that indicates if the record was successfully deleted
 
-
-
 # Services Diagram
 Down below is a uml diagram of how all the interconnected services work together. The data for these services comes from the database repository. 
 
 Note that the entity relationships may change in development. 
 
 ![ER Diagram](./images/p6.png)
-
 
 ## PATIENT Functional Requirements
 These are the functions needed for the actor (Patient)
@@ -213,7 +201,6 @@ These are the functions needed for the actor (Patient)
 3. **Outputs**: 
 	* returns true or false if patient is adult or not
 
-
 ### CALCULATE BMI
 **Introduction**: Purpose of this function is to verify that the date of the birth of the patient is valid. It checks if they are under or over 18 and returns a result based on the value of the condition. 
 1. **Inputs**
@@ -224,7 +211,6 @@ These are the functions needed for the actor (Patient)
 	* Check if age is greater than 18
 3. **Outputs**: 
 	* returns true or false if patient is adult or not
-
 
 ### ADD SYMPTOMS
 **Introduction**: Purpose of this function is to verify that the date of the birth of the patient is valid. It checks if they are under or over 18 and returns a result based on the value of the condition. 
@@ -250,7 +236,6 @@ These are all the functional requirements for an employee with the "Nurse" role.
 3. **Outputs**: 
 	* returns true or false if patient was successfully admitted
 
-
 ### VIEW/UPDATE PATIENT NOTES
 **Introduction**: Purpose of this function is to allow nurse to view and update notes for the patient while they are admitted to the emergency room. 
 1. **Inputs**
@@ -260,7 +245,6 @@ These are all the functional requirements for an employee with the "Nurse" role.
 	* Check if patient is admitted. 
 3. **Outputs**: 
 	* returns true or false if patient notes were successfully updated. 
-
 
 ### VIEW/UPDATE PATIENT NOTES
 **Introduction**: Purpose of this function is to allow nurse to view and update notes for the patient while they are admitted to the emergency room. 
@@ -272,10 +256,9 @@ These are all the functional requirements for an employee with the "Nurse" role.
 3. **Outputs**: 
 	* returns true or false if patient notes were successfully updated.
 
- 
+
 ## DOCTOR: Functional Requirements
 All functionality needed for doctor entity. These include functions with permissions, viewing/reading data from the database. 
-
 
 ### PRESCRIBE MEDICATION
 **Introduction**: Purpose of this function to prescribe a patient with the medication needed to treat their diagnosis. 
@@ -288,15 +271,12 @@ All functionality needed for doctor entity. These include functions with permiss
 3. **Outputs**: 
 	* returns true or false if patient medication was prescribed. 
 
-
 ### ASSIGN AND CREATE A PROCEDURE
 **Introduction**: Purpose of this function to create a procedure, select the type and assign the patient/staff and room needed. 
-
 1. **Inputs**
 	* patient_id: unique id of the patient (could be one to many)
 	* employee_id unique id for the employees we need
 	* room_id unique id for the room the procedure is occuring in. 
-
 2. **Processing**: 
 	* Check if user is a doctor
 	* Check if patient is admitted. 
@@ -304,7 +284,6 @@ All functionality needed for doctor entity. These include functions with permiss
 	* returns true or false if patient medication was prescribed. 
 
 # External interface requirements
-
 **User Interfaces**: User Interface: The product will look and function like a form where you can add, edit and delete information. The interface will be password protected so only users with the right privileges can access certain parts of the form. For example, the doctor can look at all of the information collected by all levels of users while the registration nurse would only have access to the registration information on a patient. 
 
 **Hardware Interfaces**: Runs on Mac,Windows,Linux. It will be a desktop/web application. 
@@ -315,27 +294,18 @@ All functionality needed for doctor entity. These include functions with permiss
 
 
 # Performance Requirements
-
-
 **Standards Compliance**: Certain audit procedures would be followed, such as information on results of audits, financial info, how many intakes etc. It should be verified that bills are prepared properly according to visit charges of doctors, medicine, stay charges, room rent, etc. Bills should be verified with the fees/charges structure.
 
 **Hardware Limitations**: Hardware limitations are the system is running on one CPU with a sqlite3 database. As for the amount of memory available, there is 1TP of hard drive space. 
 
 **Availability**: User/Customer information is saved in database and customer transactions are saved. Application will be able to replicate copies of the data model on disk. If any data is lost due to computer/system failure, replicated copies of SQL relational models will be saved. 
 
-
 **Security Requirements**: SQL server needs to have a database administrator. DB admin should have full access to all tables and entities. Users in the data model such as Nurse, Doctor, Patient need to have different permissions when viewing data. GUI Endpoints need to prevent SQL injections/string escaping. Database Repository and Business logic are separated from each other to prevent collision of application logic. 
-
-
 
 **Maintainability**: Down below is a list of things the developers will be responsible for fixing if bugs/issues come up. Database Repository: All the code responsible for interacting with the database. Services: Employee Management Service, Patient Intake and Room assignment. All the logic and code needed to provide data to the GUI. 
 GUI: PYQT user interface. Any issues that occur with the GUI and layout/style of application will be subject to review if any errors come up. 
 
-
-
 **Other Requirements**: 
-
-
 # Application Architecture
 This is a model of how the database functions will be seperated from the buisness logic of the application. The figure shows a library designated for buisness logic and the data repository. The database repository will use sqlite3, with the ER diagram implemented. 
 
