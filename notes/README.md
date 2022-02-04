@@ -118,8 +118,7 @@ Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, 
 
 
 ## Assumptions and Dependencies
-
-
+If an operating system or library turns out not to be available, we would fall back on any type of relational database. We would have to adapt to what doesn’t work and use different libraries or systems to get around it.
 
 
 # Specific Requirements
@@ -304,37 +303,35 @@ All functionality needed for doctor entity. These include functions with permiss
 3. **Outputs**: 
 	* returns true or false if patient medication was prescribed. 
 
-
-## PROCEDURE:  Functional Requirements
-
-
 # External interface requirements
 
-**User Interfaces**: 
+**User Interfaces**: User Interface: The product will look and function like a form where you can add, edit and delete information. The interface will be password protected so only users with the right privileges can access certain parts of the form. For example, the doctor can look at all of the information collected by all levels of users while the registration nurse would only have access to the registration information on a patient. 
 
-**Hardware Interfaces**: 
+**Hardware Interfaces**: Runs on Mac,Windows,Linux. It will be a desktop/web application. 
 
-**Software Interface**: 
+**Software Interface**: Software needed: Python, Sqlite3,PyQt 5 or HTML/Bootstrap, Figma
 
-**Communication Interfaces**: 
+**Communication Interfaces**: Socket Protocol- TCP/IP Sql server  PyQt 
 
 
 # Performance Requirements
 
 
-# Design Constraints
+**Standards Compliance**: Certain audit procedures would be followed, such as information on results of audits, financial info, how many intakes etc. It should be verified that bills are prepared properly according to visit charges of doctors, medicine, stay charges, room rent, etc. Bills should be verified with the fees/charges structure.
+
+**Hardware Limitations**: Hardware limitations are the system is running on one CPU with a sqlite3 database. As for the amount of memory available, there is 1TP of hard drive space. 
+
+**Availability**: User/Customer information is saved in database and customer transactions are saved. Application will be able to replicate copies of the data model on disk. If any data is lost due to computer/system failure, replicated copies of SQL relational models will be saved. 
+
+
+**Security Requirements**: SQL server needs to have a database administrator. DB admin should have full access to all tables and entities. Users in the data model such as Nurse, Doctor, Patient need to have different permissions when viewing data. GUI Endpoints need to prevent SQL injections/string escaping. Database Repository and Business logic are separated from each other to prevent collision of application logic. 
 
 
 
+**Maintainability**: Down below is a list of things the developers will be responsible for fixing if bugs/issues come up. Database Repository: All the code responsible for interacting with the database. Services: Employee Management Service, Patient Intake and Room assignment. All the logic and code needed to provide data to the GUI. 
+GUI: PYQT user interface. Any issues that occur with the GUI and layout/style of application will be subject to review if any errors come up. 
 
-# Attributes
 
-
-**Availability**: 
-
-**Security Requirements**: 
-
-**Maintainability**: 
 
 **Other Requirements**: 
 
