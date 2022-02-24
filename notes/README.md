@@ -10,8 +10,9 @@
 
 **Frontend Stack**: PyQt 5 (OR) HTML/BOOTSTRAP
 
-# Purpose
-Purpose of this document is to provide a general summary/requirement analysis of what tCritiCare is and how it functions. 
+# PURPOSE
+Purpose of this project is to create a database that can be used in hospitals and emergency rooms to organize, save, edit and evaluate patient information. 
+
 
 ## Scope
 Criticare is an information management system for emergency rooms/critical care centers. The application stores information on a database and allows users to view, read, update and enter hospital related information. Some of the main features of criticare are managing patient/employee information, reserve rooms to perform procedures on patient and diagnose and provide the proper medical care in emergencies. 
@@ -118,9 +119,6 @@ Down below, the user characterstics are divided into 5 sections, Nurse, Doctor, 
 
 ## Assumptions and Dependencies
 
-
-
-
 # Specific Requirements
 The requirements for the system are based on the entity relationship diagram down below. 
 
@@ -130,6 +128,44 @@ Down below is the databse/uml diagram to model the actors in the emergency room 
 Note that the entity relationships may change in development. 
 
 ![ER Diagram](./images/p4.png)
+
+
+### GENERAL FUNCTIONAL REQUIREMENTS
+**Intro**: Intent of the function- collect data from users and organize it in a way that can be clearly read and understood by users. 
+We will use Python to code the backend of the program and either PyQt or HTML to design the user interface that will be interacted with as a working form. 
+
+#### DATA MODEL Registration INPUTS
+
+1. Patient
+	* Patient_id, gender, date_of_birth, first_name, last_name, middle_name, height, weight, next_of_kin, home_phone, work_phone, mobile_phone, other, symptoms, health_insurance, vaccination, vaccination_date, drugs_or_alcohol, religion, SSN, sexually_active, allergies, blood_type
+
+2. Test/Scan Results
+	* test_id, type, cost, diabetes, Covid, pneumonia, asthma, heart attack, stroke, IBS, hypertension
+3. Physician 
+	* Tests results, tests given, doctor_id, first_name, last_name, department
+
+4. Nurse
+	* Blood_pressure, notes, symptoms, weight, height
+
+5. Room
+	* Room_number, room_type, blockfloor, blockcode, availability_status 
+
+6. Department
+	* Department_id, name, head
+
+7. Medication
+	* Name, brand, description
+8. Appointment 
+	* Appointment_id, patient, doctor, start_time, end_time, room_number
+9. Billing
+	* Room rate, test costs, medication costs, bill deadline, 
+
+
+2. **Processing**:
+	* checking permission and privileges, check to make sure patient ID is valid, checking symptoms for diagnosis. 
+
+3. **Outputs**: 
+	* Output: a document that organizes and displays the information inputted into the form. Also an output of billing information for the patient.  
 
 
 ## CRUD Operations
@@ -226,16 +262,7 @@ These are the functions needed for the actor (Patient)
 	* returns true or false if patient is adult or not
 
 
-### ADD SYMPTOMS
-**Introduction**: Purpose of this function is to verify that the date of the birth of the patient is valid. It checks if they are under or over 18 and returns a result based on the value of the condition. 
-1. **Inputs**
-	* patient date of birth
-	* date-format: YYYY:M:D:H:M:S
-2. **Processing**: 
-	* Check if age is less then 18
-	* Check if age is greater than 18
-3. **Outputs**: 
-	* returns true or false if patient is adult or not
+
 
 ## NURSE: Functional Requirements
 These are all the functional requirements for an employee with the "Nurse" role. 
@@ -262,20 +289,21 @@ These are all the functional requirements for an employee with the "Nurse" role.
 	* returns true or false if patient notes were successfully updated. 
 
 
-### VIEW/UPDATE PATIENT NOTES
-**Introduction**: Purpose of this function is to allow nurse to view and update notes for the patient while they are admitted to the emergency room. 
+
+### ADD SYMPTOMS
+**Introduction**: Purpose of this function is to verify that the date of the birth of the patient is valid. It checks if they are under or over 18 and returns a result based on the value of the condition. 
 1. **Inputs**
-	* patient id (Related to notes entity)
+	* patient date of birth
+	* date-format: YYYY:M:D:H:M:S
 2. **Processing**: 
-	* Check if user is a nurse
-	* Check if patient is admitted. 
+	* Check if age is less then 18
+	* Check if age is greater than 18
 3. **Outputs**: 
-	* returns true or false if patient notes were successfully updated.
+	* returns true or false if patient is adult or not
 
  
 ## DOCTOR: Functional Requirements
-All functionality needed for doctor entity. These include functions with permissions, viewing/reading data from the database. 
-
+All functionality needed for doctor entity, doctor has all the functions that the nurse has. These include functions with permissions, viewing/reading data from the database. 
 
 ### PRESCRIBE MEDICATION
 **Introduction**: Purpose of this function to prescribe a patient with the medication needed to treat their diagnosis. 
@@ -304,18 +332,42 @@ All functionality needed for doctor entity. These include functions with permiss
 	* returns true or false if patient medication was prescribed. 
 
 
-## PROCEDURE:  Functional Requirements
+### DIAGNOSE PATIENT
+**Introduction**: Purpose of this function to assign a patient a medical condition. 
 
+1. **Inputs**
+	* patient id: unique id of the patient (could be one to many)
+	* condition id: id of the diagnosis the patient is recieving. 
+
+2. **Processing**: 
+	* Check if user is a doctor
+	* Check if patient is admitted. 
+3. **Outputs**: 
+	* returns true or false if patient was diagnosed.  
+
+
+### DISCHARGE PATIENT
+**Introduction**: Purpose of this function to discharge patient
+
+1. **Inputs**
+	* patient id: unique id of the patient (could be one to many)
+
+2. **Processing**: 
+	* Check if user is a doctor
+	* Check if patient is admitted. 
+3. **Outputs**: 
+	* returns true or false if patient was diagnosed.  
 
 # External interface requirements
 
-**User Interfaces**: 
+**User Interfaces**: User Interface: The product will look and function like a form where you can add, edit and delete information. The interface will be password protected so only users with the right privileges can access certain parts of the form. For example, the doctor can look at all of the information collected by all levels of users while the registration nurse would only have access to the registration information on a patient. 
 
-**Hardware Interfaces**: 
 
-**Software Interface**: 
+**Hardware Interfaces**: Runs on Mac,Windows,Linux. It will be a desktop/web application. 
 
-**Communication Interfaces**: 
+**Software Interface**: Software needed: Python, Sqlite3,PyQt 5 or HTML/Bootstrap, Figma 
+
+**Communication Interfaces**: Socket Protocol- TCP/IP Sql server  PyQt 
 
 
 # Performance Requirements
@@ -331,9 +383,28 @@ All functionality needed for doctor entity. These include functions with permiss
 
 **Availability**: 
 
-**Security Requirements**: 
+##Security Requirements
 
-**Maintainability**: 
+SQL server needs to have a database administrator. DB admin should have full access to all tables and entities. 
+
+Users in the data model such as Nurse, Doctor, Patient need to have different permissions when viewing data. 
+
+GUI Endpoints need to prevent SQL injections/string escaping. 
+
+Database Repository and Business logic are separated from each other to prevent collision of application logic. 
+
+
+
+## Maintainability
+
+Down below is a list of things the developers will be responsible for fixing if bugs/issues come up. 
+
+Database Repository: All the code responsible for interacting with the database 
+
+Services: Employee Management Service, Patient Intake and Room assignment. All the logic and code needed to provide data to the GUI. 
+
+GUI: PYQT user interface. Any issues that occur with the GUI and layout/style of application will be subject to review if any errors come up. 
+ 
 
 **Other Requirements**: 
 
