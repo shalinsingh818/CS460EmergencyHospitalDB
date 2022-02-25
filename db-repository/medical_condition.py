@@ -11,10 +11,10 @@ MEDICAL_CONDITION_FIELDS = [
 
 
 # QUERIES NEEDED FOR intakeS (FLUSH OUT)
-INSERT_MEDICAL_CONDITION_QUERY = "INSERT INTO MEDICAL_CONDITION (cost, notes, name) values(?,?,?,?);"
+INSERT_MEDICAL_CONDITION_QUERY = "INSERT INTO MEDICAL_CONDITION (name, code) values(?,?);"
 VIEW_MEDICAL_CONDITIONS_QUERY = "SELECT * FROM MEDICAL_CONDITION;"; 
 DELETE_MEDICAL_CONDITION_QUERY = "DELETE FROM MEDICAL_CONDITION where condition_id=?"; 
-DELETE_ALL_MEDICAL_CONDITION_QUERY = "DELETE  FROM MEDICAL_CONDITION;"; 
+DELETE_ALL_MEDICAL_CONDITIONS_QUERY = "DELETE  FROM MEDICAL_CONDITION;"; 
 
 
 # Create Patient
@@ -48,6 +48,7 @@ def create_medical_condition(medical_condition_fields: dict) -> bool:
 
 
 def view_medical_conditions():
+	result = []
 	medical_conditions = [] 	
 	# open db
 	db = sqlite3.connect("data/criticare.db")
@@ -62,6 +63,7 @@ def view_medical_conditions():
 				temp_dict[field] = i[count]
 				count += 1
 			pprint(temp_dict)
+			result.append(temp_dict)
             
 			#medical_condition = models.IntakePatient(temp_dict)
 			#medical_conditions.append(patient)
@@ -71,7 +73,7 @@ def view_medical_conditions():
 		db.rollback()
 	db.close()
 
-	return medical_conditions
+	return result
 
 
 def delete_medical_condition(medical_condition_id):
