@@ -1,6 +1,5 @@
 import sqlite3
 from pprint import pprint
-import models
 
 # Keep fields in array so we can populate employee_dict
 EMPLOYEE_FIELDS = [
@@ -65,7 +64,7 @@ def view_employees():
 			pprint(temp_dict)
 			#employee = models.Employee(temp_dict)
 			#employees.append(employee)
-	
+			employees.append(temp_dict)	
 	except Exception as e:
 		print("Error in viewing employee: {}".format(e))
 		db.rollback()

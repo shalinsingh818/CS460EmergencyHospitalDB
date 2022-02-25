@@ -1,5 +1,6 @@
 import unittest
 import patient as pat
+from pprint import pprint
 from datetime import date
 
 class TestCriticarePatientMethods(unittest.TestCase):
@@ -38,7 +39,7 @@ class TestCriticarePatientMethods(unittest.TestCase):
 		# retrieve patients
 		patients = pat.view_patients()
 		for patient in patients:
-			print(patient.test_print())
+			pprint(patient)
 
 	
 	def test_delete_patient(self):	

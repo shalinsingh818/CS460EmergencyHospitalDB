@@ -1,6 +1,5 @@
 import sqlite3
 from pprint import pprint
-import models
 
 # Keep fields in array so we can populate patient_dict
 PATIENT_FIELDS = [
@@ -63,6 +62,7 @@ def create_patient(patient_fields: dict) -> bool:
 
 
 def view_patients():
+	result = []
 	patients = [] 	
 	# open db
 	db = sqlite3.connect("data/criticare.db")
@@ -76,16 +76,15 @@ def view_patients():
 			for field in PATIENT_FIELDS:
 				temp_dict[field] = i[count]
 				count += 1
+			result.append(temp_dict)
 
-			patient = models.Patient(temp_dict)
-			patients.append(patient)
 	
 	except Exception as e:
 		print("Error in viewing patient: {}".format(e))
 		db.rollback()
 	db.close()
 
-	return patients
+	return result
 
 
 def delete_patient(patient_id):
