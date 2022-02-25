@@ -24,6 +24,14 @@ CREATE TABLE PATIENT (
 );
 
 
+/** Discharge information for patient intake/outtake  */
+CREATE TABLE DISCHARGE (
+	discharge_id INTEGER PRIMARY KEY,
+	medication_cost INT, 
+	procedure_cost INT, 
+	overnight_rate INT, 
+	doctor_notes VARCHAR(1000)
+); 
 
 /** Information stored with patient on intake  */
 CREATE TABLE INTAKE_PATIENT (
@@ -35,7 +43,9 @@ CREATE TABLE INTAKE_PATIENT (
 	discharge BOOLEAN,
 	date_created DATETIME,
 	ambulance BOOLEAN, 	
-	FOREIGN KEY(patient_id) REFERENCES PATIENT(patient_id)
+	discharge_id INT, 
+	FOREIGN KEY(patient_id) REFERENCES PATIENT(patient_id),
+	FOREIGN KEY(discharge_id) REFERENCES DISCHARGE(discharge_id)
 ); 
 
 
