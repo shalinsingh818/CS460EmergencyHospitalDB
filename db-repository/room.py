@@ -3,7 +3,7 @@ from pprint import pprint
 import models
 
 # Keep fields in array so we can populate intake_dict
-PROCEDURE_FIELDS = [
+ROOM_FIELDS = [
 	"room_id",	
 	"cost",
     "notes",
@@ -12,23 +12,23 @@ PROCEDURE_FIELDS = [
 
 
 # QUERIES NEEDED FOR intakeS (FLUSH OUT)
-INSERT_PROCEDURE_QUERY = "INSERT INTO PROCEDURE (room_id, cost, notes, name) values(?,?,?,?);"
-VIEW_PROCEDURES_QUERY = "SELECT * FROM PROCEDURE;"; 
-DELETE_PROCEDURE_QUERY = "DELETE FROM PROCEDURE where procedure_id=?"; 
-DELETE_ALL_PROCEDURES_QUERY = "DELETE  FROM PROCEDURE;"; 
+INSERT_ROOM_QUERY = "INSERT INTO ROOM (room_id, cost, notes, name) values(?,?,?,?);"
+VIEW_ROOMS_QUERY = "SELECT * FROM ROOM;"; 
+DELETE_ROOM_QUERY = "DELETE FROM room where room_id=?"; 
+DELETE_ALL_ROOMS_QUERY = "DELETE  FROM ROOM;"; 
 
 
 # Create Patient
-def create_procedure(procedure_fields: dict) -> bool:
+def create_room(room_fields: dict) -> bool:
 	"""
-		Since there's alot of fields. procedure_fields is a dictionary that can be
+		Since there's alot of fields. room_fields is a dictionary that can be
 		passed to this method for testing. 
 	"""
 	result = False
 	# bind values, by automatically appending dict vals to tuple
 	values = []
-	for val in procedure_fields:
-		values.append(procedure_fields[val])
+	for val in room_fields:
+		values.append(room_fields[val])
 
 	# convert to tuple
 	values = tuple(values)
@@ -37,52 +37,52 @@ def create_procedure(procedure_fields: dict) -> bool:
 	db = sqlite3.connect("data/criticare.db")
 	try:
 		cur = db.cursor()
-		cur.execute(INSERT_PROCEDURE_QUERY, values)
+		cur.execute(INSERT_ROOM_QUERY, values)
 		db.commit()
 		result = True
 	except Exception as e:
-		print("Error in creating procedure: {}".format(e))
+		print("Error in creating room: {}".format(e))
 		db.rollback()
 
 	db.close()
 	return result
 
 
-def view_procedures():
-	procedures = [] 	
+def view_rooms():
+	rooms = [] 	
 	# open db
 	db = sqlite3.connect("data/criticare.db")
 	try:
 		cur = db.cursor()
-		cur.execute(VIEW_PROCEDURES_QUERY)
+		cur.execute(VIEW_ROOMS_QUERY)
 		for i in cur:
 			# render row entry into patient class model
 			temp_dict = {}	
 			count = 0 
-			for field in procedure_FIELDS:
+			for field in ROOM_FIELDS:
 				temp_dict[field] = i[count]
 				count += 1
 			pprint(temp_dict)
             
-			#procedure = models.IntakePatient(temp_dict)
-			#procedures.append(patient)
+			#room = models.IntakePatient(temp_dict)
+			#rooms.append(patient)
 	
 	except Exception as e:
-		print("Error in viewing intake patient: {}".format(e))
+		print("Error in viewing rooms: {}".format(e))
 		db.rollback()
 	db.close()
 
-	return procedures
+	return rooms
 
 
-def delete_procedure(procedure_id):
+def delete_room(room_id):
 	result = False
 	db = sqlite3.connect("data/criticare.db")
 	
 	try:
-		print("INTAKE PATIENT ID: ", procedure_id)
+		print("ROOM ID: ", room_id)
 		cur = db.cursor()
-		cur.execute(DELETE_PROCEDURE_QUERY, (procedure_id,))
+		cur.execute(DELETE_ROOM_QUERY, (room_id,))
 		db.commit()
 		result = True
 	except Exception as e:
@@ -95,20 +95,19 @@ def delete_procedure(procedure_id):
 
 	
 	
-def delete_all_procedures():
+def delete_all_rooms():
 	result = False
 	db = sqlite3.connect("data/criticare.db")
 	
 	try:
 		cur = db.cursor()
-		cur.execute(DELETE_ALL_PROCEDURES_QUERY)
+		cur.execute(DELETE_ALL_ROOMS_QUERY)
 		db.commit()
 		result = True
 	except Exception as e:
-		print("Error in deleting intake patient: {}".format(e))
+		print("Error in deleting rooms: {}".format(e))
 		db.rollback()
 
 	db.close()
 
 	return result
-        
