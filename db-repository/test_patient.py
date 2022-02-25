@@ -2,17 +2,17 @@ import unittest
 import patient as pat
 from datetime import date
 
-class TestCriticareMethods(unittest.TestCase):
+class TestCriticarePatientMethods(unittest.TestCase):
 
 	def test_create_patient(self):
 		
 		# dictionary as input
 		dict_input = {
-			"ssn": 3244321, 
-			"first_name": "shay", 
-			"middle_name": "indel", 
-			"last_name": "singh",
-			"date_of_birth": "05/12/1999", 
+			"ssn": 3244102, 
+			"first_name": "b", 
+			"middle_name": "test", 
+			"last_name": "bernard",
+			"date_of_birth": "05/12/1998", 
 			"height": "5 6",
 			"weight": "155",
 			"next_of_kin": "usha singh",
@@ -29,18 +29,35 @@ class TestCriticareMethods(unittest.TestCase):
 			"notes": "idk"
 		}
 
-		pat.create_patient(dict_input)
+		result = pat.create_patient(dict_input)
+		if result:
+			print("# PASSED CREATE PATIENT: ")
 
-		# write test case to check if values are in dbi
 
-
-	"""
 	def test_view_patients(self):	
 		# retrieve patients
 		patients = pat.view_patients()
 		for patient in patients:
 			print(patient.test_print())
-	"""
+
+	
+	def test_delete_patient(self):	
+		# retrieve patients
+		test_patient_id = 2
+		result = pat.delete_patient(test_patient_id)	
+		if result:
+			print("# PASSED DELETE PATIENT BY ID: ")
+		else:	
+			print("# FAILED DELETE PATIENT BY ID: ")
+		
+		
+	def test_delete_all_patients(self):	
+		# retrieve patients	
+		result = pat.delete_all_patients()	
+		if result:
+			print("# PASSED DELETE ALL PATIENTS: ")
+		else:	
+			print("# FAILED DELETE ALL PATIENTS: ")
 
 
 

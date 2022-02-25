@@ -29,6 +29,7 @@ PATIENT_FIELDS = [
 # QUERIES NEEDED FOR PATIENTS (FLUSH OUT)
 INSERT_QUERY = "INSERT INTO PATIENT (ssn, first_name,middle_name,last_name,date_of_birth, height, weight, next_of_kin, home_phone, work_phone, symptoms, health_insurance, vaccination, vaccination_date, drugs_alchohol, sexually_active, allergies, blood_type, notes) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
 VIEW_PATIENTS_QUERY = "SELECT * FROM PATIENT;"; 
+DELETE_ALL_PATIENTS_QUERY = "DELETE  FROM PATIENT;"; 
 
 
 # Create Patient
@@ -45,8 +46,6 @@ def create_patient(patient_fields: dict) -> bool:
 
 	# convert to tuple
 	values = tuple(values)
-	print("DATABASE TUPLE")
-	print(values)
 
 	# insert to db
 	db = sqlite3.connect("data/criticare.db")
@@ -54,7 +53,6 @@ def create_patient(patient_fields: dict) -> bool:
 		cur = db.cursor()
 		cur.execute(INSERT_QUERY, values)
 		db.commit()
-		print("Created Patient: ")
 		result = True
 	except Exception as e:
 		print("Error in creating patient: {}".format(e))
@@ -89,8 +87,43 @@ def view_patients():
 
 	return patients
 
+
+def delete_patient(patient_id):
+	result = False
+	db = sqlite3.connect("data/criticare.db")
+	DELETE_PATIENT_QUERY = "DELETE FROM PATIENT WHERE patient_id=?;"; 
 	
-	
+	try:
+		print("PATIENT ID: ", patient_id)
+		cur = db.cursor()
+		cur.execute(DELETE_PATIENT_QUERY, (patient_id,))
+		db.commit()
+		result = True
+	except Exception as e:
+		print("Error in deleting patient: {}".format(e))
+		db.rollback()
+
+	db.close()
+
+	return result
 
 	
+	
+def delete_all_patients():
+	result = False
+	db = sqlite3.connect("data/criticare.db")
+	
+	try:
+		cur = db.cursor()
+		cur.execute(DELETE_ALL_PATIENTS_QUERY)
+		db.commit()
+		result = True
+	except Exception as e:
+		print("Error in deleting patient: {}".format(e))
+		db.rollback()
 
+	db.close()
+
+	return result
+        
+	
