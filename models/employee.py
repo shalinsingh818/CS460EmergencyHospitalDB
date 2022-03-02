@@ -15,7 +15,13 @@ class Employee:
         self.middle_name = attribute_dict["middle_name"]
         self.permission_id = attribute_dict["permission_id"]	
 	
+	# example methods
+	def check_permission_id(self):
+		pass
 
+	def check_last_name(self):
+		pass
+		
 	def test_print(self):
 		print("============================")	
         print("EMPLOYEE: ")

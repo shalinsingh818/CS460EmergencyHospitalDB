@@ -11,7 +11,14 @@ class Room:
         self.room_id = attribute_dict["room_id"]
         self.room_number = attribute_dict["room_number"]	
 	
-     def test_print(self):
+    # example methods
+	def check_room_id(self):
+		pass
+
+    def check_cost(self):
+        pass 
+
+    def test_print(self):
 		print("============================")	
         print("Availability: {}".format(self.availibility))
         print("Cost: {}".format(self.cost))

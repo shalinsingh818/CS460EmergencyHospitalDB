@@ -14,7 +14,12 @@ class Procedure:
         self.staff = attribute_dict["staff"]
         self.test_type = attribute_dict["test_type"]
         
-        
+    # example methods
+	def check_name(self):
+		pass
+
+    def check_cost(self):
+        pass
         
 
      def test_print(self):

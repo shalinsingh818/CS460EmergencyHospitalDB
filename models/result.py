@@ -12,6 +12,13 @@ class Result:
         self.procedure_id = attribute_dict["procedure_id"]	
         self.result_id = attribute_dict["result_id"]
 	
+    # example methods
+	def check_assigned_physisian(self):
+		pass
+
+    def check_blood_pressure(self):
+        pass
+
      def test_print(self):
 		print("============================")	
         print("Assigned Physician: {}".format(self.assigned_physician))

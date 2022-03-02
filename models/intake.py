@@ -18,7 +18,13 @@ class Intake:
         self.patient_id = attribute_dict["patient_id"]
         self.procedure = attribute_dict["procedure"]
         
-	
+	# example methods
+	def check_intake_id(self):
+		pass
+
+    def check_admitted(self):
+        pass
+        
 
      def test_print(self):
 		print("============================")	

@@ -11,6 +11,13 @@ class Medication:
         self.name = attribute_dict["name"]
         self.price = attribute_dict["price"]	
 	
+    # example methods
+	def check_name(self):
+		pass
+
+    def check_price(self):
+        pass
+    
      def test_print(self):
 		print("============================")	
         print("Code: {}".format(self.code))
