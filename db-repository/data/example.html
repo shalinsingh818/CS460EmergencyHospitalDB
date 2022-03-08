@@ -1,0 +1,661 @@
+<!doctype html>
+<html ng-app="myApp" lang="en">
+    
+    
+  <head>
+      
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Example for Criticare!</title>
+      
+  <link rel="stylesheet" href="http://nuimageapi.ati-erp.com/app/signapp/components/signaturepad/jquery.signaturepad.css"/>
+  <link href="https://code.ionicframework.com/1.0.0-beta.11/css/ionic.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700,600" rel=stylesheet>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="https://code.ionicframework.com/1.0.0-beta.11/js/ionic.bundle.js"></script>
+   <script type="text/javascript" src="https://rawgit.com/angular-ui/ui-utils/master/modules/mask/mask.js"></script>
+   <script type="text/javascript" src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+    <script src="http://nuimageapi.ati-erp.com/app/signapp/components/signaturepad/flashcanvas.js"></script>
+    <script src="http://nuimageapi.ati-erp.com/app/signapp/components/signaturepad/jquery.signaturepad.min.js"></script>
+  
+
+</head>
+  <body ng-controller="MyCtrl">
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">Toggles</h1>
+         <progress max="100" value=" {{eDonePercent}}" style="height: 30px; transition: width 0.1s; background: red;"> </progress>{{eDonePercent}}
+      </ion-header-bar>
+  <ion-nav-view>
+    
+    <ion-view view-title="My Page">
+      
+      <ion-content class="padding">
+        
+     
+        <div id="res" style="float:top;"> 
+        <!--  Disabled: {{eDisabled}} <br>-->
+          All: {{eAll}}  <br>
+         You need to complete {{eRequired}} required field(s)  <br>
+         <!--  Done in %: {{eDonePercent}} <br>
+          Valid: {{survey.$valid}}-->
+          Gender:{{user.sex}}
+          famhi:{{user.familyhistory.HeartDisease}}
+           
+        </div>
+        
+        
+        <form name="survey" novalidate="novalidate" on-valid-submit="doLogin()" >
+      <div class="list card">
+        <div class="item item-divider">New Patient Intake Form:</div>
+        <label class="item item-input item-floating-label validated">
+          <span class="input-label">Patient Name</span>
+          <input type="text" ng-model="user.pname" required="required" name="pname" ng-required="true" placeholder="Patient Name">
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+         <div class="item item-input validated ">
+          <span class="input-label ">Gender</span>
+           <div class="row">
+    <div class="col"><input  id="rdbmale" style="-webkit-appearance: radio;" type="radio" ng-model="user.sex"  ng-required="!user.sex" value="Male" name="sex"  >Male</div>
+    <div class="col"><input  id="rdbfemale" style="-webkit-appearance: radio;" type="radio" ng-model="user.sex"  value="Female" name="sex" ng-required="!user.sex"   >Female
+             <i class="icon ion-alert-circled error col col-10"></i></div>
+           </div>
+           
+          
+          
+        </div>
+        <label class="item item-input item-floating-label validated">
+          <span class="input-label">BirthDate</span>
+          <input type="date" ng-model="user.dob" required="required" name="dob" ng-  placeholder="BirthDate(MM/DD/YYYY)" >
+          
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+        
+        <label class="item item-input item-floating-label validated item-floating-label">
+          <span class="input-label">Address</span>
+          <input type="text" ng-model="user.address" required="required" name="address" id="address" placeholder="Address">
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+        <label class="item item-input item-floating-label validated">
+          <span class="input-label">City</span>
+          <input type="text" ng-model="user.city" required="required" name="city" placeholder="City">
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+         <label class="item item-input item-floating-label validated">
+          <span class="input-label">State</span>
+          <input type="text" ng-model="user.state" required="required" name="state" placeholder="Satate">
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+         <label class="item item-input item-floating-label validated">
+          <span class="input-label">Zip</span>
+          <input type="text" ng-model="user.zip" required="required" name="zip" maxlength="6" placeholder="Zip">
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+        <label class="item item-input item-floating-label validated">
+          <span class="input-label">Primary Phone</span>
+          <input type="tel" ng-model="user.prphone" required="required" name="prphone" ui-mask="+1(999)-999-9999" >
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+        <label class="item item-input item-floating-label validated">
+          <span class="input-label">Additional Phone</span>
+          <input type="tel" ng-model="user.adphone" required="required" name="adphone"   ui-mask="+1(999)-999-9999" my-placeholder="Additional Phone">
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+        <label class="item item-input item-floating-label validated">
+          <span class="input-label">Email</span>
+          <input type="email" ng-model="user.email" required="required" name="email" placeholder="Email">
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+       <!-- <label class="item item-input validated row">
+          <span class="input-label col col-33">Password</span>
+          <input type="password" ng-model="user.password" name="password" required="required" class="col col-50">
+          <i class="icon ion-alert-circled error col col-10" style="min-width: 16px;"></i>
+        </label>-->
+         <label class="item item-input item-floating-label validated">
+          <span class="input-label">Reason?</span>
+           <textarea  ng-model="user.trtmnt" name="trtmnt" required="required" placeholder="Reason"> <i class="icon ion-alert-circled error col col-10"></i></textarea>
+           </label>
+         <div class="item item-divider">Basic Examination</div>
+          
+         <label class="item item-input item-floating-label validated">
+          <span class="input-label">Height</span>
+          <input type="text" ng-model="user.height" required="required" name="height" placeholder="Height">
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+         <label class="item item-input item-floating-label validated">
+          <span class="input-label">Weight</span>
+          <input type="text" ng-model="user.weight" required="required" name="weight" placeholder="Weight">
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+         <label class="item item-input item-floating-label validated">
+          <span class="input-label">BP</span>
+          <input type="text" ng-model="user.bp" required="required" name="bp" placeholder="BP">
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+         <label class="item item-input item-floating-label validated">
+          <span class="input-label">Puls</span>
+          <input type="text" ng-model="user.puls" required="required" name="puls" placeholder="Puls">
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+        
+        <div class="item item-divider">Product Usage</div>
+        
+        <label class="item item-input item-floating-label validated">
+          <span class="input-label">Tobacco</span>
+          <input type="text" ng-model="user.tobacco" required="required" name="tobacco" placeholder="Tobacco How Often">
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+        <label class="item item-input item-floating-label validated">
+          <span class="input-label">Alcohol</span>
+          <input type="text" ng-model="user.alcohol" required="required" name="alcohol" placeholder="Alcohol How Often">
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+        <label class="item item-input item-floating-label validated">
+          <span class="input-label">Caffeine</span>
+          <input type="text" ng-model="user.caffeine" required="required" name="caffeine" placeholder="Caffeine  How Often">
+          <i class="icon ion-alert-circled error col col-10"></i>
+        </label>
+       
+        
+         <div class="item item-divider">Allergies (Check All that apply)</div>
+        
+        
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.Allergies.Penicillin"  ng-disabled="user.Allergies.UnknownAlergies" ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Penicillin</span></div></label>
+        
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.Allergies.Codeine"  ng-disabled="user.Allergies.UnknownAlergies" ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Codeine</span></div></label>
+        
+        
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.Allergies.SulfaDrug"  ng-disabled="user.Allergies.UnknownAlergies" ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Sulfa Drug</span></div></label>
+        
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.Allergies.Nitrate"  ng-disabled="user.Allergies.UnknownAlergies" ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Nitrate</span></div></label>
+        
+        
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.Allergies.Morphine"  ng-disabled="user.Allergies.UnknownAlergies" ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Morphine</span></div></label>
+        
+        
+            <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.Allergies.Aspirin"  ng-disabled="user.Allergies.UnknownAlergies" ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Aspirin</span></div></label>
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.Allergies.Food"  ng-disabled="user.Allergies.UnknownAlergies" ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Food</span></div></label>
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.Allergies.DyeAllergies"  ng-disabled="user.Allergies.UnknownAlergies" ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Dye Allergies</span></div></label>
+        
+       
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.Allergies.Seasonal"  ng-disabled="user.Allergies.UnknownAlergies" ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Seasonal</span></div></label>
+         
+        
+        
+       
+       
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.Allergies.Pet"  ng-disabled="user.Allergies.UnknownAlergies" ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Pet</span></div></label>
+        
+        
+        
+        <label class="item item-input validated">
+          <span class="input-label">Other</span>
+          <input type="text" ng-model="user.Allergies.other"  name="otheralergies"  ng-disabled="user.Allergies.UnknownAlergies" placeholder="Other">
+         
+        </label>
+          
+        <ion-checkbox ng-model="user.Allergies.UnknownAlergies">No known Alergies</ion-checkbox>
+        
+          
+        <div class="item item-divider">Over The Counter Medication (Check All that apply)</div>
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ocm.PainReliever" ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Pain Reliever</span></div></label>
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ocm.Aspirin"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Aspirin</span></div></label>
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ocm.AcidBlockers"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Acid Blockers</span></div></label>
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ocm.Naproxen" ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Naproxen</span></div></label>
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ocm.Ketaprofen"  ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Ketaprofen</span></div></label>
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ocm.Decongestant"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Decongestant</span></div></label>
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ocm.CoughSuppressant"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Cough Suppressant</span></div></label>
+        
+          <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ocm.Laxatives"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Laxatives</span></div></label>
+        
+        
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ocm.DietAids"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Diet Aids</span></div></label>
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ocm.Antihistamines"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Antihistamines</span></div></label>
+        
+        
+        <label class="item item-input validated">
+          <span class="input-label">Other</span>
+          <input type="text" ng-model="user.ocm.other"  name="otheralergies"   placeholder="Other">
+         
+        </label>
+        
+        
+        
+        <div class="item item-divider">Past/Present Medical Conditions (Check All that apply)</div>
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.HeartDisease"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Heart Disease</span></div></label>
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.HighCholestrol"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>High Cholestrol</span></div></label>
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.Cancer"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Cancer</span></div></label>
+        
+         <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.LungIssues"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Lung Issues</span></div></label>
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.Diabetes"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Diabetes</span></div></label>
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.HighBloodPressure"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>High Blood Pressure</span></div></label>
+         <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.Ulcers"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Ulcers</span></div></label>
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.Migraines"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Migraines</span></div></label>
+        
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.Depression"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Depression</span></div></label>
+        
+        
+          <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.HormoneRelated"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Hormone Related</span></div></label>
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.Tyroid"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Tyroid</span></div></label>
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.EyeDisease"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Eye Disease</span></div></label>
+        
+        
+        
+         <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.Epilepsy"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Epilepsy</span></div></label>
+        
+        
+        
+        
+         <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.BloodClottingIssue"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Blood Clotting Issue</span></div></label>
+        
+        
+        
+        <label class="item item-checkbox">
+          <div class="checkbox checkbox-input-hidden disable-pointer-events">
+            <input type="checkbox"  ng-model="user.ppmc.Arthritis"   ><i class="checkbox-icon"></i></div><div class="item-content " ><span>Arthritis</span></div></label>
+        
+         <label class="item item-input validated">
+          <span class="input-label">Other</span>
+          <input type="text" ng-model="user.ppmc.other"  name="otheralergies"   placeholder="Other">
+         
+        </label>
+        
+        <br>
+        <br>
+        <div class="row">
+    <div class="col">Current Medication/Vitamins/Supplements<br>
+          </div>
+    <div class="col">Strength<br>
+         
+                 </div>
+          <div class="col">Date Started<br>
+      
+             </div>
+          <div class="col">Dosage per Day
+            
+            
+                   </div
+       </div>
+            
+          </div>
+            
+            <div class="row">
+              
+    <div class="col"><input type="text" style="background-color: gainsboro;" ng-model="user.medication.Current1"  name="otheralergies1"   placeholder="Other"></div>
+              
+    <div class="col"> <input type="text" style="background-color: gainsboro;" ng-model="user.medication.Strength1"  name="otheralergies1"   placeholder="Other"></div>
+              
+    <div class="col"><input type="text" style="background-color: gainsboro;" ng-model="user.medication.DateStarted1"  name="otheralergies1"   placeholder="Other"></div>
+              
+    <div class="col"><input type="text" ng-model="user.medication.Dosage1" style="background-color: gainsboro;"  name="otheralergies1"   placeholder="Other"></div>
+    
+  </div>
+            
+          <div class="row">
+              
+    <div class="col"><input type="text" style="background-color: gainsboro;" ng-model="user.medication.Current2"  name="otheralergies1"   placeholder="Other"></div>
+              
+    <div class="col"> <input type="text" style="background-color: gainsboro;" ng-model="user.medication.Strength2"  name="otheralergies1"   placeholder="Other"></div>
+              
+    <div class="col"><input type="text" style="background-color: gainsboro;" ng-model="user.medication.DateStarted2"  name="otheralergies1"   placeholder="Other"></div>
+              
+    <div class="col"><input type="text" ng-model="user.medication.Dosage2" style="background-color: gainsboro;"  name="otheralergies1"   placeholder="Other"></div>
+    
+  </div>
+          
+        <div class="item item-divider"> Family History:(Father,Mother,Siblings only)
+            </div> 
+          <div class="row">
+    <div class="col"></div>
+    <div class="col">Yes</div>
+    <div class="col">No</div>
+    <div class="col">Relationship</div>
+    
+  </div>
+          
+          <div class="row">
+            <div class="col">Heart Disease</div>
+            
+            <div class="col" ><input type="radio" ng-model="user.familyhistory.HeartDisease" name="familyhistoryHeartDisease" id="familyhistoryHeartDisease1" style="-webkit-appearance: checkbox;" data-ng-value="true" /></div>
+            
+            <div class="col"><input type="radio" ng-model="user.familyhistory.HeartDisease" name="familyhistoryHeartDisease" id="familyhistoryHeartDisease2"  style="-webkit-appearance: checkbox;"  data-ng-value="false" /></div>
+            <div class="col"><input type="text" style="background-color: gainsboro;" ng-model="user.familyhistory.HeartDiseaseRelation" ng-disabled="!user.familyhistory.HeartDisease"/>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col">High Blood Pressure</div>
+            
+            <div class="col" ><input type="radio" ng-model="user.familyhistory.HighBloodPressure" name="familyhistoryHighBloodPressure" style="-webkit-appearance: checkbox;" data-ng-value="true"/></div>
+            
+            <div class="col"><input type="radio" ng-model="user.familyhistory.HighBloodPressure" name="familyhistoryHighBloodPressure" style="-webkit-appearance: checkbox;" data-ng-value="false"/></div>
+            <div class="col"><input type="text" style="background-color: gainsboro;"  ng-model="user.familyhistory.HighBloodPressureRelation" ng-disabled="!user.familyhistory.HighBloodPressure"/>
+            </div>
+          </div>
+          
+          
+          <div class="row">
+            <div class="col">Diabetes</div>
+            
+            <div class="col" ><input type="radio" ng-model="user.familyhistory.Diabetes" name="familyhistoryDiabetes" style="-webkit-appearance: checkbox;" data-ng-value="true"/></div>
+            
+            <div class="col"><input type="radio" ng-model="user.familyhistory.Diabetes" name="familyhistoryDiabetes" style="-webkit-appearance: checkbox;" data-ng-value="false"/></div>
+            <div class="col"><input type="text" style="background-color: gainsboro;"  ng-model="user.familyhistory.DiabetesRelation" ng-disabled="!user.familyhistory.Diabetes"/>
+            </div>
+          </div>
+          
+          
+          
+          <div class="row">
+            <div class="col">Arthritis</div>
+            
+            <div class="col" ><input type="radio" ng-model="user.familyhistory.Arthritis" name="familyhistoryArthritis" style="-webkit-appearance: checkbox;" data-ng-value="true"/></div>
+            
+            <div class="col"><input type="radio" ng-model="user.familyhistory.Arthritis" name="familyhistoryArthritis" style="-webkit-appearance: checkbox;" data-ng-value="false"/></div>
+            <div class="col"><input type="text" style="background-color: gainsboro;" ng-model="user.familyhistory.ArthritisRelation" ng-disabled="!user.familyhistory.Arthritis"/>
+            </div>
+          </div>
+          
+          
+          
+          
+          <div class="row">
+            <div class="col">Cancer</div>
+            
+            <div class="col" ><input type="radio" ng-model="user.familyhistory.Cancer" name="familyhistoryCancer" style="-webkit-appearance: checkbox;" data-ng-value="true"/></div>
+            
+            <div class="col"><input type="radio" ng-model="user.familyhistory.Cancer" name="familyhistoryCancer" style="-webkit-appearance: checkbox;" data-ng-value="false"/></div>
+            <div class="col"><input type="text" style="background-color: gainsboro;" ng-model="user.familyhistory.CancerRelation"ng-disabled="!user.familyhistory.Cancer"/>
+            </div>
+          </div>
+          
+          
+          <div class="row">
+            <div class="col">If Other,Please list disease/condition and relationship:</div>
+          </div>
+           <div class="row">
+            <div class="col"><input type="text" ng-model="user.familyhistory.OtherRelation" placeholder="Other disease" /></div>
+          </div>
+           
+          
+              
+        <div class="item item-divider"> Woman Only:
+            </div> 
+          
+          <div class="row">
+    <div class="col col-50"></div>
+    <div class="col">Yes</div>
+    <div class="col">No</div>
+  
+  </div>
+          
+            <div class="row">
+    <div class="col col-50">Are you currently pragnent?</div>
+    <div class="col"><input type="radio" name="wopragnent" ng-model="user.woman.pragnent" data-ng-value="true"/></div>
+    <div class="col"><input type="radio" name="wopragnent" ng-model="user.woman.Pragnent" data-ng-value="false"/></div>
+  
+  </div>
+          
+          
+          <div class="row">
+    <div class="col col-50">Last Menstrual Cycle:</div>
+    <div class="col"><input type="radio" name="womenstr" ng-model="user.woman.LastMenstrualCycle" data-ng-value="true"/></div>
+    <div class="col"><input type="radio" name="womenstr" ng-model="user.woman.LastMenstrualCycle" data-ng-value="false"/></div>
+  
+  </div>
+          
+          <div class="row">
+    <div class="col col-50">Have you ever had what you consider an abnormal period cycle?</div>
+    <div class="col"><input type="radio" name="woabpc" ng-model="user.woman.IsAbnormalPeriod" data-ng-value="true"/></div>
+    <div class="col"><input type="radio" name="woabpc" ng-model="user.woman.IsAbnormalPeriod" data-ng-value="false"/></div>
+  
+  </div>
+         
+          <div class="row">
+    <div class="col col-50">Any history of breast or femal organ cancer?</div>
+    <div class="col"><input type="radio" name="wofoc" ng-model="user.woman.IsOrganCancer" data-ng-value="true"/></div>
+    <div class="col"><input type="radio" name="wofoc" ng-model="user.woman.IsOrganCancer" data-ng-value="false"/></div>
+  
+  </div>
+          
+       <br/>
+          <br/>
+          I HEREBY DECLARE that,to the best of my knowledge and belief ,the information given in these answers to Nu Image Medical is correctly recorded,complete and true and I agree that Nu Image Medical .beliveing them to be true, shall rely and act upon them accordingly.
+          
+          <div class="row">
+    <div class="col">Patient Signature <regensigpad ng-if="active!=null && active!='' && active=='drawIt'" sigdata={{user.signature}}></regensigpad></div>
+            <div class="col"><label style="border: 1px solid rgb(233, 242, 155);
+  background: rgb(245, 247, 183);cursor:pointer;" ng-click="modal.show()">Click Here to Sign</label></div>
+    
+  
+  </div>
+          
+          
+          
+      </div>
+      <div class="padding">
+        <button type="submit" class="button icon-right ion-chevron-right button-block button-energized">
+          Submit
+        </button>
+      </div>
+      </form>
+          
+          
+          
+        
+         
+         </ion-content>
+        <script id="modal.html" type="text/ng-template">
+        <div class="modal" >
+          <ion-header-bar class="bar bar-header bar-positive">
+            <h1 class="title">Signature</h1>
+            <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+          </ion-header-bar>
+          <ion-content>
+           
+            <form name="sigForm" ng-submit="saveSignature()">
+             <!-- Name Field -->
+          <div class="row">
+            <!--<div class="col">
+              <input type="text" class="span2" placeholder="First Name" ng-model="user.firstName" ng-disabled="formDisabled" required>
+               
+            </div>-->
+            
+            <div class="col sigPad">
+              
+              <sigpad ng-model='user.signature' signs="signs" clearBtn=".clearButton" ng-model="usrsignature" saveBtn=".saveSignBtn" name="user.signature" ></sigpad>
+            
+            </div>
+          </div>
+  
+          
+  
+          <!--<div class="row">
+            <div class="col">
+            <input  type="button" 
+                    class="btn clearButton span2" 
+                    ng-click="clearData();" value="Clear" 
+                   />
+              </div>
+            <div class="col">-->
+               <input  type="button" 
+                    class="btn clearButton span2" 
+                    ng-click="clearData();" value="Clear" 
+                   />
+            <input  type="submit" 
+                    class="btn btn-primary saveButton span2 pull-right" 
+                    value="Save" 
+                    ng-disabled="sigForm.$invalid" 
+                    ng-class="{disabled:sigForm.$invalid}"/>
+            <!-- </div>
+          </div>-->
+       </form>
+          </ion-content>
+        </div>
+      </script>
+       <script id="sigPad.html" type="text/ng-template">
+         
+        <!-- <div class="control sigPad">
+    <div class="sig sigWrapper">
+     <!-- <canvas class="pad" width="436" height="120" ng-mouseup="updateModel()"></canvas>-->
+      
+    <!--  <canvas class="pad" width="436" height="75" ng-mouseup="updateModel()"></canvas>
+      
+       <input  type="button" 
+                    class="btn clearButton span2" 
+                    ng-click="clearData1();" value="Clear1" 
+                   />
+    </div>
+  </div>-->
+        <!-- <form ng-submit="saveSignature()"  class="sigPad" name="sigForm">-->
+    <label for="name">Print your name</label>
+    <input type="text" name="name" id="name" class="name" ng-disabled="formDisabled" required>
+    <p class="typeItDesc">Review your signature</p>
+    <p class="drawItDesc">Draw your signature</p>
+    <ul class="sigNav">
+      <li class="typeIt"><a href="#type-it" class="current">Type It</a></li>
+      <li class="drawIt"><a href="#draw-it">Draw It</a></li>
+      <li class="clearButton"><a href="#clear">Clear</a></li>
+    </ul>
+    <div class="sig sigWrapper" style="width:100%;height:58px;" required>
+      <div class="typed"></div>
+       
+      <canvas class="pad" width="300" height="55" ng-mouseup="updateModel()" ></canvas>
+      <input type="hidden" name="output" class="output"  >
+      <canvas class="typepad" id="cansign3" width="300" height="55"  style="margin-left:5%;border: 2px dotted #000000;"></canvas>
+    </div>
+    <!--<input class="saveSignBtn"  type="submit" 
+                    class="btn btn-primary saveButton span2 pull-right" 
+                    value="Save" 
+                    />-->
+              </div>
+  <!--</form>-->
+        </script>
+      </ion-view>
+  </ion-nav-view>
+ 
+
+    
+
+    <!--Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    
+  </body>
+</html>
