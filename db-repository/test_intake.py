@@ -8,9 +8,9 @@ class TestCriticareIntakeMethods(unittest.TestCase):
 		
 		# dictionary as input
 		dict_input = {
-			"patient_id": 1, 
+			"patient_id": 2, 
 			"blood_pressure": 180, 
-			"notes": "Singh is cool",
+			"notes": "heart attack 2",
             "date_created": date.today()
 		}
 
@@ -26,6 +26,7 @@ class TestCriticareIntakeMethods(unittest.TestCase):
 			print(intake_patient.test_print())
 
 
+	"""
 	def test_delete_intake_patient(self):	
 		# retrieve intake_patients
 		test_intake_patient_id = 2
@@ -43,6 +44,8 @@ class TestCriticareIntakeMethods(unittest.TestCase):
 			print("# PASSED DELETE ALL intake_patientS: ")
 		else:	
 			print("# FAILED DELETE ALL intake_patientS: ")
+
+	"""
 
 
 if __name__ == '__main__':

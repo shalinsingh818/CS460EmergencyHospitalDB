@@ -1,6 +1,5 @@
 import sqlite3
 from pprint import pprint
-import models
 
 # Keep fields in array so we can populate intake_dict
 PROCEDURE_FIELDS = [

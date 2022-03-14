@@ -19,7 +19,7 @@ class Result:
     def check_blood_pressure(self):
         pass
 
-     def test_print(self):
+    def test_print(self):
 		print("============================")	
         print("Assigned Physician: {}".format(self.assigned_physician))
         print("Blood Pressure: {}".format(self.blood_pressure))

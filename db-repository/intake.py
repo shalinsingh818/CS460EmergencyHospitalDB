@@ -1,5 +1,9 @@
 import sqlite3
 from pprint import pprint
+
+# go to desired directory
+import sys
+sys.path.append("../")
 import models
 
 # Keep fields in array so we can populate intake_dict
@@ -13,7 +17,7 @@ INTAKE_FIELDS = [
 
 
 # QUERIES NEEDED FOR intakeS (FLUSH OUT)
-INSERT_INTAKE_QUERY = "INSERT INTO INTAKE_PATIENT (blood_pressure, notes, date_created) values(?,?,?);"
+INSERT_INTAKE_QUERY = "INSERT INTO INTAKE_PATIENT (patient_id, blood_pressure, notes, date_created) values(?,?,?, ?);"
 VIEW_INTAKE_PATIENTS_QUERY = "SELECT * FROM INTAKE_PATIENT;"; 
 DELETE_INTAKE_PATIENT_QUERY = "DELETE FROM INTAKE_PATIENT where intake_id=?"; 
 DELETE_ALL_INTAKE_PATIENTS_QUERY = "DELETE  FROM INTAKE_PATIENT;"; 
@@ -60,13 +64,14 @@ def view_intake_patients():
 			# render row entry into patient class model
 			temp_dict = {}	
 			count = 0 
-			for field in INTAKE_PATIENT_FIELDS:
+			# generate temp dict
+			for field in INTAKE_FIELDS:
 				temp_dict[field] = i[count]
 				count += 1
 			pprint(temp_dict)
             
-			#intake_patient = models.IntakePatient(temp_dict)
-			#intake_patients.append(patient)
+			intake_patient = models.Intake(temp_dict)
+			intake_patients.append(patient)
 	
 	except Exception as e:
 		print("Error in viewing intake patient: {}".format(e))
