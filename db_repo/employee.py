@@ -1,6 +1,12 @@
 import sqlite3
 from pprint import pprint
 
+# go to desired directory
+import sys
+sys.path.append("../")
+import models
+
+
 # Keep fields in array so we can populate employee_dict
 EMPLOYEE_FIELDS = [
 	"first_name",

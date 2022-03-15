@@ -1,9 +1,13 @@
 import sqlite3
 from pprint import pprint
+
+# go to desired directory
+import sys
+sys.path.append("../")
 import models
 
 # Keep fields in array so we can populate intake_dict
-RESULT_FIELDS = [
+RESULT_FIELDS =  [
 	"result_id",	
 	"cost",
     "notes",
@@ -24,7 +28,7 @@ def create_result(result_fields: dict) -> bool:
 		Since there's alot of fields. result_fields is a dictionary that can be
 		passed to this method for testing. 
 	"""
-    result = False
+	result = False
 	# bind values, by automatically appending dict vals to tuple
 	values = []
 	for val in result_fields:
@@ -33,7 +37,6 @@ def create_result(result_fields: dict) -> bool:
 	# convert to tuple
 	values = tuple(values)
 	# bind values, by automatically appending dict vals to tuple
-	values = )
 	try:
 		cur = db.cursor()
 		cur.execute(INSERT_RESULT_QUERY, values)

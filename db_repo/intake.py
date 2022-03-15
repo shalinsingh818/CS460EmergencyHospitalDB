@@ -23,6 +23,9 @@ DELETE_INTAKE_PATIENT_QUERY = "DELETE FROM INTAKE_PATIENT where intake_id=?";
 DELETE_ALL_INTAKE_PATIENTS_QUERY = "DELETE  FROM INTAKE_PATIENT;"; 
 
 
+# Example many to many query
+PRESCRIBE_MEDICATION_QUERY = "INSERT INTO INTAKE_PATIENT_MEDICATION (patient_intake_id, medication_id) values(?,?);"
+
 # Create Patient
 def create_intake_patient(intake_patient_fields: dict) -> bool:
 	"""
@@ -118,4 +121,28 @@ def delete_all_intake_patients():
 	db.close()
 
 	return result
-        
+    
+    
+def prescribe_medication_to_patient(intake_patient_id, medication_id):	
+	result = False
+	# bind values, by automatically appending dict vals to tuple
+
+	# convert to tuple
+	values = (intake_patient_id, medication_id)
+
+	# insert to db
+	db = sqlite3.connect("data/criticare.db")
+	try:
+		cur = db.cursor()
+		cur.execute(PRESCRIBE_MEDICATION_QUERY, values)
+		db.commit()
+		result = True
+	except Exception as e:
+		print("Error in creating intake patient: {}".format(e))
+		db.rollback()
+
+	db.close()
+	return result
+	
+
+

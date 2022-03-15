@@ -86,7 +86,6 @@ CREATE TABLE RESULT (
  
 /** Procedure Entity for the emergency room  */
 CREATE TABLE PROCEDURE (	
-	procedure_id INTEGER PRIMARY KEY,
 	room_id INT, 
 	cost INT, 
 	notes VARCHAR(1000),
@@ -95,21 +94,6 @@ CREATE TABLE PROCEDURE (
 	FOREIGN KEY(room_id) REFERENCES ROOM(room_id), 
 	FOREIGN KEY(results) REFERENCES RESULT(result_id) 
 );
-
-
-
-/**
-* Procedure -> Multiple Staff Assigned
-* Relate procedure to multiple staff assigned
-*/
-CREATE TABLE PROCEDURE_STAFF (
-	patient_id INT, 
-	procedure_id INT,	
-	employee_id INT,	
-	FOREIGN KEY(patient_id) REFERENCES PATIENT(patient_id), 
-	FOREIGN KEY(procedure_id) REFERENCES PROCEDURE(procedure_id), 
-	FOREIGN KEY(employee_id) REFERENCES EMPLOYEE(employee_id)
-); 
 
 
 
@@ -137,6 +121,30 @@ CREATE TABLE MEDICAL_CONDITION (
 
 	For the patient intake model, it has multiple entities associated with it. A patient can have multiple medication, procedures or staff assigned to them. Down below is the SQL code for creating the ONE TO MANY relationships. 
 */
+
+/**
+* Procedure -> Multiple Staff Assigned
+* Relate procedure to multiple staff assigned
+*/
+CREATE TABLE PROCEDURE_STAFF (
+	procedure_id INT,	
+	employee_id INT,	
+	FOREIGN KEY(procedure_id) REFERENCES PROCEDURE(procedure_id), 
+	FOREIGN KEY(employee_id) REFERENCES EMPLOYEE(employee_id)
+); 
+
+
+/**
+* Procedure -> Multiple Staff Assigned
+* Relate procedure to multiple staff assigned
+*/
+CREATE TABLE PROCEDURE_PATIENT (
+	procedure_id INT,
+	patient_id INT,		
+	FOREIGN KEY(procedure_id) REFERENCES PROCEDURE(procedure_id), 
+	FOREIGN KEY(employee_id) REFERENCES EMPLOYEE(employee_id)
+); 
+
  
 
 /**
@@ -169,6 +177,17 @@ CREATE TABLE INTAKE_PATIENT_MEDICATION (
 CREATE TABLE INTAKE_PATIENT_MEDICAL_CONDITION (
 	patient_intake_id INT,	
 	medical_condition_id INT,	
+	FOREIGN KEY(patient_intake_id) REFERENCES PATIENT_INTAKE(intake_id)
+	FOREIGN KEY(medical_condition_id) REFERENCES MEDICAL_CONDITION(condition_id)
+); 
+
+
+/**
+* Intake Patient -> Multiple Staff assigned
+*/
+CREATE TABLE INTAKE_PATIENT_PROCEDURE (
+	patient_intake_id INT,	
+	_id INT,	
 	FOREIGN KEY(patient_intake_id) REFERENCES PATIENT_INTAKE(intake_id)
 	FOREIGN KEY(medical_condition_id) REFERENCES MEDICAL_CONDITION(condition_id)
 ); 

@@ -7,7 +7,8 @@ class TestCriticareProcedureMethods(unittest.TestCase):
 	def test_create_procedure(self):
 		
 		# dictionary as input
-		dict_input = {
+		dict_input = {	
+			"patient_id": 1, 
 			"room_id": 1, 
 			"cost": 180, 
 			"notes": "Singh is cool",

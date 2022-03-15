@@ -25,6 +25,21 @@ class TestCriticareIntakeMethods(unittest.TestCase):
 		for intake_patient in intake_patients:
 			print(intake_patient.test_print())
 
+	
+	def test_prescribe_medication(self):
+		
+		# dictionary as input
+		dict_input = {
+			"intake_id": 2, 
+			"blood_pressure": 180, 
+			"notes": "heart attack 2",
+            "date_created": date.today()
+		}
+
+		result = pi.create_intake_patient(dict_input)
+		if result:
+			print("# PASSED CREATE intake_patient: ")
+
 
 	"""
 	def test_delete_intake_patient(self):	

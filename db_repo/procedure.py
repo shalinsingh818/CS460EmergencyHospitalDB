@@ -1,8 +1,14 @@
 import sqlite3
 from pprint import pprint
 
+# go to desired directory
+import sys
+sys.path.append("../")
+import models
+
 # Keep fields in array so we can populate intake_dict
 PROCEDURE_FIELDS = [
+	"patient_id",
 	"room_id",	
 	"cost",
     "notes",
@@ -11,7 +17,7 @@ PROCEDURE_FIELDS = [
 
 
 # QUERIES NEEDED FOR intakeS (FLUSH OUT)
-INSERT_PROCEDURE_QUERY = "INSERT INTO PROCEDURE (room_id, cost, notes, name) values(?,?,?,?);"
+INSERT_PROCEDURE_QUERY = "INSERT INTO PROCEDURE (patient_id, room_id, cost, notes, name) values(?,?,?,?,?);"
 VIEW_PROCEDURES_QUERY = "SELECT * FROM PROCEDURE;"; 
 DELETE_PROCEDURE_QUERY = "DELETE FROM PROCEDURE where procedure_id=?"; 
 DELETE_ALL_PROCEDURES_QUERY = "DELETE  FROM PROCEDURE;"; 
