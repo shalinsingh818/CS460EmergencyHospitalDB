@@ -1,3 +1,4 @@
+
 from flask import Flask
 from flask_restful import Resource, Api, request
 
@@ -6,38 +7,37 @@ import sys
 sys.path.append("../")
 
 # imports 
-import db_repo.medication as me
+import db_repo.room as room
 
 
-class Medication(Resource):
-	
+class Room(Resource):
+
 	def __init__(self):
 		pass
 
 	def get(self):
-		medication_list = []
-		results = me.view_medications()
-		for result in results:
-		  medication_list.append(result)
+		room_list = []
+		results = pat.view_rooms()
+		for room in results:
+			room_list.append(room)
 
 		return {
-		  "medications": medication_list
+			"rooms": room_list
 		}
 
 
 	def to_form_fields(self):
 		# capturing from postman	
+		cost = request.form.get('cost')
 		name = request.form.get('name')
-		code  = request.form.get('code')
-		price = request.form.get('price')
-  
-		# create employee in database
+		notes = request.form.get('notes')
+
+		# dictionary as input
 		dict_input = {
-			"name": name,
-			"code": code, 
-			"price": price
-		} 
-			
+			"cost": cost, 
+			"notes": notes,
+			"name": name
+		}
 
 		return dict_input
 
@@ -46,15 +46,15 @@ class Medication(Resource):
 			# capturing from postman
 			capture_fields = self.to_form_fields()
 			# capturing from postman
-			result = me.create_medication(capture_fields)
+			result = proc.create_procedure(capture_fields)
 			if result:
-				print("# PASSED CREATE RESULT: ")
+				print("# PASSED CREATE PROCEDURE: ")
 
 			return {
-				"message": "created medication for database"
+				"message": "created test result for procedure"
 			}
 			return {
-				"error": "Could not create medication"
+				"error": "Could not create patient"
 			}
 
 		# exception

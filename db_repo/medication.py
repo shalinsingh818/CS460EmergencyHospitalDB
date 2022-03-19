@@ -15,12 +15,19 @@ MEDICATION_FIELDS = [
 ]
 
 
+INTAKE_MEDICATION_FIELDS = [
+	"patient_intake_id",
+    "medication_id"
+]
+
+
 # QUERIES NEEDED FOR intakeS (FLUSH OUT)
-INSERT_MEDICATION_QUERY = "INSERT INTO MEDICATION (cost, notes, name) values(?,?,?);"
+INSERT_MEDICATION_QUERY = "INSERT INTO MEDICATION (code, name, price) values(?,?,?);"
 VIEW_MEDICATIONS_QUERY = "SELECT * FROM MEDICATION;"; 
 DELETE_MEDICATION_QUERY = "DELETE FROM MEDICATION where medication_id=?"; 
 DELETE_ALL_MEDICATION_QUERY = "DELETE  FROM MEDICATION;"; 
 
+VIEW_MEDICATIONS_QUERY = "SELECT * FROM INTAKE_PATIENT_MEDICATION where patient_intake_id=?"
 
 # Create Patient
 def create_medication(medication_fields: dict) -> bool:
@@ -66,10 +73,7 @@ def view_medications():
 			for field in MEDICATION_FIELDS:
 				temp_dict[field] = i[count]
 				count += 1
-			pprint(temp_dict)
-            
-			#medication = models.IntakePatient(temp_dict)
-			#medications.append(patient)
+			medications.append(temp_dict)
 	
 	except Exception as e:
 		print("Error in viewing medications: {}".format(e))
@@ -118,6 +122,32 @@ def delete_all_medications():
 
 
 
+def view_intake_medications(intake_patient_id):	
+	# other format
+	intake_patients = [] 	
+	values = (intake_patient_id,)
+	# open db
+	db = sqlite3.connect("data/criticare.db")
+	try:
+		cur = db.cursor()
+		cur.execute(VIEW_MEDICATIONS_QUERY, values)
+		for i in cur:
+			# render row entry into patient class model
+			temp_dict = {}	
+			count = 0 
+			# generate temp dict
+			for field in INTAKE_MEDICATION_FIELDS:
+				temp_dict[field] = i[count]
+				count += 1
+			pprint(temp_dict)
+			intake_patients.append(temp_dict)
+            
+	except Exception as e:
+		print("Error in viewing patient medications: {}".format(e))
+		db.rollback()
+	db.close()
+
+	return intake_patients
 
 
 

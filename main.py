@@ -19,12 +19,13 @@ api = Api(app)
 
 
 # patients
-api.add_resource(patientController.Patient, '/createPatient')
+api.add_resource(patientController.Patient, '/patient')
 
 
 # intake
 api.add_resource(intakeController.Intake, '/intakePatient')
-
+api.add_resource(intakeController.PrescribeMedication, '/prescribeMedication')
+api.add_resource(intakeController.AssignPatientProcedure, '/patientProcedure')
 
 # results
 api.add_resource(resultController.Result, '/results')

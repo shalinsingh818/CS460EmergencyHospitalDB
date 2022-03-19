@@ -86,6 +86,7 @@ CREATE TABLE RESULT (
  
 /** Procedure Entity for the emergency room  */
 CREATE TABLE PROCEDURE (	
+	procedure_id INTEGER PRIMARY KEY,
 	room_id INT, 
 	cost INT, 
 	notes VARCHAR(1000),
@@ -133,18 +134,6 @@ CREATE TABLE PROCEDURE_STAFF (
 	FOREIGN KEY(employee_id) REFERENCES EMPLOYEE(employee_id)
 ); 
 
-
-/**
-* Procedure -> Multiple Staff Assigned
-* Relate procedure to multiple staff assigned
-*/
-CREATE TABLE PROCEDURE_PATIENT (
-	procedure_id INT,
-	patient_id INT,		
-	FOREIGN KEY(procedure_id) REFERENCES PROCEDURE(procedure_id), 
-	FOREIGN KEY(employee_id) REFERENCES EMPLOYEE(employee_id)
-); 
-
  
 
 /**
@@ -187,9 +176,9 @@ CREATE TABLE INTAKE_PATIENT_MEDICAL_CONDITION (
 */
 CREATE TABLE INTAKE_PATIENT_PROCEDURE (
 	patient_intake_id INT,	
-	_id INT,	
+	procedure_id INT,	
 	FOREIGN KEY(patient_intake_id) REFERENCES PATIENT_INTAKE(intake_id)
-	FOREIGN KEY(medical_condition_id) REFERENCES MEDICAL_CONDITION(condition_id)
+	FOREIGN KEY(procedure_id) REFERENCES PROCEDURE(procedure_id)
 ); 
 
 

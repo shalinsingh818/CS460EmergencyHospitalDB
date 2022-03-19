@@ -15,6 +15,10 @@ PROCEDURE_FIELDS = [
     "name"
 ]
 
+INTAKE_PROCEDURE_FIELDS = [
+	"patient_intake_id",
+    "procedure_id"
+]
 
 # QUERIES NEEDED FOR intakeS (FLUSH OUT)
 INSERT_PROCEDURE_QUERY = "INSERT INTO PROCEDURE (patient_id, room_id, cost, notes, name) values(?,?,?,?,?);"
@@ -22,6 +26,7 @@ VIEW_PROCEDURES_QUERY = "SELECT * FROM PROCEDURE;";
 DELETE_PROCEDURE_QUERY = "DELETE FROM PROCEDURE where procedure_id=?"; 
 DELETE_ALL_PROCEDURES_QUERY = "DELETE  FROM PROCEDURE;"; 
 
+VIEW_INTAKE_PROCEDURES_QUERY = "SELECT * FROM INTAKE_PATIENT_PROCEDURE where patient_intake_id=?"
 
 # Create Patient
 def create_procedure(procedure_fields: dict) -> bool:
@@ -116,4 +121,33 @@ def delete_all_procedures():
 	db.close()
 
 	return result
+
+
+
+def view_intake_procedures(intake_patient_id):	
+	# other format
+	intake_patients = [] 	
+	values = (intake_patient_id,)
+	# open db
+	db = sqlite3.connect("data/criticare.db")
+	try:
+		cur = db.cursor()
+		cur.execute(VIEW_INTAKE_PROCEDURES_QUERY, values)
+		for i in cur:
+			# render row entry into patient class model
+			temp_dict = {}	
+			count = 0 
+			# generate temp dict
+			for field in INTAKE_PROCEDURE_FIELDS:
+				temp_dict[field] = i[count]
+				count += 1
+			pprint(temp_dict)
+			intake_patients.append(temp_dict)
+            
+	except Exception as e:
+		print("Error in viewing patient procedures: {}".format(e))
+		db.rollback()
+	db.close()
+
+	return intake_patients
         

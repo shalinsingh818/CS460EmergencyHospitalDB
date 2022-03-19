@@ -1,5 +1,13 @@
 
-1. Flask rest api endpoints
+# Process for adding code to FLASK API
+1. Check the tables.sql to see what tables we need
+2. Implement the datbase query in db-repo and put in appropriate file
+3. Create a corresponding HTTP web endpoint 
+	* Import needed db methods
+	* Create Get, Post etc
+
+
+1. Flask rest api endpoints (Backend)
 	* Create Patient
 	* Intake Patient
 	* Prescribe Medication to patient
@@ -22,6 +30,5 @@
 	* Medication
 	* Results
 	* Intake
-	* 
-
+	* Employee 
 
