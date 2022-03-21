@@ -9,6 +9,7 @@ sys.path.append("../")
 # imports 
 import db_repo.intake as pi
 import db_repo.medication as med
+import db_repo.medical_condition as cond
 import db_repo.procedure as proc
 
 class Intake(Resource):
@@ -74,7 +75,7 @@ class PrescribeMedication(Resource):
 		# view patient id
 		intake_patient_id = request.args.get('patient', default=1, type=int)	
 		intake_patient_list = []
-		intake_patients = med.view_intake_medications(intake_patient_id)
+		intake_patients = cond.view_intake_medications(intake_patient_id)
 		for patient in intake_patients:
 			intake_patient_list.append(patient)
 
@@ -87,7 +88,7 @@ class PrescribeMedication(Resource):
 			# capture fields
 			intake_patient_id = request.args.get('patient', default=1, type=int)	
 			medication_id = request.form.get('medication_id')
-			result = pi.prescribe_medication_to_patient(intake_patient_id, medication_id)
+			result = cond.diagnose_medical_condition(intake_patient_id, medication_id)
 
 			# check if creating patient worked
 			if result:
@@ -96,7 +97,7 @@ class PrescribeMedication(Resource):
 				}
 
 			return {
-				"error": "Could not prescribe medication to patient"
+				"error": "Could not assign medication to patient"
 			}
 		else:
 			return {
@@ -144,4 +145,46 @@ class AssignPatientProcedure(Resource):
 			return {
 				"error": "Not a post request"
 			}
+
+
+# diagnose patient with medical condition
+class DiagnosePatient(Resource):
+
+    def __init__(self):
+        pass
+
+    def get(self):
+        # view patient id
+        intake_patient_id = request.args.get('patient', default=1, type=int)
+        intake_patient_list = []
+        intake_patients = cond.view_intake_conditions(intake_patient_id)
+        for patient in intake_patients:
+            intake_patient_list.append(patient)
+
+        return {
+            "intake_patients_conditions": intake_patient_list
+        }
+
+    def post(self):
+        if request.method == 'POST':
+            # capture fields
+            intake_patient_id = request.args.get('patient', default=1, type=int)
+            condition_id = request.form.get('condition_id')
+            result = pi.diagnose_condition(intake_patient_id, condition_id)
+
+            # check if creating patient worked
+            if result:
+                return {
+                    "message": "assigned condition to patient"
+                }
+
+            return {
+                "error": "Could not assign condition to patient"
+            }
+        else:
+            return {
+                "error": "Not a post request"
+            }
+
+
 

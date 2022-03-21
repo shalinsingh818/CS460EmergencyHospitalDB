@@ -3,3 +3,4 @@ from . import intake
 from . import results
 from . import medication
 from . import employee
+from . import medical_condition

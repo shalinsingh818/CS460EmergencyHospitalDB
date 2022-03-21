@@ -7,7 +7,7 @@ import sys
 sys.path.append("../")
 
 # imports 
-import db_repo.room as room
+import db_repo.room as rom
 
 
 class Room(Resource):
@@ -17,7 +17,7 @@ class Room(Resource):
 
 	def get(self):
 		room_list = []
-		results = pat.view_rooms()
+		results = rom.view_rooms()
 		for room in results:
 			room_list.append(room)
 
@@ -27,16 +27,15 @@ class Room(Resource):
 
 
 	def to_form_fields(self):
-		# capturing from postman	
+		# capturing from postman
+			
+		number = request.form.get('number')
 		cost = request.form.get('cost')
-		name = request.form.get('name')
-		notes = request.form.get('notes')
 
 		# dictionary as input
-		dict_input = {
+		dict_input = {	
+			"number": number,
 			"cost": cost, 
-			"notes": notes,
-			"name": name
 		}
 
 		return dict_input
@@ -46,7 +45,7 @@ class Room(Resource):
 			# capturing from postman
 			capture_fields = self.to_form_fields()
 			# capturing from postman
-			result = proc.create_procedure(capture_fields)
+			result = rom.create_room(capture_fields)
 			if result:
 				print("# PASSED CREATE PROCEDURE: ")
 

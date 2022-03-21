@@ -9,9 +9,7 @@ import models
 # Keep fields in array so we can populate intake_dict
 RESULT_FIELDS =  [
 	"result_id",	
-	"cost",
     "notes",
-    "name"
 ]
 
 
@@ -29,6 +27,7 @@ def create_result(result_fields: dict) -> bool:
 		passed to this method for testing. 
 	"""
 	result = False
+	db = sqlite3.connect("data/criticare.db")
 	# bind values, by automatically appending dict vals to tuple
 	values = []
 	for val in result_fields:
@@ -65,6 +64,7 @@ def view_results():
 				temp_dict[field] = i[count]
 				count += 1
 			pprint(temp_dict)
+			results.append(temp_dict)
             
 			#result = models.IntakePatient(temp_dict)
 			#results.append(patient)

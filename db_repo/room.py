@@ -7,16 +7,17 @@ sys.path.append("../")
 import models
 
 # Keep fields in array so we can populate intake_dict
+# Fields that display in postman
 ROOM_FIELDS = [
-	"room_id",	
-	"cost",
-    "notes",
-    "name"
+	"room_id",
+	"available",
+	"room_number",	
+	"cost"
 ]
 
 
 # QUERIES NEEDED FOR intakeS (FLUSH OUT)
-INSERT_ROOM_QUERY = "INSERT INTO ROOM (room_id, cost, notes, name) values(?,?,?,?);"
+INSERT_ROOM_QUERY = "INSERT INTO ROOM (room_number, cost) values(?,?);"
 VIEW_ROOMS_QUERY = "SELECT * FROM ROOM;"; 
 DELETE_ROOM_QUERY = "DELETE FROM room where room_id=?"; 
 DELETE_ALL_ROOMS_QUERY = "DELETE  FROM ROOM;"; 
@@ -66,10 +67,8 @@ def view_rooms():
 			for field in ROOM_FIELDS:
 				temp_dict[field] = i[count]
 				count += 1
-			pprint(temp_dict)
+			rooms.append(temp_dict)
             
-			#room = models.IntakePatient(temp_dict)
-			#rooms.append(patient)
 	
 	except Exception as e:
 		print("Error in viewing rooms: {}".format(e))
