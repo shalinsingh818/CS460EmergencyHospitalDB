@@ -23,19 +23,10 @@ pip3 install -r requirements.txt
 
 ## Use cases that are being implemeted as endpoints
 1. Flask rest api endpoints (Backend)
-	* Create Patient
-	* Intake Patient
-	* Prescribe Medication to patient
-	* Assign Procedure to patient
-	* Assign Room for procedure
-	* Discharge Patient
-	* Set Employee Permission
-	* Update Patient notes
-	* Diagnose patient with medical condition
-	* Assign staff(Doctor/Nurse) to patient
+	* Discharge Patient (just delete patient from database and generate report)
 	* Update patient test results
 	* View Patient test results
-	* View Patient Procedure information
+	* View Patient Procedure information (View procedure by id)
 	* Calculate cost of medication, procedure, overnight
 	* Calculate BMI
 
@@ -48,4 +39,13 @@ pip3 install -r requirements.txt
 	* Employee 
 
 
-1. flask restful
+1. Endpoints that are done		
+	* Assign staff(Doctor/Nurse) to patient
+	* Update Patient notes
+	* Set Employee Permission (Provide permission id in form)
+	* Create Patient X
+	* Intake Patient X
+	* Prescribe Medication to patient X 
+	* Assign Procedure to patient X
+	* Assign Room for procedure X (provide room id in body)
+	* Diagnose patient with medical condition X

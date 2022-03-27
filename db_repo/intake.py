@@ -22,6 +22,7 @@ INTAKE_FIELDS = [
 
 # QUERIES NEEDED FOR intakeS (FLUSH OUT)
 INSERT_INTAKE_QUERY = "INSERT INTO INTAKE_PATIENT (patient_id, blood_pressure, notes, date_created) values(?,?,?, ?);"
+UPDATE_INTAKE_NOTES = "UPDATE INTAKE_PATIENT SET notes=? where intake_id=?"
 VIEW_INTAKE_PATIENTS_QUERY = "SELECT * FROM INTAKE_PATIENT;"; 
 DELETE_INTAKE_PATIENT_QUERY = "DELETE FROM INTAKE_PATIENT where intake_id=?"; 
 DELETE_ALL_INTAKE_PATIENTS_QUERY = "DELETE  FROM INTAKE_PATIENT;"; 
@@ -34,6 +35,10 @@ PRESCRIBE_MEDICATION_QUERY = "INSERT INTO INTAKE_PATIENT_MEDICATION (patient_int
 ASSIGN_PROCEDURE_QUERY = "INSERT INTO INTAKE_PATIENT_PROCEDURE (patient_intake_id, procedure_id) values(?,?);"
 
 INTAKE_PATIENT_MEDICAL_CONDITION_QUERY = "INSERT INTO INTAKE_PATIENT_MEDICAL_CONDITION (patient_intake_id, medical_condition_id) values(?,?)";
+
+# assign employee to patient
+ASSIGN_STAFF_PATIENT_QUERY = "INSERT INTO INTAKE_PATIENT_EMPLOYEE (patient_intake_id, employee_id) values(?,?);"
+
 
 # Create Patient
 def create_intake_patient(intake_patient_fields: dict) -> bool:
@@ -195,4 +200,53 @@ def diagnose_condition(patient_intake_id, medical_condition):
         db.rollback()
 
     db.close()
-    return result	
+    return result
+
+
+def assign_staff_to_patient(intake_patient_id, employee_id):
+    result = False
+    # bind values, by automatically appending dict vals to tuple
+
+    # convert to tuple
+    values = (intake_patient_id, employee_id)
+
+    # insert to db
+    db = sqlite3.connect("data/criticare.db")
+    try:
+        cur = db.cursor()
+        cur.execute(ASSIGN_STAFF_PATIENT_QUERY, values)
+        db.commit()
+        result = True
+    except Exception as e:
+        print("Error in assigning staff to patient: {}".format(e))
+        db.rollback()
+
+    db.close()
+    return result
+
+
+	
+# Update patient notes
+def update_patient_notes(new_patient_note, intake_patient_id) -> bool:
+	"""
+		Since there's alot of fields. intake_patient_fields is a dictionary that can be
+		passed to this method for testing. 
+	"""
+	result = False
+	
+	# convert to tuple
+	values = (new_patient_note, intake_patient_id)
+
+	# insert to db
+	db = sqlite3.connect("data/criticare.db")
+	try:
+		cur = db.cursor()
+		cur.execute(UPDATE_INTAKE_NOTES, values)
+		db.commit()
+		result = True
+	except Exception as e:
+		print("Error in updating patient notes: {}".format(e))
+		db.rollback()
+
+	db.close()
+	return result

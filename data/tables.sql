@@ -49,7 +49,6 @@ CREATE TABLE INTAKE_PATIENT (
 ); 
 
 
-
 /** Permission Entity for Employees  */
 CREATE TABLE PERMISSION (
 	permission_id INTEGER PRIMARY KEY, 

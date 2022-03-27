@@ -11,6 +11,7 @@ import db_repo.intake as pi
 import db_repo.medication as med
 import db_repo.medical_condition as cond
 import db_repo.procedure as proc
+import db_repo.employee as emp
 
 class Intake(Resource):
 
@@ -42,6 +43,22 @@ class Intake(Resource):
 		}
 
 		return dict_input
+
+	def put(self):	
+		intake_patient_id = request.args.get('patient', default=1, type=int)		
+		notes = request.form.get('notes')
+		result = pi.update_patient_notes(notes, intake_patient_id)
+
+		
+		if result:
+			return {
+				"message": "created intake patient"
+			}
+		else:
+			return {
+				"error": "Could not update patient notes"
+			}
+		
 
 	
 	def post(self):
@@ -75,7 +92,7 @@ class PrescribeMedication(Resource):
 		# view patient id
 		intake_patient_id = request.args.get('patient', default=1, type=int)	
 		intake_patient_list = []
-		intake_patients = cond.view_intake_medications(intake_patient_id)
+		intake_patients = med.view_intake_medications(intake_patient_id)
 		for patient in intake_patients:
 			intake_patient_list.append(patient)
 
@@ -88,7 +105,7 @@ class PrescribeMedication(Resource):
 			# capture fields
 			intake_patient_id = request.args.get('patient', default=1, type=int)	
 			medication_id = request.form.get('medication_id')
-			result = cond.diagnose_medical_condition(intake_patient_id, medication_id)
+			result = pi.prescribe_medication_to_patient(intake_patient_id, medication_id)
 
 			# check if creating patient worked
 			if result:
@@ -130,7 +147,7 @@ class AssignPatientProcedure(Resource):
 			# capture fields
 			intake_patient_id = request.args.get('patient', default=1, type=int)	
 			procedure_id = request.form.get('procedure_id')
-			result = proc.assign_procedure_to_patient(intake_patient_id, procedure_id)
+			result = pi.assign_procedure_to_patient(intake_patient_id, procedure_id)
 
 			# check if creating patient worked
 			if result:
@@ -188,3 +205,40 @@ class DiagnosePatient(Resource):
 
 
 
+class AssignStaffToPatient(Resource):
+
+	def __init__(self):
+		pass
+
+	def get(self):
+		# view patient id
+		intake_patient_id = request.args.get('patient', default=1, type=int)	
+		intake_patient_list = []
+		intake_patients = emp.view_patient_staff(intake_patient_id)
+		for patient in intake_patients:
+			intake_patient_list.append(patient)
+
+		return {
+			"intake_patients_staff": intake_patient_list
+		}
+
+	def post(self):
+		if request.method == 'POST':
+			# capture fields
+			intake_patient_id = request.args.get('patient', default=1, type=int)	
+			employee_id = request.form.get('employee_id')
+			result = pi.assign_staff_to_patient(intake_patient_id, employee_id)
+
+			# check if creating patient worked
+			if result:
+				return {
+					"message": "assigned staff to patient"
+				}
+
+			return {
+				"error": "Could not assign staff to patient"
+			}
+		else:
+			return {
+				"error": "Not a post request"
+			}

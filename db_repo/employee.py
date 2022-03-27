@@ -9,11 +9,18 @@ import models
 
 # Keep fields in array so we can populate employee_dict
 EMPLOYEE_FIELDS = [
+	"employee_id", 
 	"first_name",
     "middle_name",
     "last_name",
     "permission_id"
 ]
+
+INTAKE_STAFF_FIELDS = [
+    "patient_intake_id",
+    "employee_id"
+]
+
 
 
 # QUERIES NEEDED FOR employeeS (FLUSH OUT)
@@ -21,6 +28,9 @@ INSERT_EMPLOYEE_QUERY = "INSERT INTO EMPLOYEE (first_name,middle_name,last_name,
 VIEW_EMPLOYEE_QUERY = "SELECT * FROM EMPLOYEE;"; 
 DELETE_EMPLOYEE_QUERY = "DELETE  FROM EMPLOYEE where employee_id=?"; 
 DELETE_ALL_EMPLOYEE_QUERY = "DELETE  FROM EMPLOYEE;"; 
+
+# view staff to work on patient
+VIEW_STAFF_ASSIGNED_QUERY = "SELECT * FROM INTAKE_PATIENT_EMPLOYEE where patient_intake_id=?"
 
 
 # Create employee
@@ -115,4 +125,33 @@ def delete_all_employees():
 	db.close()
 
 	return result
-        
+
+
+def view_patient_staff(intake_patient_id):
+    # other format
+    staff = []
+    values = (intake_patient_id,)
+    # open db
+    db = sqlite3.connect("data/criticare.db")
+    try:
+        cur = db.cursor()
+        cur.execute(VIEW_STAFF_ASSIGNED_QUERY, values)
+        for i in cur:
+            # render row entry into patient class model
+            temp_dict = {}
+            count = 0
+            # generate temp dict
+            for field in INTAKE_STAFF_FIELDS:
+                temp_dict[field] = i[count]
+                count += 1
+            pprint(temp_dict)
+            staff.append(temp_dict)
+
+    except Exception as e:
+        print("Error in viewing patient medications: {}".format(e))
+        db.rollback()
+    db.close()
+
+    return staff
+
+    

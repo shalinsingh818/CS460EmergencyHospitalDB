@@ -8,11 +8,11 @@ import models
 
 # Keep fields in array so we can populate intake_dict
 PROCEDURE_FIELDS = [
-	"patient_id",
 	"room_id",	
+	"results",
 	"cost",
     "notes",
-    "name"
+    "name",
 ]
 
 INTAKE_PROCEDURE_FIELDS = [
@@ -21,7 +21,7 @@ INTAKE_PROCEDURE_FIELDS = [
 ]
 
 # QUERIES NEEDED FOR intakeS (FLUSH OUT)
-INSERT_PROCEDURE_QUERY = "INSERT INTO PROCEDURE (patient_id, room_id, cost, notes, name) values(?,?,?,?,?);"
+INSERT_PROCEDURE_QUERY = "INSERT INTO PROCEDURE (room_id, cost, notes, name) values (?,?,?,?);"
 VIEW_PROCEDURES_QUERY = "SELECT * FROM PROCEDURE;"; 
 DELETE_PROCEDURE_QUERY = "DELETE FROM PROCEDURE where procedure_id=?"; 
 DELETE_ALL_PROCEDURES_QUERY = "DELETE  FROM PROCEDURE;"; 
@@ -69,10 +69,11 @@ def view_procedures():
 			# render row entry into patient class model
 			temp_dict = {}	
 			count = 0 
-			for field in procedure_FIELDS:
+			for field in PROCEDURE_FIELDS:
 				temp_dict[field] = i[count]
 				count += 1
 			pprint(temp_dict)
+			procedures.append(temp_dict)
             
 			#procedure = models.IntakePatient(temp_dict)
 			#procedures.append(patient)

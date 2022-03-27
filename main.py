@@ -12,8 +12,9 @@ import controllers.results as resultController
 import controllers.employee as employeeController
 import controllers.medication as medicationController
 import controllers.procedure as procedureController
-import controllers.room as roomController
+import controllers.permission as permissionController
 import controllers.med_condition as conditionController
+import controllers.room as roomController
 
 app = Flask(__name__)
 api = Api(app)
@@ -25,11 +26,15 @@ api.add_resource(patientController.Patient, '/patient')
 api.add_resource(intakeController.Intake, '/intakePatient')
 api.add_resource(intakeController.PrescribeMedication, '/prescribeMedication')
 api.add_resource(intakeController.AssignPatientProcedure, '/patientProcedure')
+api.add_resource(intakeController.AssignStaffToPatient, '/assignStaff')
 api.add_resource(intakeController.DiagnosePatient, '/diagnose')
 
 
 # results
 api.add_resource(resultController.Result, '/result')
+
+# permissions
+api.add_resource(permissionController.Permission, '/permissions')
 
 # employees
 api.add_resource(employeeController.Employee, '/employees')

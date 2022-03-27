@@ -16,8 +16,8 @@ class Procedure(Resource):
 
 	def get(self):
 		procedure_list = []
-		results = pat.view_procedures()
-		for procedure in procedures:
+		results = proc.view_procedures()
+		for procedure in results:
 			procedure_list.append(procedure)
 
 		return {
@@ -27,7 +27,7 @@ class Procedure(Resource):
 
 	def to_form_fields(self):
 		# capturing from postman	
-		patient_id = request.args.get('patient', default=1, type=int)
+		room_id = request.form.get('room_id')
 		cost = request.form.get('cost')
 		name = request.form.get('name')
 		notes = request.form.get('notes')

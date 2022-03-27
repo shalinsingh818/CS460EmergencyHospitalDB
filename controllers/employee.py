@@ -15,9 +15,9 @@ class Employee(Resource):
 
 	def get(self):
 		employee_list = []
-		employees = pat.view_intake_employees()
+		employees = emp.view_employees()
 		for employee in employees:
-	  		employee_list.append(employee)
+			employee_list.append(employee)
 
 		return {
 			"employees": employee_list
@@ -40,11 +40,25 @@ class Employee(Resource):
 
 		return dict_input
 
-	
 	def post(self):
 		if request.method == 'POST':
+			# capture fields
 			capture_fields = self.to_form_fields(request)
-			# capturing from postman
 			result = emp.create_employee(capture_fields)
+
+			# check if creating patient worked
 			if result:
-				print("# PASSED CREATE employee: ")
+				return {
+					"message": "created employee"
+				}
+
+			return {
+				"error": "could not create employee"
+			}
+		else:
+			return {
+				"error": "Not a post request"
+			}
+
+
+	
