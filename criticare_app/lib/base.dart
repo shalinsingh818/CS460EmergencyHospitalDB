@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'home.dart';
+import 'inserts/insert_patient.dart';
 
 class MainPage extends StatefulWidget {
 
@@ -74,8 +75,10 @@ class _MainPageState extends State<MainPage> {
               onTap: () {
                 // Update the state of the app
                 // ...
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => InsertPatientPage()));
                 // Then close the drawer
-                Navigator.pop(context);
               },
             ),
             ListTile(

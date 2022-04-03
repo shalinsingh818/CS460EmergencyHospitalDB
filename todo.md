@@ -49,3 +49,13 @@ pip3 install -r requirements.txt
 	* Assign Procedure to patient X
 	* Assign Room for procedure X (provide room id in body)
 	* Diagnose patient with medical condition X
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Resource, Api, request
 from pprint import pprint
+import json
 
 # go to desired directory
 import sys
@@ -77,9 +78,11 @@ class Patient(Resource):
 
 	def post(self):
 		if request.method == 'POST':
-			capture_fields = self.to_form_fields()
-			pprint(capture_fields)
-			result = pat.create_patient(capture_fields)
+			data = json.loads(request.data)
+			pprint(data)
+			#capture_fields = self.to_form_fields()
+			#pprint(capture_fields)
+			result = pat.create_patient(data)
 
 			# check if creating patient worked
 			if result:

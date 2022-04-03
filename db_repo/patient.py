@@ -38,6 +38,7 @@ DELETE_ALL_PATIENTS_QUERY = "DELETE  FROM PATIENT;";
 
 # Create Patient
 def create_patient(patient_fields: dict) -> bool:
+	pprint(patient_fields)
 	"""
 		Since there's alot of fields. patient_fields is a dictionary that can be
 		passed to this method for testing. 

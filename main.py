@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Resource, Api, request
+from flask_cors import CORS
 
 # go to desired directory
 import sys
@@ -18,6 +19,7 @@ import controllers.room as roomController
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
 
 # patients
 api.add_resource(patientController.Patient, '/patient')
