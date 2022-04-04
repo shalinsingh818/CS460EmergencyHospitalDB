@@ -134,20 +134,6 @@ class _MainPageState extends State<MainPage> {
                   MaterialPageRoute(builder: (context) => InsertConditionPage()));
               },
             ),
-
-            ListTile(
-              leading: Icon(
-                Icons.room, 
-                color: Colors.red,
-              ),
-              title: const Text('Add Hospital Room'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
           ],
         ),
       ),
@@ -157,6 +143,7 @@ class _MainPageState extends State<MainPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
+
           BottomNavigationBarItem(
             icon: Icon(
               Icons.calculate, 
@@ -164,6 +151,7 @@ class _MainPageState extends State<MainPage> {
             ),
             label: 'Intake'
           ),
+          
           BottomNavigationBarItem(
             icon: Icon(
               Icons.library_music,

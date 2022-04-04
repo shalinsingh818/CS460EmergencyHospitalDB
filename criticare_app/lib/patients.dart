@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'models/patient.dart'; 
 import 'api/patient.dart';
+import 'list_tiles/patient.dart';
 
 class ViewPatientsPage extends StatefulWidget {
 
@@ -36,41 +37,13 @@ class _ViewPatientsState extends State<ViewPatientsPage> {
              SliverList(delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index){
                     Patient patient = _patients[index]; 
-                    return Card(
-                        child: Column(
-                            children: <Widget> [
-                                ListTile(
-                                    leading: Icon(
-                                        Icons.face_rounded,
-                                        color: Colors.red 
-                                    ), 
-                                    title: Text(
-                                        "testing",
-                                        style: TextStyle(fontWeight: FontWeight.bold)
-                                    ), 
-                                    subtitle: Text("IDK"),
-                                    trailing: Wrap(
-                                      spacing: 15,
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.check, 
-                                          color: Colors.green, 
-                                        ),
-                                        Icon(
-                                          Icons.do_not_disturb_on_outlined,
-                                          color: Colors.red, 
-                                        ),
-                                        Icon(
-                                          Icons.more_vert, 
-                                          color: Colors.blue, 
-                                        ),
-
-                                      ]
-                                    )
-                                )
-                            ]
-                        )
-                    ); 
+                    return PatientListTile(
+                      "${patient.firstName}",
+                      "${patient.middleName}",
+                      "${patient.lastName}",
+                      "${patient.dateOfBirth}", 
+                      "${patient.ssn}"
+                    );
                 }, 
                 childCount: _patients == null ? 0: _patients.length,
              ),), 
