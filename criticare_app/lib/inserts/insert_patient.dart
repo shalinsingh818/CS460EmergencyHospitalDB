@@ -182,8 +182,8 @@ class _InsertPatientPageState extends State<InsertPatientPage> {
                   ),
                   SizedBox(height: 20.0),
               ]
-          )
-      )
+          ),
+      ),
     );
   }
 }

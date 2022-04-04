@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Resource, Api, request
-
+import json
 # go to desired directory
 import sys
 sys.path.append("../")
@@ -10,6 +10,7 @@ import db_repo.employee as emp
 
 
 class Employee(Resource):
+
 	def __init__(self):
 		pass
 
@@ -19,9 +20,7 @@ class Employee(Resource):
 		for employee in employees:
 			employee_list.append(employee)
 
-		return {
-			"employees": employee_list
-		}
+		return employee_list
 
 
 	def to_form_fields(self, request):	
@@ -42,9 +41,10 @@ class Employee(Resource):
 
 	def post(self):
 		if request.method == 'POST':
-			# capture fields
+			# capture fields	
+			data = json.loads(request.data)
 			capture_fields = self.to_form_fields(request)
-			result = emp.create_employee(capture_fields)
+			result = emp.create_employee(data)
 
 			# check if creating patient worked
 			if result:

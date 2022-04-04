@@ -23,9 +23,7 @@ class Patient(Resource):
 		for patient in patients:
 			patient_list.append(patient)
 
-		return {
-			"patients": patient_list
-		}
+		return patient_list
 
 	def to_form_fields(self):
 		# wrapper for form fields of model

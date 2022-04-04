@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Resource, Api, request
+import json
 
 # go to desired directory
 import sys
@@ -42,11 +43,12 @@ class Medication(Resource):
 		return dict_input
 
 	def post(self):
-		if request.method == 'POST':
+		if request.method == 'POST':	
+			data = json.loads(request.data)
 			# capturing from postman
 			capture_fields = self.to_form_fields()
 			# capturing from postman
-			result = me.create_medication(capture_fields)
+			result = me.create_medication(data)
 			if result:
 				print("# PASSED CREATE RESULT: ")
 

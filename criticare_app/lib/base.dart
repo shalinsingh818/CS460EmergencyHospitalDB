@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'home.dart';
 import 'inserts/insert_patient.dart';
+import 'inserts/insert_medication.dart';
+import 'inserts/insert_employee.dart';
+import 'inserts/insert_condition.dart';
+import 'inserts/insert_room.dart';
+import 'patients.dart';
+import 'home.dart';
+
 
 class MainPage extends StatefulWidget {
 
@@ -12,27 +18,13 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
 
-  /**
-   * Get the current youtube API key stored in the django database to set it
-   * in shared preferences
-   * 
-   * Might need to move this to the library.dart file
-   */
-
-
-
-  /**
-   * Bottom navigation bar index selection
-   */
-
-
   int selectedIndex = 0;
   static const TextStyle optionStyle = TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 30
   );
   List<Widget> _widgetOptions = <Widget> [
-    Text('Property page'),
+    ViewPatientsPage(), 
     HomePage(), 
     Text('Intake Page'), 
   ];
@@ -41,8 +33,6 @@ class _MainPageState extends State<MainPage> {
       selectedIndex = index;
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +81,9 @@ class _MainPageState extends State<MainPage> {
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => InsertEmployeePage()));
               },
             ),
 
@@ -105,11 +97,12 @@ class _MainPageState extends State<MainPage> {
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => InsertRoomPage()));
+                
               },
             ),
-
-
             ListTile(
               leading: Icon(
                 Icons.medication, 
@@ -120,7 +113,9 @@ class _MainPageState extends State<MainPage> {
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                Navigator.pop(context);
+                 Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => InsertMedicationPage()));
               },
             ),
 
@@ -134,7 +129,9 @@ class _MainPageState extends State<MainPage> {
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                Navigator.pop(context);
+                 Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => InsertConditionPage()));
               },
             ),
 
@@ -151,8 +148,6 @@ class _MainPageState extends State<MainPage> {
                 Navigator.pop(context);
               },
             ),
-
-
           ],
         ),
       ),

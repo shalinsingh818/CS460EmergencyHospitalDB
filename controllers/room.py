@@ -1,6 +1,7 @@
 
 from flask import Flask
 from flask_restful import Resource, Api, request
+import json
 
 # go to desired directory
 import sys
@@ -43,9 +44,10 @@ class Room(Resource):
 	def post(self):
 		if request.method == 'POST':
 			# capturing from postman
+			data = json.loads(request.data)
 			capture_fields = self.to_form_fields()
 			# capturing from postman
-			result = rom.create_room(capture_fields)
+			result = rom.create_room(data)
 			if result:
 				print("# PASSED CREATE PROCEDURE: ")
 
