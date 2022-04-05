@@ -11,17 +11,17 @@ String employeeToJson(List<Employee> data) => json.encode(List<dynamic>.from(dat
 class Employee {
     Employee({
         required this.employeeId,
-        this.firstName,
-        this.middleName,
-        this.lastName,
-        this.permissionId,
+        required this.firstName,
+        required this.middleName,
+        required this.lastName,
+        required this.permissionId,
     });
 
-    int employeeId;
-    String firstName;
-    String middleName;
-    String lastName;
-    int permissionId;
+    int? employeeId;
+    String? firstName;
+    String? middleName;
+    String? lastName;
+    int? permissionId;
 
     factory Employee.fromJson(Map<String, dynamic> json) => Employee(
         employeeId: json["employee_id"],

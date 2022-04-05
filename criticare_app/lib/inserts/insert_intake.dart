@@ -1,31 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import '../api/medical_condition.dart'; 
+import '../api/intake.dart'; 
 
-class InsertConditionPage extends StatefulWidget {
+class InsertIntakePage extends StatefulWidget {
+
+  final int? patientId;
+  const InsertIntakePage({Key? key, @required this.patientId}) : super(key: key);
 
 
   @override
-  _InsertConditionPageState createState() => _InsertConditionPageState();
+  _InsertIntakePageState createState() => _InsertIntakePageState(patientId: this.patientId);
 }
 
-class _InsertConditionPageState extends State<InsertConditionPage> {
+class _InsertIntakePageState extends State<InsertIntakePage> {
+
+  int? patientId; 
+  _InsertIntakePageState({this.patientId});
+
+  IntakeApi _intakeApi = IntakeApi(); 
+
+  TextEditingController bloodPressureController = new TextEditingController();
+  TextEditingController notesController = new TextEditingController();
 
 
-  MedicalConditionApi _conditionApi = MedicalConditionApi(); 
+  submitIntakeData() async {
 
-  TextEditingController nameController = new TextEditingController();
-  TextEditingController codeController = new TextEditingController();
-
-
-  submitConditionData() async {
-
-    Map <String, dynamic> conditionApiData =  {
-        'name': nameController.text,
-        'code': codeController.text    
+    Map <String, dynamic> intakeApiData =  {
+        'blood_pressure': bloodPressureController.text,
+        'notes': notesController.text    
     }; 
 
-    String status = await _conditionApi.createMedicalCondition(conditionApiData);
+    String status = await _intakeApi.createIntake(intakeApiData, patientId);
 
   }
 
@@ -40,7 +45,7 @@ class _InsertConditionPageState extends State<InsertConditionPage> {
            ),
            child: Center(
                child: Text(
-                   'Add Medical Condition',
+                   'Intake Patient',
                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -62,9 +67,9 @@ class _InsertConditionPageState extends State<InsertConditionPage> {
               child: Column(
                   children: <Widget> [
                      SizedBox(height: 20.0),
-                     textFieldWidget("Name: ", Icons.person, nameController),
+                     textFieldWidget("Blood Pressure: ", Icons.person, bloodPressureController),
                      SizedBox(height: 20.0),
-                     textFieldWidget("Code", Icons.person, codeController),
+                     textFieldWidget("Notes", Icons.person, notesController),
                   ]
               ),
           ),
@@ -93,7 +98,7 @@ class _InsertConditionPageState extends State<InsertConditionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text("Add Medical Condition"),
+            title: Text("Intake Patient"),
             backgroundColor: Colors.red
         ),
       body: SingleChildScrollView(
@@ -103,7 +108,7 @@ class _InsertConditionPageState extends State<InsertConditionPage> {
                   SizedBox(height: 20.0),
                   GestureDetector(
                     onTap: (){
-                        submitConditionData();
+                        submitIntakeData();
                     },
                     child: submitButton(), 
                   ),

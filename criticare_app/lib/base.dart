@@ -5,12 +5,12 @@ import 'inserts/insert_medication.dart';
 import 'inserts/insert_employee.dart';
 import 'inserts/insert_condition.dart';
 import 'inserts/insert_room.dart';
-import 'patients.dart';
+import 'reads/patients.dart';
+import 'reads/employees.dart';
 import 'home.dart';
 
 
 class MainPage extends StatefulWidget {
-
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -26,7 +26,7 @@ class _MainPageState extends State<MainPage> {
   List<Widget> _widgetOptions = <Widget> [
     ViewPatientsPage(), 
     HomePage(), 
-    Text('Intake Page'), 
+    ViewEmployeesPage(), 
   ];
   void _onItemTapped(int index) {
     setState(() {
@@ -147,25 +147,25 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.calculate, 
-              color: Colors.grey,
+              color: Colors.red,
             ),
-            label: 'Intake'
+            label: 'Waiting Room'
           ),
           
           BottomNavigationBarItem(
             icon: Icon(
               Icons.library_music,
-              color: Colors.grey,
+              color: Colors.red,
             ),
-            label: 'home'
+            label: 'Intake'
           ),
 
           BottomNavigationBarItem(
             icon: Icon(
               Icons.search,
-              color: Colors.grey,
+              color: Colors.red,
             ),
-            label: 'employees'
+            label: 'Employees'
           ),
 
         ],

@@ -57,11 +57,6 @@ class _InsertPatientPageState extends State<InsertPatientPage> {
         'notes': notesController.text
     }; 
 
-    print("Username " + firstNameController.text);
-    print("middle  " + middleNameController.text);
-    print("last " + lastNameController.text);
-    print("k " + dobController.text);
-
     String status = await _patientApi.createPatient(patientApiData);
 
   }
@@ -154,7 +149,7 @@ class _InsertPatientPageState extends State<InsertPatientPage> {
               ),
               hintText: title, 
               hintStyle: TextStyle(color: Colors.grey),
-              prefixIcon: Icon(icon)
+              prefixIcon: Icon(icon, color: Colors.red)
           ),
       );
   }

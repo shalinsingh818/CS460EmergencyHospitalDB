@@ -1,12 +1,13 @@
 from flask import Flask
 from flask_restful import Resource, Api, request
+from pprint import pprint
 from datetime import date
+import json
 
 # go to desired directory
 import sys
 sys.path.append("../")
 
-# imports 
 import db_repo.intake as pi
 import db_repo.medication as med
 import db_repo.medical_condition as cond
@@ -24,9 +25,7 @@ class Intake(Resource):
 		for patient in intake_patients:
 			intake_patient_list.append(patient)
 
-		return {
-			"intake_patients": intake_patient_list
-		}
+		return intake_patient_list
 
 	def to_form_fields(self, request):	
 		ambulance = request.form.get('ambulance')
@@ -48,7 +47,6 @@ class Intake(Resource):
 		intake_patient_id = request.args.get('patient', default=1, type=int)		
 		notes = request.form.get('notes')
 		result = pi.update_patient_notes(notes, intake_patient_id)
-
 		
 		if result:
 			return {
@@ -60,12 +58,14 @@ class Intake(Resource):
 			}
 		
 
-	
 	def post(self):
 		if request.method == 'POST':
+			data = json.loads(request.data)
+			print("MY DATA ")
+			pprint(data)
 			capture_fields = self.to_form_fields(request)
 			# capturing from postman
-			result = pi.create_intake_patient(capture_fields)
+			result = pi.create_intake_patient(data)
 
 			# check if creating patient worked
 			if result:

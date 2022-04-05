@@ -96,6 +96,19 @@ class Patient(Resource):
 				"error": "Not a post request"
 			}
 
+	# delete method (Mike F )
+	def delete(self):
+		# grab patient id	
+		patient_id = request.args.get('patient', default=1, type=int)
+		# delete patient using db repo  
+		result = pat.delete_patient(patient_id)
+		if result:
+			return { "message": "deleted patient" }
+		# if result is not true
+		return {"message": "Could not delete patient"}
+
+		
+
 
 # prescribe medication to patient
 class PrescribeMedicationToPatient(Resource):
@@ -109,8 +122,6 @@ class PrescribeMedicationToPatient(Resource):
 		return {
 			"patients": patient_list
 		}
-
-		
 
 	def post(self):
 		if request.method == 'POST':

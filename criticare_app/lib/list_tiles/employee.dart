@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import '../models/patient.dart'; 
-import '../inserts/insert_intake.dart'; 
+import '../models/employee.dart'; 
 
-class PatientListTile extends StatefulWidget {
+class EmployeeListTile extends StatefulWidget {
 
-  final Patient? patient;
-  const PatientListTile({Key? key, @required this.patient}) : super(key: key);
+  final Employee? employee;
+  const EmployeeListTile({Key? key, @required this.employee}) : super(key: key);
 
 
   @override
-  _PatientListTileState createState() => _PatientListTileState(patient: this.patient);
+  _EmployeeListTileState createState() => _EmployeeListTileState(employee: this.employee);
 }
 
-class _PatientListTileState extends State<PatientListTile> {
+class _EmployeeListTileState extends State<EmployeeListTile> {
 
-  Patient? patient; 
-  _PatientListTileState({this.patient});
+  Employee? employee; 
+  _EmployeeListTileState({this.employee});
 
 
   @override
@@ -30,27 +29,19 @@ class _PatientListTileState extends State<PatientListTile> {
                         color: Colors.red 
                     ), 
                     title: Text(
-                        "${patient?.firstName} : ${patient?.lastName}",
+                        "${employee?.firstName} : ${employee?.lastName}",
                         style: TextStyle(fontWeight: FontWeight.bold)
                     ), 
                     subtitle: Text(
-                        "Date Created: ${patient?.dateOfBirth} SSN: ${patient?.ssn}",
+                        "Employee Id: ${employee?.employeeId} Permission: ${employee?.permissionId}",
                     ),
                     trailing: Wrap(
                         spacing: 15,
                         children: <Widget>[
-                            IconButton(
-                                icon: Icon(
-                                    Icons.check, 
-                                    color: Colors.green, 
-                                ),
-                                onPressed: (){
-                                     Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => InsertIntakePage(patientId: patient?.patientId)));
-                                }
+                            Icon(
+                                Icons.add, 
+                                color: Colors.green, 
                             ),
-
                             Icon(
                                 Icons.do_not_disturb_on_outlined,
                                 color: Colors.red, 

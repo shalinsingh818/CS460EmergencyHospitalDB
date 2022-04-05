@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'models/patient.dart'; 
-import 'api/patient.dart';
-import 'list_tiles/patient.dart';
+import '../models/patient.dart'; 
+import '../api/patient.dart';
+import '../list_tiles/patient.dart';
 
 class ViewPatientsPage extends StatefulWidget {
 
