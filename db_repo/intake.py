@@ -12,16 +12,12 @@ INTAKE_FIELDS = [
 	"patient_id",
     "blood_pressure",
     "notes",
-	"admitted", 
-	"discharge",
-    "date_created",
-	"ambulance",
-	"discharge_id"
+    "date_created"
 ]
 
 
 # QUERIES NEEDED FOR intakeS (FLUSH OUT)
-INSERT_INTAKE_QUERY = "INSERT INTO INTAKE_PATIENT (patient_id, blood_pressure, notes, date_created) values(?,?,?, ?);"
+INSERT_INTAKE_QUERY = "INSERT INTO INTAKE_PATIENT (patient_id, blood_pressure, notes, date_created) values(?,?,?,?);"
 UPDATE_INTAKE_NOTES = "UPDATE INTAKE_PATIENT SET notes=? where intake_id=?"
 VIEW_INTAKE_PATIENTS_QUERY = "SELECT * FROM INTAKE_PATIENT;"; 
 DELETE_INTAKE_PATIENT_QUERY = "DELETE FROM INTAKE_PATIENT where intake_id=?"; 
@@ -46,6 +42,8 @@ def create_intake_patient(intake_patient_fields: dict) -> bool:
 		Since there's alot of fields. intake_patient_fields is a dictionary that can be
 		passed to this method for testing. 
 	"""
+	print("FIELDS :")
+	pprint(intake_patient_fields)
 	result = False
 	# bind values, by automatically appending dict vals to tuple
 	values = []

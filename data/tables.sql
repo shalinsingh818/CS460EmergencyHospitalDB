@@ -39,13 +39,8 @@ CREATE TABLE INTAKE_PATIENT (
 	patient_id INTEGER,
 	blood_pressure INTEGER,
 	notes VARCHAR(1000), 
-	admitted BOOLEAN,
-	discharge BOOLEAN,
 	date_created DATETIME,
-	ambulance BOOLEAN, 	
-	discharge_id INT, 
-	FOREIGN KEY(patient_id) REFERENCES PATIENT(patient_id),
-	FOREIGN KEY(discharge_id) REFERENCES DISCHARGE(discharge_id)
+	FOREIGN KEY(patient_id) REFERENCES PATIENT(patient_id)
 ); 
 
 

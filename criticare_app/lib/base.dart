@@ -6,6 +6,7 @@ import 'inserts/insert_employee.dart';
 import 'inserts/insert_condition.dart';
 import 'inserts/insert_room.dart';
 import 'reads/patients.dart';
+import 'reads/intake.dart';
 import 'reads/employees.dart';
 import 'home.dart';
 
@@ -25,9 +26,11 @@ class _MainPageState extends State<MainPage> {
   );
   List<Widget> _widgetOptions = <Widget> [
     ViewPatientsPage(), 
-    HomePage(), 
-    ViewEmployeesPage(), 
+    ViewIntakePage(), 
+    ViewEmployeesPage()
   ];
+
+  
   void _onItemTapped(int index) {
     setState(() {
       selectedIndex = index;

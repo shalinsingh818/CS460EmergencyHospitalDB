@@ -26,7 +26,7 @@ class _InsertIntakePageState extends State<InsertIntakePage> {
   submitIntakeData() async {
 
     Map <String, dynamic> intakeApiData =  {
-        'blood_pressure': bloodPressureController.text,
+        'bloodPressure': bloodPressureController.text,
         'notes': notesController.text    
     }; 
 
