@@ -60,5 +60,16 @@ class Employee(Resource):
 				"error": "Not a post request"
 			}
 
+	# delete method (Mike F )
+	def delete(self):
+		# grab employee id	
+		employee_id = request.args.get('employee', default=1, type=int)
+		# delete employee using db repo  
+		result = emp.delete_employee(employee_id)
+		if result:
+			return { "message": "deleted employee" }
+		# if result is not true
+		return {"message": "Could not delete employee"}
+
 
 	

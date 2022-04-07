@@ -244,3 +244,14 @@ class AssignStaffToPatient(Resource):
 			return {
 				"error": "Not a post request"
 			}
+
+	# delete method (Mike F )
+	def delete(self):
+		# grab intake patient id	
+		intake_patient_id = request.args.get('intake patient', default=1, type=int)
+		# delete intake patient using db repo  
+		result = pi.delete_intake_patient(intake_patient_id)
+		if result:
+			return { "message": "deleted intake patient" }
+		# if result is not true
+		return {"message": "Could not delete intake patient"}

@@ -64,3 +64,14 @@ class Procedure(Resource):
 			return {
 				"error": "Not a post request"
 			}
+
+	# delete method (Mike F )
+	def delete(self):
+		# grab procedure id	
+		procedure_id = request.args.get('procedure', default=1, type=int)
+		# delete procedure using db repo  
+		result = proc.delete_procedure(procedure_id)
+		if result:
+			return { "message": "deleted procedure" }
+		# if result is not true
+		return {"message": "Could not delete procedure"}

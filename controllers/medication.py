@@ -64,3 +64,14 @@ class Medication(Resource):
 			return {
 				"error": "Not a post request"
 			}
+
+	# delete method (Mike F )
+	def delete(self):
+		# grab medication id	
+		medication_id = request.args.get('medication', default=1, type=int)
+		# delete medication using db repo  
+		result = me.delete_medication(medication_id)
+		if result:
+			return { "message": "deleted medication" }
+		# if result is not true
+		return {"message": "Could not delete medication"}

@@ -56,3 +56,13 @@ class Result(Resource):
 			return {
 				"error": "Not a post request"
 			}
+
+	def delete(self):
+		# grab result id	
+		result_id = request.args.get('result', default=1, type=int)
+		# delete result using db repo  
+		result = re.delete_result(result_id)
+		if result:
+			return { "message": "deleted result" }
+		# if result is not true
+		return {"message": "Could not delete result"}
