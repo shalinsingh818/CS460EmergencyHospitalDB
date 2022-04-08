@@ -61,15 +61,9 @@ class Intake(Resource):
 	def post(self):
 		if request.method == 'POST':
 			data = json.loads(request.data)
-			data["date_created"] = date.today()
-			data["patient_id"] = request.args.get('patient', default=1, type=int)
-			print("MY DATA ")
-			pprint(data)
-			capture_fields = self.to_form_fields(request)
-			# capturing from postman
+			print("all data: ")
+			pprint(data)	
 			result = pi.create_intake_patient(data)
-
-			# check if creating patient worked
 			if result:
 				return {
 					"message": "created intake patient"

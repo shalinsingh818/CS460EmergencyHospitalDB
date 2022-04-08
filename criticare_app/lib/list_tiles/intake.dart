@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import '../models/intake.dart'; 
+import '../detail_views/intake_patient.dart'; 
+
 
 class IntakeListTile extends StatefulWidget {
 
@@ -11,6 +13,7 @@ class IntakeListTile extends StatefulWidget {
   @override
   _IntakeListTileState createState() => _IntakeListTileState(intake: this.intake);
 }
+
 
 class _IntakeListTileState extends State<IntakeListTile> {
 
@@ -24,6 +27,11 @@ class _IntakeListTileState extends State<IntakeListTile> {
         child: Column(
             children: <Widget> [
                  ListTile(
+                     onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => IntakeDetailPage(intake: intake)));
+                     },
                     leading: Icon(
                         Icons.face_rounded,
                         color: Colors.red 

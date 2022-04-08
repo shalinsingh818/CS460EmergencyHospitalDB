@@ -32,7 +32,7 @@ PATIENT_FIELDS = [
 
 # QUERIES NEEDED FOR PATIENTS (FLUSH OUT)
 INSERT_QUERY = "INSERT INTO PATIENT (ssn, first_name,middle_name,last_name,date_of_birth, height, weight, next_of_kin, home_phone, work_phone, symptoms, health_insurance, vaccination, vaccination_date, drugs_alchohol, sexually_active, allergies, blood_type, notes) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
-VIEW_PATIENTS_QUERY = "SELECT * FROM PATIENT;"; 
+VIEW_PATIENTS_QUERY = "SELECT * FROM PATIENT where patient_id NOT IN (SELECT patient_id FROM INTAKE_PATIENT);" 
 DELETE_ALL_PATIENTS_QUERY = "DELETE  FROM PATIENT;"; 
 
 

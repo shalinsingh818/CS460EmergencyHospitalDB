@@ -9,15 +9,14 @@ import models
 # Keep fields in array so we can populate intake_dict
 INTAKE_FIELDS = [
 	"intake_id",	
-	"patient_id",
-    "blood_pressure",
-    "notes",
-    "date_created"
+	"patient_id", 
+    "blood_pressure",	
+    "notes"
 ]
 
 
 # QUERIES NEEDED FOR intakeS (FLUSH OUT)
-INSERT_INTAKE_QUERY = "INSERT INTO INTAKE_PATIENT (patient_id, blood_pressure, notes, date_created) values(?,?,?,?);"
+INSERT_INTAKE_QUERY = "INSERT INTO INTAKE_PATIENT (patient_id, blood_pressure, notes) values(?,?,?);"
 UPDATE_INTAKE_NOTES = "UPDATE INTAKE_PATIENT SET notes=? where intake_id=?"
 VIEW_INTAKE_PATIENTS_QUERY = "SELECT * FROM INTAKE_PATIENT;"; 
 DELETE_INTAKE_PATIENT_QUERY = "DELETE FROM INTAKE_PATIENT where intake_id=?"; 

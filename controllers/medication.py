@@ -21,9 +21,7 @@ class Medication(Resource):
 		for result in results:
 		  medication_list.append(result)
 
-		return {
-		  "medications": medication_list
-		}
+		return medication_list
 
 
 	def to_form_fields(self):

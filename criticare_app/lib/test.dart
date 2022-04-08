@@ -1,38 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import './models/Bill.dart'; 
 import './api/Service.dart';
-import 'billing_detail.dart'; 
+import './models/Notifications.dart'; 
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
 
-class BillingPage extends StatefulWidget {
+
+class HomePage extends StatefulWidget {
 
 
   @override
-  _BillingPageState createState() => _BillingPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _BillingPageState extends State<BillingPage> {
+class _HomePageState extends State<HomePage> {
 
   String HOST;
 
-  List<Bill> _bills; 
-
-  bool is_loading = false;
-
-  @override
-  void initState(){
-    super.initState(); 
-    is_loading = true; 
-   
-    Service.getBills().then((bills){
-      
-      setState(() {
-        _bills = bills; 
-        is_loading = false; 
-
-      });
-    });
-  }
 
   /**
    * Get the current youtube API key stored in the django database to set it
@@ -47,43 +32,153 @@ class _BillingPageState extends State<BillingPage> {
    * Bottom navigation bar index selection
    */
 
+  double charge_sum;
+  String tier;
+  int hcf;
+  int gallons; 
+  double service_total; 
+  bool is_loading = true;
+
+
+  Future<String> getBill() async{
+    final token = Service.auth_token; 
+    final network = Service.url; 
+
+
+    http.Response response = await http.get(
+        Uri.encodeFull("$network/billing/users/current-bill/"),
+        headers: {
+          "Accept":"application/json",
+          "Authorization": "Token ${token} "
+        }
+    );
+
+    final jsonData = json.decode(response.body);
+    print(jsonData);
+
+    setState(() {
+      charge_sum = jsonData["charge_sum"];
+      tier = jsonData["tier"];
+      hcf = jsonData["HCF"];
+      gallons = jsonData["gallons"]; 
+      service_total = jsonData["service_total"]; 
+      
+    });
+
+  
+    return "Success!";
+  }
+
+  List<Notifications> _notifications; 
+
+@override
+  void initState(){
+    super.initState();
+
+    Service.getNotifs().then((notifications){
+      
+      setState(() {
+        _notifications = notifications; 
+        is_loading = false; 
+
+      });
+    });
+
+    this.getBill();
+   
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-            SliverToBoxAdapter(
-                child: Center(
-                    child: Column(children: [
-            
-            
-            
-                    ],  
+          SliverToBoxAdapter(
+            child: Center(
+        child: Column(children: [
+          SizedBox(
+            height: 10 ,
+          ),
+          Container(
+            margin: EdgeInsets.all(10.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.blue, width: 5.0), 
+              color: Colors.white,
+              shape: BoxShape.circle, 
+              ),
+            height: 270,
+            child: Center(
+              child: Column(children: [
+                SizedBox(
+                  height: 50,
+                ), 
+                Text(hcf.toString() + " " + "HCF", style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),),
+                SizedBox(
+                  height: 10,
+                ), 
+                Text(gallons.toString() + ' Gallons per HCF', style: TextStyle(color: Colors.black, fontSize: 17)),
+                SizedBox(
+                  height: 10,
+                ), 
+                Text(charge_sum.toString(), style: TextStyle(color: Colors.green, fontSize: 45))
+              ],),
             ),
+          ),
+          SizedBox(
+            height: 20,
+          ), 
+
+          ListTile(
+            leading: Icon(
+              Icons.attach_money,
+              color: Colors.green, 
             ),
+            title: Text("View current bill", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+            subtitle: Text('View charges related to your current water usage'),
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.location_city,
+              color: Colors.blue, 
+            ),
+            title: Text("View county charges", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+            subtitle: Text('View charges related to the county you reside in'),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.message,
+              color: Colors.blue, 
+            ),
+            title: Text("Messages", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20.0)),
+          
+          ),
+         
+         
+          ],  
+          ),
         ),
-        SliverList(delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index){
-            Bill bill = _bills[index]; 
-            return  Card(
-                child: Column(children: [
-                ListTile(
-                    onTap: (){
-                    Navigator.push(
-                        context,
-                    MaterialPageRoute(builder: (context) => BillingDetailPage(pk: bill.id)));
-                    },
-                    leading: Icon(
-                    Icons.message, 
-                    ), 
-                    title: Text(bill.dateBillPrepared.toString(), style: TextStyle(fontWeight: FontWeight.bold)),
-                    subtitle: Text('Total: ' + bill.totalAmount.toString() + " " + "Service charge total: " + bill.serviceChargeTotal.toString()),
-                )
-                ],) ,
-            );
-            },
-            childCount: _bills == null ? 0: _bills.length, 
-        ),)
+      ),
+      SliverList(delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index){
+          Notifications notification = _notifications[index]; 
+          return  Card(
+            child: Column(children: [
+              ListTile(
+                leading: Icon(
+                  Icons.message, 
+                ), 
+                title: Text(notification.title, style: TextStyle(fontWeight: FontWeight.bold)),
+                subtitle: Text(notification.subtitle),
+              )
+            ],) ,
+          );
+        },
+        childCount: _notifications == null ? 0: _notifications.length, 
+      ),)
       ],
     )
     

@@ -14,28 +14,25 @@ class Intake {
         required this.patientId,
         required this.bloodPressure,
         required this.notes,
-        required this.dateCreated,
     });
 
     int? intakeId;
-    String? patientId;
+    int? patientId;
     String? bloodPressure;
-    DateTime? notes;
-    int? dateCreated;
+    String? notes;
 
     factory Intake.fromJson(Map<String, dynamic> json) => Intake(
         intakeId: json["intake_id"],
         patientId: json["patient_id"],
         bloodPressure: json["blood_pressure"],
-        notes: DateTime.parse(json["notes"]),
-        dateCreated: json["date_created"],
+        notes: json["notes"],
     );
 
     Map<String, dynamic> toJson() => {
         "intake_id": intakeId,
         "patient_id": patientId,
         "blood_pressure": bloodPressure,
-        "notes": "${notes.year.toString().padLeft(4, '0')}-${notes.month.toString().padLeft(2, '0')}-${notes.day.toString().padLeft(2, '0')}",
-        "date_created": dateCreated,
+        "notes": notes,
     };
 }
+

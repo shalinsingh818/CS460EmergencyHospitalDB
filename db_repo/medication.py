@@ -9,8 +9,8 @@ import models
 # Keep fields in array so we can populate intake_dict
 MEDICATION_FIELDS = [
 	"medication_id",	
-	"code",
-    "name",
+	"name",
+    "code",
     "price"
 ]
 
@@ -23,7 +23,7 @@ INTAKE_MEDICATION_FIELDS = [
 
 # QUERIES NEEDED FOR intakeS (FLUSH OUT)
 INSERT_MEDICATION_QUERY = "INSERT INTO MEDICATION (code, name, price) values(?,?,?);"
-VIEW_MEDICATIONS_QUERY = "SELECT * FROM MEDICATION;"; 
+VIEW_MEDICATION_QUERY = "SELECT * FROM MEDICATION;"; 
 DELETE_MEDICATION_QUERY = "DELETE FROM MEDICATION where medication_id=?"; 
 DELETE_ALL_MEDICATION_QUERY = "DELETE  FROM MEDICATION;"; 
 
@@ -65,7 +65,7 @@ def view_medications():
 	db = sqlite3.connect("data/criticare.db")
 	try:
 		cur = db.cursor()
-		cur.execute(VIEW_MEDICATIONS_QUERY)
+		cur.execute(VIEW_MEDICATION_QUERY)
 		for i in cur:
 			# render row entry into patient class model
 			temp_dict = {}	

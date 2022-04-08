@@ -39,7 +39,6 @@ CREATE TABLE INTAKE_PATIENT (
 	patient_id INTEGER,
 	blood_pressure INTEGER,
 	notes VARCHAR(1000), 
-	date_created DATETIME,
 	FOREIGN KEY(patient_id) REFERENCES PATIENT(patient_id)
 ); 
 
