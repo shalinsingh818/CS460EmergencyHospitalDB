@@ -56,3 +56,14 @@ class Permission(Resource):
 			return {
 				"error": "Not a post request"
 			}
+
+	# delete method (Mike F )
+	def delete(self):
+		# grab permission id	
+		permission_id = request.args.get('permission', default=1, type=int)
+		# delete permission using db repo  
+		result = perm.delete_permission(permission_id)
+		if result:
+			return { "message": "deleted permission" }
+		# if result is not true
+		return {"message": "Could not delete permission"}

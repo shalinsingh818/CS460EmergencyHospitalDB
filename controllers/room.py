@@ -63,3 +63,14 @@ class Room(Resource):
 			return {
 				"error": "Not a post request"
 			}
+
+	# delete method (Mike F )
+	def delete(self):
+		# grab room id	
+		room_id = request.args.get('room', default=1, type=int)
+		# delete room using db repo  
+		result = rom.delete_room(room_id)
+		if result:
+			return { "message": "deleted room" }
+		# if result is not true
+		return {"message": "Could not delete room"}

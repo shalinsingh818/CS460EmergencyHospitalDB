@@ -61,3 +61,14 @@ class MedicalCondtion(Resource):
 			return {
 				"error": "Not a post request"
 			}
+
+	# delete method (Mike F )
+	def delete(self):
+		# grab medical condition id	
+		medical_condition_id = request.args.get('medidcal condition', default=1, type=int)
+		# delete medical condition using db repo  
+		result = me.delete_medical_condition(medical_condition_id)
+		if result:
+			return { "message": "deleted medical condition" }
+		# if result is not true
+		return {"message": "Could not delete medical condition"}
