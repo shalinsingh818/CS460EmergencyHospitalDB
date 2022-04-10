@@ -23,6 +23,8 @@ CORS(app)
 
 # patients
 api.add_resource(patientController.Patient, '/patient')
+api.add_resource(patientController.ViewPatient, '/viewPatient')
+
 
 # intake
 api.add_resource(intakeController.Intake, '/intakePatient')

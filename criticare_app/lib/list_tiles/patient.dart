@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import '../api/patient.dart'; 
 import '../models/patient.dart'; 
 import '../inserts/insert_intake.dart'; 
 
@@ -51,9 +52,15 @@ class _PatientListTileState extends State<PatientListTile> {
                                 }
                             ),
 
-                            Icon(
-                                Icons.do_not_disturb_on_outlined,
-                                color: Colors.red, 
+
+                            IconButton(
+                                icon: Icon(
+                                    Icons.do_not_disturb_on_outlined, 
+                                    color: Colors.red, 
+                                ),
+                                onPressed: (){
+                                    PatientApi.deletePatient(patient?.patientId);
+                                }
                             ),
                             Icon(
                                 Icons.more_vert, 

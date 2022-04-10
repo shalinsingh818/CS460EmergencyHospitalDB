@@ -33,6 +33,7 @@ PATIENT_FIELDS = [
 # QUERIES NEEDED FOR PATIENTS (FLUSH OUT)
 INSERT_QUERY = "INSERT INTO PATIENT (ssn, first_name,middle_name,last_name,date_of_birth, height, weight, next_of_kin, home_phone, work_phone, symptoms, health_insurance, vaccination, vaccination_date, drugs_alchohol, sexually_active, allergies, blood_type, notes) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
 VIEW_PATIENTS_QUERY = "SELECT * FROM PATIENT where patient_id NOT IN (SELECT patient_id FROM INTAKE_PATIENT);" 
+VIEW_PATIENT_QUERY = "SELECT * FROM PATIENT WHERE patient_id=?;"; 
 DELETE_ALL_PATIENTS_QUERY = "DELETE  FROM PATIENT;"; 
 
 
@@ -91,6 +92,27 @@ def view_patients():
 	db.close()
 
 	return result
+
+
+def view_patient_by_id(patient_id):
+	result = False
+	temp_dict = {}
+	db = sqlite3.connect("data/criticare.db")	
+	try:
+		cur = db.cursor()
+		cur.execute(VIEW_PATIENT_QUERY, (patient_id,))
+		for i in cur:
+			count = 0
+			for field in PATIENT_FIELDS:
+				temp_dict[field] = i[count]
+				count += 1
+		db.commit()
+	except Exception as e:
+		print("Error in deleting patient: {}".format(e))
+		db.rollback()
+
+	db.close()
+	return temp_dict
 
 
 def delete_patient(patient_id):

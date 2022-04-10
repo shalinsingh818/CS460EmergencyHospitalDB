@@ -66,7 +66,6 @@ CREATE TABLE EMPLOYEE (
 CREATE TABLE ROOM (	
 	room_id INTEGER PRIMARY KEY,
 	room_number INT, 
-	available BOOLEAN, 
 	cost INT
 );
 

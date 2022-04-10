@@ -22,8 +22,8 @@ class Patient(Resource):
 		patients = pat.view_patients()
 		for patient in patients:
 			patient_list.append(patient)
-
 		return patient_list
+
 
 	def to_form_fields(self):
 		# wrapper for form fields of model
@@ -107,6 +107,15 @@ class Patient(Resource):
 		# if result is not true
 		return {"message": "Could not delete patient"}
 
+
+class ViewPatient(Resource):
+	
+	def get(self):
+		# view medications prescribed to patient	
+		patient_id = request.args.get('patient', default=1, type=int)
+		patient = pat.view_patient_by_id(patient_id)
+		return patient
+	
 		
 
 

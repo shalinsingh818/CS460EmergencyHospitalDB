@@ -47,6 +47,35 @@ class PatientApi {
         }
     }
 
+
+    static Future<Patient> fetchPatient(int? patientId) async {
+        final response = await http.get(Uri.parse('http://127.0.0.1:5000/viewPatient?patient=${patientId}'));
+        if (response.statusCode == 200) {
+            // If the server did return a 200 OK response,
+            // then parse the JSON.
+            return Patient.fromJson(jsonDecode(response.body));
+        } else {
+            // If the server did not return a 200 OK response,
+            // then throw an exception.
+            throw Exception('Failed to load album');
+        }
+    }
+
+
+    static Future<String> deletePatient(int? patientId) async {
+        final response = await http.delete(Uri.parse('http://127.0.0.1:5000/patient?patient=${patientId}'));
+        if (response.statusCode == 200) {
+            // If the server did return a 200 OK response,
+            // then parse the JSON.
+            return "Deleted Patient"; 
+        } else {
+            // If the server did not return a 200 OK response,
+            // then throw an exception.
+            throw Exception('Failed to load album');
+        }
+    }
+
+
     static Future<List<Patient>> fetchPatients() async {
         final response = await http.get(Uri.parse('http://127.0.0.1:5000/patient'));
         if (response.statusCode == 200) {

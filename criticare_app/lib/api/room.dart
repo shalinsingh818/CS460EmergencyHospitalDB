@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import '../models/room.dart'; 
 import 'dart:async';
 import 'dart:convert';
 
@@ -16,7 +17,7 @@ class RoomApi {
                 'Content-Type': 'application/json; charset=UTF-8',
             }, 
             body: jsonEncode({
-                'number': formData['number'],
+                'room_number': formData['number'],
                 'cost': formData['cost']
             }),
         );
@@ -28,5 +29,21 @@ class RoomApi {
             return "Failure"; 
         }
     }
+
+
+    static Future<List<Room>> fetchRooms() async {
+        final response = await http.get(Uri.parse('http://127.0.0.1:5000/room'));
+        if (response.statusCode == 200) {
+            // If the server did return a 200 OK response,
+            // then parse the JSON.
+            final List<Room> rooms = roomFromJson(response.body);
+            return rooms;
+        } else {
+            // If the server did not return a 200 OK response,
+            // then throw an exception.
+            throw Exception('Failed to load album');
+        }
+    }
+
 
 }

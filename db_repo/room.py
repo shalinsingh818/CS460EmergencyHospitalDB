@@ -10,7 +10,6 @@ import models
 # Fields that display in postman
 ROOM_FIELDS = [
 	"room_id",
-	"available",
 	"room_number",	
 	"cost"
 ]

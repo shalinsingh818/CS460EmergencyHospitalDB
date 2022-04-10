@@ -99,10 +99,8 @@ class PrescribeMedication(Resource):
 	def post(self):
 		if request.method == 'POST':
 			# capture fields
-			intake_patient_id = request.args.get('patient', default=1, type=int)	
-			medication_id = request.form.get('medication_id')
-			result = pi.prescribe_medication_to_patient(intake_patient_id, medication_id)
-
+			data = json.loads(request.data)
+			result = pi.prescribe_medication_to_patient(data["patient_id"], data["medication_id"] )
 			# check if creating patient worked
 			if result:
 				return {
@@ -249,3 +247,21 @@ class AssignStaffToPatient(Resource):
 			return { "message": "deleted intake patient" }
 		# if result is not true
 		return {"message": "Could not delete intake patient"}
+
+
+
+"""
+class GeneratePatientBill(Resource):
+
+	def __init__(self):
+		pass
+
+	# view patient procedures
+	def get(self):
+		# get total cost of patient medications
+		
+	
+		# get total cost of patient procedures
+	
+		# add overnight rate or some shit
+"""	

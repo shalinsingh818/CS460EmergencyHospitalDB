@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import '../models/medication.dart';
-import '../api/medication.dart';
+import '../models/room.dart';
+import '../inserts/insert_procedure.dart';
+import '../api/room.dart';
 import '../models/intake.dart';
 
 
 
-class MedicationTile extends StatefulWidget {
+class RoomTile extends StatefulWidget {
 
   final Intake? intake;
-  final Medication? medication;
-  const MedicationTile({Key? key, @required this.medication, @required this.intake}) : super(key: key);
+  final Room? room;
+  const RoomTile({Key? key, @required this.room, @required this.intake}) : super(key: key);
 
 
   @override
-  _MedicationTileState createState() => _MedicationTileState(medication: this.medication, intake: this.intake);
+  _RoomTileState createState() => _RoomTileState(room: this.room, intake: this.intake);
+
 }
 
-class _MedicationTileState extends State<MedicationTile> {
+class _RoomTileState extends State<RoomTile> {
 
-  Medication? medication; 
+  Room? room; 
   Intake? intake; 
-  _MedicationTileState({this.medication, this.intake});
+  _RoomTileState({this.room, this.intake});
 
 
   @override
@@ -29,8 +31,9 @@ class _MedicationTileState extends State<MedicationTile> {
     return Scaffold(
       body: GestureDetector(
           onTap: () {
-              MedicationApi.prescribeMedication(intake?.intakeId, medication?.medicationId); 
-              print("Prescribe medication "); 
+               Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => InsertProcedurePage(room: room)));
           }, 
           child: Container(
             padding: const EdgeInsets.all(8),
@@ -41,14 +44,14 @@ class _MedicationTileState extends State<MedicationTile> {
                   children: <Widget> [
                       SizedBox(height: 30), 
                       Icon(
-                          Icons.medication,
+                          Icons.location_city,
                           color: Colors.red, 
                           size: 100,
                       ), 
                       SizedBox(height: 10.0), 
-                      Text('${medication?.name}', style: TextStyle(color: Colors.red, fontSize: 30)),
+                      Text('${room?.roomNumber}', style: TextStyle(color: Colors.red, fontSize: 30)),
                       SizedBox(height: 15.0), 
-                      Text('\$ ${medication?.price}', style: TextStyle(color: Colors.green, fontSize: 20)),
+                      Text('\$ ${room?.cost}', style: TextStyle(color: Colors.green, fontSize: 20)),
                   ],
               ),
               color: Colors.grey[200],

@@ -1,6 +1,7 @@
 
 from flask import Flask
 from flask_restful import Resource, Api, request
+from pprint import pprint
 import json
 
 # go to desired directory
@@ -22,9 +23,7 @@ class Room(Resource):
 		for room in results:
 			room_list.append(room)
 
-		return {
-			"rooms": room_list
-		}
+		return room_list
 
 
 	def to_form_fields(self):
@@ -45,6 +44,7 @@ class Room(Resource):
 		if request.method == 'POST':
 			# capturing from postman
 			data = json.loads(request.data)
+			pprint(data)
 			capture_fields = self.to_form_fields()
 			# capturing from postman
 			result = rom.create_room(data)

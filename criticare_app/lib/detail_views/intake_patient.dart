@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import '../grid_views/medications.dart';
+import '../grid_views/rooms.dart';
+import '../api/patient.dart'; 
 import '../models/intake.dart'; 
-
+import '../models/patient.dart'; 
+import 'patient_info.dart';
 
 class IntakeDetailPage extends StatefulWidget {
 
@@ -17,6 +20,14 @@ class _IntakeDetailState extends State<IntakeDetailPage> {
 
     Intake? intake; 
     _IntakeDetailState({this.intake});
+
+    Future<Patient>? futurePatient;
+
+    @override
+    void initState() {
+        super.initState();
+        futurePatient = PatientApi.fetchPatient(intake?.patientId);
+    }
 
 
   @override
@@ -65,7 +76,7 @@ class _IntakeDetailState extends State<IntakeDetailPage> {
                                     onTap: () {
                                         Navigator.push(
                                             context,
-                                            MaterialPageRoute(builder: (context) => MedicationPage()));
+                                            MaterialPageRoute(builder: (context) => MedicationPage(intake: intake)));
                                     },
                                     leading: Icon(
                                         Icons.medication,
@@ -77,7 +88,13 @@ class _IntakeDetailState extends State<IntakeDetailPage> {
                                         Icons.more_vert,
                                     ),
                                 ),
+                                
                                 ListTile(
+                                    onTap: (){
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => RoomPage(intake: intake)));
+                                    },
                                     leading: Icon(
                                         Icons.location_city,
                                         color: Colors.red, 
@@ -100,6 +117,11 @@ class _IntakeDetailState extends State<IntakeDetailPage> {
                                     ),
                                 ),
                                  ListTile(
+                                    onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => PatientInfo(patient: futurePatient)));
+                                    },
                                     leading: Icon(
                                         Icons.accessible_outlined,
                                         color: Colors.red, 
