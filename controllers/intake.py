@@ -19,6 +19,7 @@ class Intake(Resource):
 	def __init__(self):
 		pass
 
+	# get intake patients
 	def get(self):
 		intake_patient_list = []
 		intake_patients = pi.view_intake_patients()
@@ -27,6 +28,7 @@ class Intake(Resource):
 
 		return intake_patient_list
 
+	# input fields into form
 	def to_form_fields(self, request):	
 		ambulance = request.form.get('ambulance')
 		blood_pressure = request.form.get('blood_pressure')	
@@ -43,6 +45,7 @@ class Intake(Resource):
 
 		return dict_input
 
+	# update patient notes
 	def put(self):	
 		intake_patient_id = request.args.get('patient', default=1, type=int)		
 		notes = request.form.get('notes')
@@ -57,7 +60,7 @@ class Intake(Resource):
 				"error": "Could not update patient notes"
 			}
 		
-
+	# create intake patient
 	def post(self):
 		if request.method == 'POST':
 			data = json.loads(request.data)

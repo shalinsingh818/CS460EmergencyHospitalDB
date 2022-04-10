@@ -17,6 +17,7 @@ class Patient(Resource):
 	def __init__(self):
 		pass
 
+	# get patient list
 	def get(self):
 		patient_list = []
 		patients = pat.view_patients()

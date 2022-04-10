@@ -14,6 +14,7 @@ class Result(Resource):
 	def __init__(self):
 		pass
 
+	# get results list
 	def get(self):
 		result_list = []
 		results = re.view_results()

@@ -93,7 +93,7 @@ def view_intake_patients():
 
 	return intake_patients
 
-
+# delete intake patient from database
 def delete_intake_patient(intake_patient_id):
 	result = False
 	db = sqlite3.connect("data/criticare.db")
@@ -114,7 +114,7 @@ def delete_intake_patient(intake_patient_id):
 	return result
 
 	
-	
+# delete all intake patients from database
 def delete_all_intake_patients():
 	result = False
 	db = sqlite3.connect("data/criticare.db")

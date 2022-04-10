@@ -14,7 +14,8 @@ class MedicalCondtion(Resource):
 
 	def __init__(self):
 		pass
-
+	
+	# get medical conditions list
 	def get(self):
 		conditions_list = []
 		results = me.view_conditions()

@@ -88,7 +88,7 @@ def view_employees():
 
 	return employees
 
-
+# delete employee from database
 def delete_employee(employee_id):
 	result = False
 	db = sqlite3.connect("data/criticare.db")
@@ -108,7 +108,7 @@ def delete_employee(employee_id):
 	return result
 
 	
-	
+# delete all employees from database
 def delete_all_employees():
 	result = False
 	db = sqlite3.connect("data/criticare.db")

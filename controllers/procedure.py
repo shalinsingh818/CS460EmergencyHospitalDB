@@ -15,6 +15,7 @@ class Procedure(Resource):
 	def __init__(self):
 		pass
 
+	# get procedure list
 	def get(self):
 		procedure_list = []
 		results = proc.view_procedures()

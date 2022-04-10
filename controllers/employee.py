@@ -13,7 +13,8 @@ class Employee(Resource):
 
 	def __init__(self):
 		pass
-
+	
+	# view employees
 	def get(self):
 		employee_list = []
 		employees = emp.view_employees()

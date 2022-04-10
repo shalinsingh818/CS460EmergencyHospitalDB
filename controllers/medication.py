@@ -15,6 +15,7 @@ class Medication(Resource):
 	def __init__(self):
 		pass
 
+	# get medication list
 	def get(self):
 		medication_list = []
 		results = me.view_medications()

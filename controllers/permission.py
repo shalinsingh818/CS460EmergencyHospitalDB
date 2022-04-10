@@ -14,6 +14,7 @@ class Permission(Resource):
 	def __init__(self):
 		pass
 
+	# get result list
 	def get(self):
 		result_list = []
 		results = perm.view_permissions()

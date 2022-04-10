@@ -17,6 +17,7 @@ class Room(Resource):
 	def __init__(self):
 		pass
 
+	# get room list
 	def get(self):
 		room_list = []
 		results = rom.view_rooms()

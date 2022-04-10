@@ -10,15 +10,15 @@ class TestCriticareMedicalConditionMethods(unittest.TestCase):
 		# create a couple medical conditions
 		test_input = [
 			{
-				"name": "Dickhead",
+				"name": "Diabetes",
 				"code": 366
 			},
 			{
-				"name": "Cuntman",
+				"name": "Hypertension",
 				"code": 367
 			},
 			{
-				"name": "Ok",
+				"name": "Asthma",
 				"code": 369
 			}
 		]
