@@ -83,9 +83,7 @@ CREATE TABLE PROCEDURE (
 	cost INT, 
 	notes VARCHAR(1000),
 	name VARCHAR(255), 
-	results INT, 
-	FOREIGN KEY(room_id) REFERENCES ROOM(room_id), 
-	FOREIGN KEY(results) REFERENCES RESULT(result_id) 
+	FOREIGN KEY(room_id) REFERENCES ROOM(room_id) 
 );
 
 

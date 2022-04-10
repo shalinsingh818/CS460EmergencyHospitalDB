@@ -4,7 +4,7 @@ from pprint import pprint
 # go to desired directory
 import sys
 sys.path.append("../")
-import models
+#import models
 
 # Keep fields in array so we can populate intake_dict
 MEDICATION_FIELDS = [
@@ -24,6 +24,7 @@ INTAKE_MEDICATION_FIELDS = [
 # QUERIES NEEDED FOR intakeS (FLUSH OUT)
 INSERT_MEDICATION_QUERY = "INSERT INTO MEDICATION (code, name, price) values(?,?,?);"
 VIEW_MEDICATION_QUERY = "SELECT * FROM MEDICATION;"; 
+VIEW_MEDICATION = "SELECT * FROM MEDICATION WHERE medication_id=?"; 
 DELETE_MEDICATION_QUERY = "DELETE FROM MEDICATION where medication_id=?"; 
 DELETE_ALL_MEDICATION_QUERY = "DELETE  FROM MEDICATION;"; 
 
@@ -81,6 +82,29 @@ def view_medications():
 	db.close()
 
 	return medications
+
+
+
+def view_medication_by_id(medication_id):
+	result = False
+	temp_dict = {}
+	db = sqlite3.connect("data/criticare.db")	
+	try:
+		cur = db.cursor()
+		cur.execute(VIEW_MEDICATION, (medication_id,))
+		for i in cur:
+			count = 0
+			for field in MEDICATION_FIELDS:
+				temp_dict[field] = i[count]
+				count += 1
+		db.commit()
+	except Exception as e:
+		print("Error in deleting patient: {}".format(e))
+		db.rollback()
+
+	db.close()
+	return temp_dict
+
 
 
 def delete_medication(medication_id):

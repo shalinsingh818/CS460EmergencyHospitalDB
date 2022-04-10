@@ -1,5 +1,6 @@
 import unittest
 import medication as med
+import procedure as proc
 from pprint import pprint
 from datetime import date
 
@@ -11,7 +12,36 @@ class TestCriticarePatientMethods(unittest.TestCase):
 		if result:
 			print("# PASSED CREATE PATIENT: ")
 
-		pprint(result)
+		total_cost = 0
+		for re in result:
+			med_id = re["medication_id"]
+			medication = med.view_medication_by_id(med_id)
+			pprint(medication)
+			total_cost += medication["price"]
+			
+		print(total_cost)
+
+	
+	def test_get_patient_procedures_cost(self):
+	
+		result = proc.view_intake_procedures(1)
+		if result:
+			print("# PASSED VIEW PROCEDURE: ")
+
+		total_cost = 0
+		for re in result:
+			pprint(re)
+			"""
+			med_id = re["medication_id"]
+			medication = med.view_medication_by_id(med_id)
+			pprint(medication)
+			total_cost += medication["price"]
+			"""
+			
+		print(total_cost)
+
+	
+			
 
 
 if __name__ == '__main__':

@@ -2,23 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import '../api/procedure.dart'; 
 import '../models/room.dart';
+import '../models/intake.dart';
 
 class InsertProcedurePage extends StatefulWidget {
 
 
   final Room? room;
-  const InsertProcedurePage({Key? key, @required this.room}) : super(key: key);
+  final Intake? intake;
+  const InsertProcedurePage({Key? key, @required this.room, @required this.intake}) : super(key: key);
 
 
   @override
-  _InsertProcedurePageState createState() => _InsertProcedurePageState(room: this.room);
+  _InsertProcedurePageState createState() => _InsertProcedurePageState(room: this.room, intake: this.intake);
 }
 
 class _InsertProcedurePageState extends State<InsertProcedurePage> {
 
 
    Room? room; 
-  _InsertProcedurePageState({this.room});
+   Intake? intake; 
+  _InsertProcedurePageState({this.room, this.intake});
 
 
   ProcedureApi _procedureApi = ProcedureApi(); 
@@ -37,7 +40,9 @@ class _InsertProcedurePageState extends State<InsertProcedurePage> {
         'notes': notesController.text    
     }; 
 
-    String status = await _procedureApi.createProcedure(procedureApiData);
+    int procId = await _procedureApi.createProcedure(procedureApiData);
+    print("Procedure id " +  procId.toString()); 
+
 
   }
 

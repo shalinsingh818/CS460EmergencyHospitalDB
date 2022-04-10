@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Resource, Api, request
+import json
 
 # go to desired directory
 import sys
@@ -20,9 +21,7 @@ class Procedure(Resource):
 		for procedure in results:
 			procedure_list.append(procedure)
 
-		return {
-			"procedures": procedure_list
-		}
+		return procedure_list
 
 
 	def to_form_fields(self):
@@ -46,14 +45,12 @@ class Procedure(Resource):
 	def post(self):
 		if request.method == 'POST':
 			# capturing from postman
-			capture_fields = self.to_form_fields()
+			data = json.loads(request.data)
 			# capturing from postman
-			result = proc.create_procedure(capture_fields)
-			if result:
-				print("# PASSED CREATE PROCEDURE: ")
+			result_id = proc.create_procedure(data)
 
 			return {
-				"message": "created test result for procedure"
+				"insert_id": result_id
 			}
 			return {
 				"error": "Could not create patient"
@@ -75,3 +72,14 @@ class Procedure(Resource):
 			return { "message": "deleted procedure" }
 		# if result is not true
 		return {"message": "Could not delete procedure"}
+
+
+class ProcedureDetail(Resource):
+	
+	def get(self):
+		# view medications prescribed to patient	
+		procedure_id = request.args.get('procedure', default=1, type=int)
+		procedure = proc.view_procedure_by_id(procedure_id)
+		return procedure
+
+
