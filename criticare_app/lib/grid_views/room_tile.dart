@@ -33,7 +33,7 @@ class _RoomTileState extends State<RoomTile> {
           onTap: () {
                Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => InsertProcedurePage(room: room)));
+                  MaterialPageRoute(builder: (context) => InsertProcedurePage(room: room, intake: intake)));
           }, 
           child: Container(
             padding: const EdgeInsets.all(8),

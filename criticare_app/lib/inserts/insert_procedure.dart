@@ -40,8 +40,14 @@ class _InsertProcedurePageState extends State<InsertProcedurePage> {
         'notes': notesController.text    
     }; 
 
+    // create procedure
     int procId = await _procedureApi.createProcedure(procedureApiData);
     print("Procedure id " +  procId.toString()); 
+    print(intake?.intakeId); 
+
+    // assign procedure to patient
+    ProcedureApi.assignProcedure(procId, intake?.intakeId); 
+    
 
 
   }

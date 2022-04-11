@@ -34,13 +34,10 @@ class TestCriticarePatientMethods(unittest.TestCase):
 		# calculate total cost of procedures
 		total_cost = 0
 		for re in result:
-			pprint(re)
-			"""
-			med_id = re["medication_id"]
-			medication = med.view_medication_by_id(med_id)
-			pprint(medication)
-			total_cost += medication["price"]
-			"""
+			procedure_id = re["procedure_id"]
+			procedure = proc.view_procedure_by_id(procedure_id)
+			pprint(procedure)
+			total_cost += procedure["cost"]
 			
 		print(total_cost)
 

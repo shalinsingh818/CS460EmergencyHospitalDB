@@ -50,15 +50,15 @@ class ProcedureApi {
     static assignProcedure(int? procedureId, int? intakeId) async {
 
         final _client = http.Client();
-        var _loginUrl = Uri.parse('http://127.0.0.1:5000/prescribeMedication');
+        var _loginUrl = Uri.parse('http://127.0.0.1:5000/patientProcedure');
 
         final response = await http.post(_loginUrl,
             headers: <String, String>{
                 'Content-Type': 'application/json; charset=UTF-8',
             }, 
             body: jsonEncode({
-                'room_id': patientId,
-                'pro_id': medicationId
+                'intake_id': intakeId,
+                'procedure_id': procedureId
             }),
         );
         //if this user gets a token, send them to the home page

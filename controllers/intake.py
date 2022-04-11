@@ -142,10 +142,9 @@ class AssignPatientProcedure(Resource):
 	def post(self):
 		if request.method == 'POST':
 			# capture fields
-			intake_patient_id = request.args.get('patient', default=1, type=int)	
-			procedure_id = request.form.get('procedure_id')
-			result = pi.assign_procedure_to_patient(intake_patient_id, procedure_id)
-
+			data = json.loads(request.data)
+			pprint(data)
+			result = pi.assign_procedure_to_patient(data["intake_id"], data["procedure_id"] )
 			# check if creating patient worked
 			if result:
 				return {
@@ -164,41 +163,41 @@ class AssignPatientProcedure(Resource):
 # diagnose patient with medical condition
 class DiagnosePatient(Resource):
 
-    def __init__(self):
-        pass
+	def __init__(self):
+		pass
 
-    def get(self):
-        # view patient id
-        intake_patient_id = request.args.get('patient', default=1, type=int)
-        intake_patient_list = []
-        intake_patients = cond.view_intake_conditions(intake_patient_id)
-        for patient in intake_patients:
-            intake_patient_list.append(patient)
+	def get(self):
+		# view patient id
+		intake_patient_id = request.args.get('patient', default=1, type=int)
+		intake_patient_list = []
+		intake_patients = cond.view_intake_conditions(intake_patient_id)
+		for patient in intake_patients:
+			intake_patient_list.append(patient)
 
-        return {
-            "intake_patients_conditions": intake_patient_list
-        }
+		return {
+			"intake_patients_conditions": intake_patient_list
+		}
 
-    def post(self):
-        if request.method == 'POST':
-            # capture fields
-            intake_patient_id = request.args.get('patient', default=1, type=int)
-            condition_id = request.form.get('condition_id')
-            result = pi.diagnose_condition(intake_patient_id, condition_id)
+	def post(self):
+		if request.method == 'POST':
+			# capture fields
+			intake_patient_id = request.args.get('patient', default=1, type=int)
+			condition_id = request.form.get('condition_id')
+			result = pi.diagnose_condition(intake_patient_id, condition_id)
 
-            # check if creating patient worked
-            if result:
-                return {
-                    "message": "assigned condition to patient"
-                }
+			# check if creating patient worked
+			if result:
+				return {
+					"message": "assigned condition to patient"
+				}
 
-            return {
-                "error": "Could not assign condition to patient"
-            }
-        else:
-            return {
-                "error": "Not a post request"
-            }
+			return {
+				"error": "Could not assign condition to patient"
+			}
+		else:
+			return {
+				"error": "Not a post request"
+			}
 
 
 
@@ -253,18 +252,51 @@ class AssignStaffToPatient(Resource):
 
 
 
-"""
 class GeneratePatientBill(Resource):
 
 	def __init__(self):
 		pass
 
+	def total_medication_cost(self, intake_id) -> int:
+		# view patients medications from intake
+		result = med.view_intake_medications(intake_id)
+		# calculate total cost of medication
+		total_cost = 0
+		for re in result:
+			med_id = re["medication_id"]
+			medication = med.view_medication_by_id(med_id)
+			pprint(medication)
+			total_cost += medication["price"]
+
+		return total_cost
+
+
+	def total_procedure_cost(self, intake_id) -> int:
+		# view pateient's procedures from intake
+		result = proc.view_intake_procedures(intake_id)
+		# calculate total cost of procedures
+		total_cost = 0
+		for re in result:
+			procedure_id = re["procedure_id"]
+			procedure = proc.view_procedure_by_id(procedure_id)
+			pprint(procedure)
+			total_cost += procedure["cost"]
+
+		return total_cost
+
+
 	# view patient procedures
-	def get(self):
-		# get total cost of patient medications
-		
-	
-		# get total cost of patient procedures
-	
-		# add overnight rate or some shit
-"""	
+	def get(self):	
+		intake_patient_id = request.args.get('patient', default=1, type=int)	
+		med_cost = self.total_medication_cost(intake_patient_id)
+		procedure_cost = self.total_procedure_cost(intake_patient_id)
+
+		return {
+			"medications_cost": med_cost,
+			"procedures_cost": procedure_cost
+		}
+
+
+
+
+
