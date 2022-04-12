@@ -1,6 +1,5 @@
 # CritiCare Emergency Room Application
-![alt text](https://github.com/shalinsingh818/CS460EmergencyHospitalDB/blob/main/screenshots/login.png)
-![alt text](https://github.com/shalinsingh818/CS460EmergencyHospitalDB/blob/main/screenshots/intakeDetail.png)
+![alt text](https://github.com/shalinsingh818/CS460EmergencyHospitalDB/blob/main/screenshots/login.png) ![alt text](https://github.com/shalinsingh818/CS460EmergencyHospitalDB/blob/main/screenshots/intakeDetail.png)
 
 **Project Name:** CritiCare
 
