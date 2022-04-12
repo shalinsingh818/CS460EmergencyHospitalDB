@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Resource, Api, request
 import json
+from pprint import pprint
 # go to desired directory
 import sys
 sys.path.append("../")
@@ -74,3 +75,26 @@ class Employee(Resource):
 
 
 	
+class EmployeeLogin(Resource):
+
+	def __init__(self):
+		pass
+
+	def post(self):
+		if request.method == 'POST':
+			# capture fields
+			data = json.loads(request.data)
+			pprint(data)
+			result = emp.retrieve_permission_id(data["first_name"], data["last_name"] )
+			if result:
+				return {
+					"permission_id": result
+				}
+
+			return {
+				"error": "false"
+			}
+		else:
+			return {
+				"error": "Not a post request"
+			}

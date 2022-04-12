@@ -31,7 +31,8 @@ api.add_resource(intakeController.Intake, '/intakePatient')
 api.add_resource(intakeController.PrescribeMedication, '/prescribeMedication')
 api.add_resource(intakeController.AssignPatientProcedure, '/patientProcedure')
 api.add_resource(intakeController.AssignStaffToPatient, '/assignStaff')
-api.add_resource(intakeController.DiagnosePatient, '/diagnose')
+api.add_resource(intakeController.GeneratePatientBill, '/patientBill')
+api.add_resource(intakeController.DiagnosePatient, '/diagnosePatient')
 
 
 # results
@@ -42,6 +43,7 @@ api.add_resource(permissionController.Permission, '/permissions')
 
 # employees
 api.add_resource(employeeController.Employee, '/employees')
+api.add_resource(employeeController.EmployeeLogin, '/login')
 
 # medications
 api.add_resource(medicationController.Medication, '/medications')

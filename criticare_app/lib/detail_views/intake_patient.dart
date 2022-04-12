@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import '../grid_views/medications.dart';
+import '../grid_views/conditions.dart';
 import '../grid_views/rooms.dart';
 import '../api/patient.dart'; 
 import '../models/intake.dart'; 
@@ -105,6 +106,27 @@ class _IntakeDetailState extends State<IntakeDetailPage> {
                                         Icons.more_vert,
                                     ),
                                 ),
+
+
+                                ListTile(
+                                    onTap: (){
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => ConditionPage(intake: intake)));
+                                    },
+                                    leading: Icon(
+                                        Icons.location_city,
+                                        color: Colors.red, 
+                                    ),
+                                    title: Text("Diagnose Medical Condition", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                                    subtitle: Text('Diagnose patient with medical conditions in Criticare DB'),
+                                    trailing: Icon(
+                                        Icons.more_vert,
+                                    ),
+                                ),
+
+
+
                                  ListTile(
                                     leading: Icon(
                                         Icons.accessibility_outlined,

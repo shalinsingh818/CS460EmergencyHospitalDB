@@ -1,9 +1,11 @@
 import unittest
 import employee as pat
 from datetime import date
+from pprint import pprint
 
 class TestCriticareEmployeeMethods(unittest.TestCase):
 
+	"""
 	def test_create_employee(self):
 		
 		# dictionary as input
@@ -17,15 +19,16 @@ class TestCriticareEmployeeMethods(unittest.TestCase):
 		result = pat.create_employee(dict_input)
 		if result:
 			print("# PASSED CREATE employee: ")
-
+	"""
 
 	def test_view_employees(self):	
 		# retrieve employees
 		employees = pat.view_employees()
 		for employee in employees:
-			print(employee.test_print())
+			pprint(employee)
 
 
+	"""
 	def test_delete_employee(self):	
 		# retrieve employees
 		test_employee_id = 2
@@ -43,6 +46,12 @@ class TestCriticareEmployeeMethods(unittest.TestCase):
 			print("# PASSED DELETE ALL employeeS: ")
 		else:	
 			print("# FAILED DELETE ALL employeeS: ")
+	"""
+
+	def test_login_system(self):
+		perm_id = pat.retrieve_permission_id("Shalin", "Singh")
+		print("Permission Id", perm_id)
+	
 
 
 if __name__ == '__main__':

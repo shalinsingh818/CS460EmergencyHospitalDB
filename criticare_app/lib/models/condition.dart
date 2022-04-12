@@ -10,14 +10,14 @@ String conditionToJson(List<Condition> data) => json.encode(List<dynamic>.from(d
 
 class Condition {
     Condition({
-        this.conditionId,
-        this.name,
-        this.code,
+        required this.conditionId,
+        required this.name,
+        required this.code,
     });
 
-    int conditionId;
-    String name;
-    int code;
+    int? conditionId;
+    String? name;
+    int? code;
 
     factory Condition.fromJson(Map<String, dynamic> json) => Condition(
         conditionId: json["condition_id"],

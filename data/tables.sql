@@ -53,12 +53,10 @@ CREATE TABLE PERMISSION (
 /** Employee data model for emergency room  */
 CREATE TABLE EMPLOYEE (	
 	employee_id INTEGER PRIMARY KEY,
-	first_name VARCHAR(255), 
+	first_name VARCHAR(255) UNIQUE, 
 	middle_name VARCHAR(255), 
-	last_name VARCHAR(255), 
-	permission_id INT, 
-	FOREIGN KEY(permission_id) REFERENCES PERMISSION(permission_id)
-
+	last_name VARCHAR(255) UNIQUE, 
+	permission_id INT
 );
 
 

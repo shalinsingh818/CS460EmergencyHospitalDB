@@ -180,10 +180,9 @@ class DiagnosePatient(Resource):
 
 	def post(self):
 		if request.method == 'POST':
-			# capture fields
-			intake_patient_id = request.args.get('patient', default=1, type=int)
-			condition_id = request.form.get('condition_id')
-			result = pi.diagnose_condition(intake_patient_id, condition_id)
+			# capture fields	
+			data = json.loads(request.data)
+			result = pi.diagnose_condition(data["patient_id"], data["condition_id"] )
 
 			# check if creating patient worked
 			if result:
@@ -293,7 +292,8 @@ class GeneratePatientBill(Resource):
 
 		return {
 			"medications_cost": med_cost,
-			"procedures_cost": procedure_cost
+			"procedures_cost": procedure_cost,
+			"overnight_charge": 60.00
 		}
 
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'base.dart'; 
+import 'login.dart';
+
 void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: "Saya Billing",
       home: Scaffold(
 
-        body: MainPage(),
+        body: LoginPage(),
       ),
     );
   }
