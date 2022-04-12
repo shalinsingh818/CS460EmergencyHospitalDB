@@ -1,5 +1,5 @@
 # CritiCare Emergency Room Application
-
+![alt text](http://url/to/img.png)
 
 
 **Project Name:** CritiCare
