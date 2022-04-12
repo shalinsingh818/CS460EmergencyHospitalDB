@@ -37,11 +37,11 @@ class _IntakeListTileState extends State<IntakeListTile> {
                         color: Colors.red 
                     ), 
                     title: Text(
-                        ": ",
+                        " ${intake?.intakeId} : ${intake?.bloodPressure} ",
                         style: TextStyle(fontWeight: FontWeight.bold)
                     ), 
                     subtitle: Text(
-                        "Employee Id:  Permission: ",
+                        "Patient Intake Id: ${intake?.intakeId} ",
                     ),
                     trailing: Wrap(
                         spacing: 15,

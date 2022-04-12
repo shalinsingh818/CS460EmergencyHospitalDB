@@ -137,6 +137,19 @@ class _MainPageState extends State<MainPage> {
                   MaterialPageRoute(builder: (context) => InsertConditionPage()));
               },
             ),
+
+            ListTile(
+              leading: Icon(
+                Icons.arrow_back_outlined, 
+                color: Colors.red,
+              ),
+              title: const Text('Log Out', style: TextStyle(fontWeight: FontWeight.bold)),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+            ),
+      
           ],
         ),
       ),

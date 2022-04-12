@@ -1,3 +1,4 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import '../grid_views/medications.dart';
@@ -19,14 +20,54 @@ class IntakeDetailPage extends StatefulWidget {
 
 class _IntakeDetailState extends State<IntakeDetailPage> {
 
+
+    int? permissionId;
+
     Intake? intake; 
     _IntakeDetailState({this.intake});
 
     Future<Patient>? futurePatient;
 
+
+    Future<void> _showMyDialog() async {
+        return showDialog<void>(
+            context: context,
+            barrierDismissible: false, // user must tap button!
+            builder: (BuildContext context) {
+            return AlertDialog(
+                backgroundColor: Colors.white,
+                title: Text('Criticare LLC', style: TextStyle(color: Colors.red)),
+                content: SingleChildScrollView(
+                    child: ListBody(
+                        children: <Widget>[
+                        Text('Invalid permissions (Must be doctor)', style: TextStyle(color: Colors.black)),
+                        
+                        ],
+                    ),
+                ),
+                actions: <Widget>[
+                    FlatButton(
+                        child: Text('OK'),
+                        onPressed: () {
+                            Navigator.of(context).pop();
+                        },
+                    ),
+                ],
+            );
+            },
+        );
+    }
+
+    void getPermission() async {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        final pId = prefs.getInt('permission_id');
+        permissionId = pId;
+    }
+
     @override
     void initState() {
         super.initState();
+        this.getPermission();
         futurePatient = PatientApi.fetchPatient(intake?.patientId);
     }
 
@@ -61,7 +102,7 @@ class _IntakeDetailState extends State<IntakeDetailPage> {
                                             SizedBox(
                                                 height: 50,
                                             ), 
-                                            Text("180/20", style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: Colors.blue),),
+                                            Text("${intake?.bloodPressure}", style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: Colors.blue),),
                                             SizedBox(
                                                 height: 20,
                                             ), 
@@ -75,9 +116,14 @@ class _IntakeDetailState extends State<IntakeDetailPage> {
 
                                 ListTile(
                                     onTap: () {
-                                        Navigator.push(
-                                            context,
+                                        if(permissionId !=2 ){
+                                            _showMyDialog(); 
+                                        }else{
+                                            // navgiate to page as doctor
+                                            Navigator.push(
+                                                context,
                                             MaterialPageRoute(builder: (context) => MedicationPage(intake: intake)));
+                                        }
                                     },
                                     leading: Icon(
                                         Icons.medication,
@@ -92,9 +138,14 @@ class _IntakeDetailState extends State<IntakeDetailPage> {
                                 
                                 ListTile(
                                     onTap: (){
-                                        Navigator.push(
-                                            context,
+                                        if(permissionId != 2){
+                                            _showMyDialog();
+                                        }else{
+                                            Navigator.push(
+                                                context,
                                             MaterialPageRoute(builder: (context) => RoomPage(intake: intake)));
+                                        }
+                        
                                     },
                                     leading: Icon(
                                         Icons.location_city,
@@ -110,9 +161,14 @@ class _IntakeDetailState extends State<IntakeDetailPage> {
 
                                 ListTile(
                                     onTap: (){
-                                        Navigator.push(
-                                            context,
+                                        if(permissionId != 2){
+                                            _showMyDialog();
+                                        }else{
+                                            Navigator.push(
+                                                context,
                                             MaterialPageRoute(builder: (context) => ConditionPage(intake: intake)));
+                                        }
+                                        
                                     },
                                     leading: Icon(
                                         Icons.location_city,
@@ -140,9 +196,14 @@ class _IntakeDetailState extends State<IntakeDetailPage> {
                                 ),
                                  ListTile(
                                     onTap: () {
-                                        Navigator.push(
-                                            context,
+                                        if(permissionId != 2){
+                                             _showMyDialog();
+                                        }else{
+                                            Navigator.push(
+                                                context,
                                             MaterialPageRoute(builder: (context) => PatientInfo(patient: futurePatient)));
+                                        }
+                                       
                                     },
                                     leading: Icon(
                                         Icons.accessible_outlined,

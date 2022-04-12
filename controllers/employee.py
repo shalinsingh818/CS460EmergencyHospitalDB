@@ -92,7 +92,7 @@ class EmployeeLogin(Resource):
 				}
 
 			return {
-				"error": "false"
+				"permission_id": 0
 			}
 		else:
 			return {
