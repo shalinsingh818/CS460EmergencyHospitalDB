@@ -4,7 +4,7 @@ from pprint import pprint
 # go to desired directory
 import sys
 sys.path.append("../")
-import models
+#import models
 
 # Keep fields in array so we can populate intake_dict
 INTAKE_FIELDS = [

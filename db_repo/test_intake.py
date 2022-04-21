@@ -23,7 +23,7 @@ class TestCriticareIntakeMethods(unittest.TestCase):
 		# retrieve intake_patients
 		intake_patients = pi.view_intake_patients()
 		for intake_patient in intake_patients:
-			print(intake_patient.test_print())
+			print(intake_patient)
 
 	
 	def test_prescribe_medication(self):
