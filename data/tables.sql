@@ -105,6 +105,32 @@ CREATE TABLE MEDICAL_CONDITION (
 
 
 
+/* dynamic scaling of tables for test results */ 
+CREATE TABLE TEST_TYPE (
+	test_id INTEGER PRIMARY KEY,
+	name VARCHAR(255),
+	patient_intake_id INT,	
+	FOREIGN KEY(patient_intake_id) REFERENCES PATIENT_INTAKE(intake_id)
+); 
+
+
+CREATE TABLE TEST_FIELD (
+	field_id INTEGER PRIMARY KEY,
+	name VARCHAR(255), 
+	value INT, 
+	unit_measurement VARCHAR(255),
+	test_type_id INT, 
+	FOREIGN KEY(test_type_id) REFERENCES TEST_TYPE(test_id)
+); 
+
+
+CREATE TABLE TEST_RESULT (
+	test_result_id INTEGER PRIMARY KEY, 
+	test_type_id INT,	
+	FOREIGN KEY(test_type_id) REFERENCES TEST_TYPE(test_id) 
+); 
+
+
 /**
 	ONE TO MANY RELATIONSHIPS: For patient intake model
 
@@ -168,6 +194,8 @@ CREATE TABLE INTAKE_PATIENT_PROCEDURE (
 	FOREIGN KEY(patient_intake_id) REFERENCES PATIENT_INTAKE(intake_id)
 	FOREIGN KEY(procedure_id) REFERENCES PROCEDURE(procedure_id)
 ); 
+
+
 
 
 

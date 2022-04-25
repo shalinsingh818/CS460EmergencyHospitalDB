@@ -18,9 +18,10 @@ INTAKE_CONDITION_FIELDS = [
 
 # QUERIES NEEDED FOR intakeS (FLUSH OUT)
 INSERT_MEDICAL_CONDITION_QUERY = "INSERT INTO MEDICAL_CONDITION (name, code) values(?,?);"
-VIEW_MEDICAL_CONDITIONS_QUERY = "SELECT * FROM MEDICAL_CONDITION;"; 
-DELETE_MEDICAL_CONDITION_QUERY = "DELETE FROM MEDICAL_CONDITION where condition_id=?"; 
-DELETE_ALL_MEDICAL_CONDITIONS_QUERY = "DELETE  FROM MEDICAL_CONDITION;"; 
+VIEW_MEDICAL_CONDITIONS_QUERY = "SELECT * FROM MEDICAL_CONDITION;" 
+VIEW_MEDICAL_CONDITION = "SELECT * FROM MEDICAL_CONDITION WHERE condition_id=?" 
+DELETE_MEDICAL_CONDITION_QUERY = "DELETE FROM MEDICAL_CONDITION where condition_id=?" 
+DELETE_ALL_MEDICAL_CONDITIONS_QUERY = "DELETE  FROM MEDICAL_CONDITION;"
 
 VIEW_CONDITIONS_QUERY = "SELECT * FROM INTAKE_PATIENT_MEDICAL_CONDITION where patient_intake_id=?"
 
@@ -83,6 +84,27 @@ def view_conditions():
 	db.close()
 
 	return result
+
+
+def view_condition_by_id(condition_id):
+	result = False
+	temp_dict = {}
+	db = sqlite3.connect("data/criticare.db")	
+	try:
+		cur = db.cursor()
+		cur.execute(VIEW_MEDICAL_CONDITION, (condition_id,))
+		for i in cur:
+			count = 0
+			for field in MEDICAL_CONDITION_FIELDS:
+				temp_dict[field] = i[count]
+				count += 1
+		db.commit()
+	except Exception as e:
+		print("Error in deleting patient: {}".format(e))
+		db.rollback()
+
+	db.close()
+	return temp_dict
 
 
 def delete_medical_condition(medical_condition_id):

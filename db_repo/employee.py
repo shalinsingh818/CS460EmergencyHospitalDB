@@ -191,6 +191,6 @@ def retrieve_permission_id(first_name, last_name):
 		# return permission id
 		return permission_id
 	else:
-		return "Could not fetch permission id"
+		return False
 
 

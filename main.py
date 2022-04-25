@@ -25,7 +25,6 @@ CORS(app)
 api.add_resource(patientController.Patient, '/patient')
 api.add_resource(patientController.ViewPatient, '/viewPatient')
 
-
 # intake
 api.add_resource(intakeController.Intake, '/intakePatient')
 api.add_resource(intakeController.PrescribeMedication, '/prescribeMedication')
@@ -34,9 +33,9 @@ api.add_resource(intakeController.AssignStaffToPatient, '/assignStaff')
 api.add_resource(intakeController.GeneratePatientBill, '/patientBill')
 api.add_resource(intakeController.DiagnosePatient, '/diagnosePatient')
 
-
 # results
-api.add_resource(resultController.Result, '/result')
+api.add_resource(resultController.CreateResultType, '/createTestType')
+api.add_resource(resultController.CreateTestField, '/createTestField')
 
 # permissions
 api.add_resource(permissionController.Permission, '/permissions')

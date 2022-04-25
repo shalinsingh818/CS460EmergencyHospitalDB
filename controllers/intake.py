@@ -93,11 +93,10 @@ class PrescribeMedication(Resource):
 		intake_patient_list = []
 		intake_patients = med.view_intake_medications(intake_patient_id)
 		for patient in intake_patients:
-			intake_patient_list.append(patient)
+			medication = med.view_medication_by_id(patient["medication_id"])
+			intake_patient_list.append(medication)
 
-		return {
-			"intake_patients_medications": intake_patient_list
-		}
+		return intake_patient_list
 
 	def post(self):
 		if request.method == 'POST':
@@ -133,11 +132,10 @@ class AssignPatientProcedure(Resource):
 		intake_patient_list = []
 		intake_patients = proc.view_intake_procedures(intake_patient_id)
 		for patient in intake_patients:
-			intake_patient_list.append(patient)
+			procedure = proc.view_procedure_by_id(patient["procedure_id"])
+			intake_patient_list.append(procedure)
 
-		return {
-			"intake_patients_procedures": intake_patient_list
-		}
+		return intake_patient_list
 
 	def post(self):
 		if request.method == 'POST':
@@ -172,11 +170,10 @@ class DiagnosePatient(Resource):
 		intake_patient_list = []
 		intake_patients = cond.view_intake_conditions(intake_patient_id)
 		for patient in intake_patients:
-			intake_patient_list.append(patient)
+			medical_condition = cond.view_condition_by_id(patient["medical_condition_id"])
+			intake_patient_list.append(medical_condition)
 
-		return {
-			"intake_patients_conditions": intake_patient_list
-		}
+		return intake_patient_list
 
 	def post(self):
 		if request.method == 'POST':
@@ -251,6 +248,7 @@ class AssignStaffToPatient(Resource):
 
 
 
+
 class GeneratePatientBill(Resource):
 
 	def __init__(self):
@@ -289,11 +287,13 @@ class GeneratePatientBill(Resource):
 		intake_patient_id = request.args.get('patient', default=1, type=int)	
 		med_cost = self.total_medication_cost(intake_patient_id)
 		procedure_cost = self.total_procedure_cost(intake_patient_id)
+		
 
 		return {
 			"medications_cost": med_cost,
 			"procedures_cost": procedure_cost,
-			"overnight_charge": 60.00
+			"overnight_charge": 60,
+			"total": med_cost + procedure_cost + 60
 		}
 
 

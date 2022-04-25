@@ -19,6 +19,7 @@ PATIENT_FIELDS = [
 	"next_of_kin",
 	"home_phone",
 	"work_phone",
+	"symptoms", 
 	"health_insurance",	
 	"vaccination",	
 	"vaccination_date",

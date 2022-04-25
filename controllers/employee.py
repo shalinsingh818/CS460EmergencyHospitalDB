@@ -90,10 +90,10 @@ class EmployeeLogin(Resource):
 				return {
 					"permission_id": result
 				}
-
-			return {
-				"permission_id": 0
-			}
+			else:
+				return {
+					"permission_id": 0
+				}
 		else:
 			return {
 				"error": "Not a post request"
