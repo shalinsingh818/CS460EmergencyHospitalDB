@@ -122,7 +122,14 @@ def generate_employee(amount):
 def generate_medication():
 
 	url = "{}/{}".format(BASE_URL, "medications")
-	name_data = [
+	name_data = [	
+		{"name": "Aspirin", "code": "123", "price": "20"},
+		{"name": "Alteplase", "code": "123", "price": "20"},
+		{"name": "Dexamethasone", "code": "123", "price": "20"},
+		{"name": "Candesartan", "code": "123", "price": "20"},
+		{"name": "Azithromycin", "code": "123", "price": "20"},
+		{"name": "Fluticasone", "code": "123", "price": "20"},
+		{"name": "Insulin", "code": "123", "price": "20"},
 		{"name": "Tylenol", "code": "123", "price": "100"}, 
 		{"name": "Advil", "code": "123", "price": "20"}, 
 		{"name": "Zoloft", "code": "123", "price": "30"}, 
@@ -146,6 +153,11 @@ def generate_medical_conditions():
 
 	url = "{}/{}".format(BASE_URL, "conditions")
 	condition_data = [
+		{"name": "Diabetes", "code": "123"},
+		{"name": "Hypertension", "code": "123"},
+		{"name": "Covid", "code": "123"},
+		{"name": "Pneumonia", "code": "123"},
+		{"name": "Asthma", "code": "123"},
 		{"name": "Lupus", "code": "123"}, 
 		{"name": "Broken Bone", "code": "123"}, 
 		{"name": "Cardiac Arrest", "code": "123"}, 

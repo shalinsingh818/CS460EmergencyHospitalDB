@@ -78,7 +78,7 @@ class _ConditionTileState extends State<ConditionTile> {
                       SizedBox(height: 10.0), 
                       Text('${condition?.name}', style: TextStyle(color: Colors.red, fontSize: 30)),
                       SizedBox(height: 15.0), 
-                      Text('\$ ${condition?.code}', style: TextStyle(color: Colors.green, fontSize: 20)),
+                      Text('${condition?.code}', style: TextStyle(color: Colors.green, fontSize: 20)),
                   ],
               ),
               color: Colors.grey[200],
